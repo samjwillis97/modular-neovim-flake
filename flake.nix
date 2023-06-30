@@ -8,29 +8,29 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }:
-    let
-      inherit (import ./lib/default.nix)
-        mkNeovimConfiguration buildPkg neovimBin;
+    let inherit (import ./lib/default.nix) mkNeovimConfiguration buildPkg;
     in {
-
-      ## TODO: what does this actually do?
-      overlays.default = final: prev: {
-        inherit mkNeovimConfiguration;
-        neovim-base = buildPkg prev;
-      };
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda
     } // flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; };
-        neovim-base-pkg = buildPkg pkgs;
+        overlays = [
+          (prev: final: {
+            inherit mkNeovimConfiguration;
+            neovim-base = buildPkg final;
+          })
+        ];
+        pkgs = import nixpkgs { inherit system overlays; };
       in {
-        packages = { neovim-base = neovimBin neovim-base-pkg; };
+        packages = rec {
+          neovim-base = pkgs.neovim-base;
+          default = neovim-base;
+        };
 
         apps = rec {
-          neovim-base = {
-            type = "app";
-            program = neovimBin neovim-base-pkg;
+          neovim-base = flake-utils.lib.mkApp {
+            drv = self.packages.${system}.neovim-base;
+            exePath = "/bin/nvim";
           };
           default = neovim-base;
         };
