@@ -11,28 +11,28 @@
     let
       inherit (import ./lib/default.nix)
         mkNeovimConfiguration buildPkg neovimBin;
-
     in {
+
       ## TODO: what does this actually do?
       overlays.default = final: prev: {
         inherit mkNeovimConfiguration;
-        neovim-all = buildPkg prev;
+        neovim-base = buildPkg prev;
       };
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda
     } // flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        defaultPkg = buildPkg pkgs;
+        neovim-base-pkg = buildPkg pkgs;
       in {
-        packages = { defaultNvim = neovimBin defaultPkg; };
+        packages = { neovim-base = neovimBin neovim-base-pkg; };
 
         apps = rec {
-          defaultNvim = {
+          neovim-base = {
             type = "app";
-            program = neovimBin defaultPkg;
+            program = neovimBin neovim-base-pkg;
           };
-          default = defaultNvim;
+          default = neovim-base;
         };
       });
 }
