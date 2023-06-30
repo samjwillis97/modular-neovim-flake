@@ -9,7 +9,7 @@
 
   outputs = { self, nixpkgs, flake-utils, ... }:
     let
-      inherit (import ./lib/default.nix { })
+      inherit (import ./lib/default.nix)
         mkNeovimConfiguration buildPkg neovimBin;
 
     in {

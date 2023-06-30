@@ -2,7 +2,7 @@
 with lib;
 with builtins;
 let
-  # TODO: Why this?
+  # TODO: Why this? - must be something to do with how options are declared that I am missing 😬
   cfgBuild = config.build;
   cfgBuilt = config.built;
   cfgVim = config.vim;
@@ -71,10 +71,6 @@ in {
           ${r.data}
         '';
         mapResult = r: (concatStringsSep "\n" (map mkSection r));
-
-        # NOTE: So this dag stuff is grabbed from the home-manager repo and is some string concat stuff
-        # Worth looking into more.
-
         vimConfig = nvim.dag.resolveDag {
           name = "vim config script";
           dag = cfgVim.configRC;
@@ -82,7 +78,9 @@ in {
         };
       in vimConfig;
 
-      # TODO: Really understand this whole thing properly
+      # TODO: Really understand this whole thing properly - Seems to basically just keep 
+      # overriding/overwriting attributes and creates the neovim package that was declared
+      # really need to understand the _module and check though
       package = (pkgs.wrapNeovimUnstable cfgBuild.package
         (neovimConfig // { wrapRc = true; })).overrideAttrs (oldAttrs: {
           passthru = oldAttrs // {

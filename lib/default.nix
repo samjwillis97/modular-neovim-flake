@@ -1,4 +1,4 @@
-{ ... }: rec {
+rec {
   mkNeovimConfiguration = { modules ? [ ], ... }@args:
     import ../modules (args // { modules = modules; });
 
