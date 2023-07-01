@@ -17,12 +17,17 @@ in {
   };
 
   config = mkIf cfg.enable (mkMerge [
-    # TODO: Lua-fy this bitch
-    # {
-    #   vim.configRC.nix = nvim.dag.entryAnywhere ''
-    #     autocmd filetype nix setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    #   '';
-    # }
+    {
+      vim.luaConfigRC.nix = nvim.dag.entryAnywhere ''
+        vim.api.nvim_create_autocmd(
+          { "FileType" },
+          {
+            pattern = "nix",
+            command = [[setlocal tabstop=2 shiftwidth=2 softtabstop=2]],
+          },
+        )
+      '';
+    }
 
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;

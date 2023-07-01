@@ -163,13 +163,24 @@ in {
       default = true;
       description = "Move by visual line rather than line number";
     };
+
+    easierSplitNavigation = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Navigate between splits with <C-J> rather than <C-W><C-J>";
+    };
   };
 
   config = {
     # vim.startPlugins = ["plenary-nvim"];
     vim.inoremap = mkIf cfg.escapeWithJK { "jk" = "<Esc>"; };
     vim.nnoremap = mkIf (cfg.leaderKey == "space") { "<space>" = "<nop>"; }
-      // mkIf (cfg.centerAfterJump) {
+      // mkIf (cfg.easierSplitNavigation) {
+        "<C-J>" = "<C-W><C-J>";
+        "<C-K>" = "<C-W><C-K>";
+        "<C-L>" = "<C-W><C-L>";
+        "<C-H>" = "<C-W><C-H>";
+      } // mkIf (cfg.centerAfterJump) {
         "<C-u>" = "<C-u>zz";
         "<C-d>" = "<C-d>zz";
         "<C-i>" = "<C-i>zz";
