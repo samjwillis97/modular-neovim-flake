@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 with lib;
 with builtins;
 let cfg = config.vim;
@@ -145,11 +145,37 @@ in {
       default = true;
       description = ''Bind "jk" to escape'';
     };
+
+    centerAfterJump = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Center the cursor in the buffer after jumping";
+    };
+
+    moveByVisualLine = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Move by visual line rather than line number";
+    };
   };
 
   config = {
     # vim.startPlugins = ["plenary-nvim"];
     vim.inoremap = mkIf cfg.escapeWithJK { "jk" = "<Esc>"; };
+    vim.nnoremap = mkIf (cfg.leaderKey == "space") { "<space>" = "<nop>"; }
+      // mkIf (cfg.centerAfterJump) {
+        "<C-u>" = "<C-u>zz";
+        "<C-d>" = "<C-d>zz";
+        "<C-i>" = "<C-i>zz";
+        "<C-o>" = "<C-o>zz";
+        "n" = "nzz";
+        "N" = "Nzz";
+        "GG" = "GGzz";
+      } // mkIf (cfg.moveByVisualLine) {
+        "j" = "gj";
+        "k" = "gk";
+      };
+    vim.nmap = { "<leader><space>" = ":nohlsearch<CR>"; };
 
     vim.luaConfigRC.base = nvim.dag.entryAfter [ "globalsScript" ] ''
       -- Settings that are set for everything
