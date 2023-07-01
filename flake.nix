@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "Sam's Modular Neovim Flake 🤭";
 
   inputs = {
     nixpkgs = { url = "github:NixOS/nixpkgs"; };
