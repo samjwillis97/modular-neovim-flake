@@ -37,18 +37,29 @@ in {
       };
     };
 
-    #FIXME:
-    # - Location right
-    # - Open on Launch
-    # - Close on Last Window
-    # - Close on File Opened
-    # - Follow currently open file
-    # - Add trailing slash to directories
-    # - Command to open Files
-    # - Filesystem watcher?
-    # - Renderer group empty?
+    openOnLaunch = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Open file tree on launch";
+    };
 
-    # TODO: Look at netrw stuff
+    addTrailingSlash = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Add a trailing slash to directories";
+    };
+
+    groupEmptyDirectories = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Groups empty directories";
+    };
+
+    autoCloseOnLastWindow = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Automatically closes tree if it is the last window left";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -60,6 +71,20 @@ in {
     };
 
     vim.luaConfigRC.filetree = nvim.dag.entryAnywhere ''
+      ${optionalString (cfg.openOnLaunch) ''
+        local function open_nvim_tree()
+          require("nvim-tree.api").tree.open()
+        end
+
+        vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+      ''}
+
+      ${optionalString (cfg.autoCloseOnLastWindow) ''
+        vim.api.nvim_create_autocmd({"QuitPre"}, {
+          callback = function() vim.cmd("NvimTreeClose") end,
+        })
+      ''}
+        
       require("nvim-tree").setup({
           view = {
             ${
@@ -97,8 +122,13 @@ in {
             ${
               optionalString (cfg.location != "center") ''
                 width = ${toString cfg.width},
+                side = "${cfg.location}",
               ''
             }
+          },
+          renderer = {
+              add_trailing = ${boolToString cfg.addTrailingSlash},
+              group_empty = ${boolToString cfg.groupEmptyDirectories},
           },
           git = {
               enable = true,
@@ -112,6 +142,9 @@ in {
                     (builtins.map (s: ''"'' + s + ''",'') cfg.filters.custom)
                   }
               },
+          },
+          filesystem_watchers = {
+            enable = true,
           },
       })
     '';
