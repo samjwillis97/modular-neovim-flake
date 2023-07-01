@@ -25,10 +25,16 @@
 
       baseConfig = {
         config = {
-          vim.filetree = {
-            enable = true;
-            location = "left";
-            width = 30;
+          vim = {
+            filetree = {
+              enable = true;
+              location = "left";
+              width = 30;
+            };
+            treesitter = {
+              enable = true;
+              fold = true;
+            };
           };
         };
       };

@@ -123,9 +123,15 @@ in {
 
       mode = mkOption {
         type = types.enum [ "indent" "syntax" ];
-        default = "syntax";
+        default = "indent";
         description = "The kind of folding to be used";
       };
+    };
+
+    syntaxHighlighting = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enables syntax highlighting";
     };
 
     splitBelow = mkOption {
@@ -240,11 +246,16 @@ in {
       ${optionalString (cfg.colourTerm) ''
         vim.opt.termguicolors = true
       ''}
+      ${optionalString (cfg.syntaxHighlighting) ''
+        vim.opt.syntax = "on"
+      ''}
       ${optionalString (cfg.folding.enable) ''
         vim.opt.foldenable = true
         vim.opt.foldlevelstart = ${toString cfg.folding.defaultFoldNumber}
         vim.opt.foldnestmax = ${toString cfg.folding.maxNumber}
-        vim.opt.foldmethod = "${cfg.folding.mode}"
+        ${optionalString (!cfg.treesitter.enable || !cfg.treesitter.fold) ''
+          vim.opt.foldmethod = "${cfg.folding.mode}"
+        ''}
       ''}
       ${optionalString (cfg.splitBelow) ''
         vim.opt.splitbelow = true

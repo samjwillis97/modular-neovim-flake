@@ -68,8 +68,8 @@ in {
   };
 
   config = let
-    # TODO: Understand :)
     buildPlug = name:
+      # TODO: Understand :)
       pkgs.vimUtils.buildVimPluginFrom2Nix rec {
         pname = name;
         version = "master";
@@ -78,14 +78,16 @@ in {
           cfgBuild.rawPlugins.${pname}.src;
       };
 
+    treeSitterPlug = pkgs.vimPlugins.nvim-treesitter.withPlugins
+      (_: config.vim.treesitter.grammars);
+
     buildConfigPlugins = plugins:
       map (plug:
         (if isString plug then
-        # (if (plug == "nvim-treesitter") then
-        #   treeSitterPlug
-        # else
-        #   buildPlug plug)
-          buildPlug plug
+          (if (plug == "nvim-treesitter") then
+            treeSitterPlug
+          else
+            buildPlug plug)
         else
           plug)) (filter (f: f != null) plugins);
 
