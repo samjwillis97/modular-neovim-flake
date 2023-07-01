@@ -7,6 +7,10 @@
     flake-utils = { url = "github:numtide/flake-utils"; };
 
     # Plugins
+    plenary-nvim = {
+      url = "github:nvim-lua/plenary.nvim";
+      flake = false;
+    };
     nvim-tree-lua = {
       url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
@@ -21,7 +25,7 @@
     let
       nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
 
-      availablePlugins = [ "nvim-tree-lua" "telescope" ];
+      availablePlugins = [ "plenary-nvim" "nvim-tree-lua" "telescope" ];
       rawPlugins = nvimLib.plugins.inputsToRaw inputs availablePlugins;
 
       inherit (import ./lib/default.nix { inherit rawPlugins; })
