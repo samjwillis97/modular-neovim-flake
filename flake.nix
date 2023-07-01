@@ -68,5 +68,8 @@
           };
           default = neovim-base;
         };
+
+        devShells.default =
+          pkgs.mkShell { nativeBuildInputs = [ pkgs.neovim-base ]; };
       });
 }
