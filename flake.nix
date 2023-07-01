@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs = { url = "github:NixOS/nixpkgs"; };
-
     flake-utils = { url = "github:numtide/flake-utils"; };
 
     # Plugins
@@ -19,13 +18,49 @@
       url = "github:nvim-telescope/telescope.nvim";
       flake = false;
     };
+
+    # Themes
+    tokyonight = {
+      url = "github:folke/tokyonight.nvim";
+      flake = false;
+    };
+    onedark = {
+      url = "github:navarasu/onedark.nvim";
+      flake = false;
+    };
+    catppuccin = {
+      url = "github:catppuccin/nvim";
+      flake = false;
+    };
+    dracula-nvim = {
+      url = "github:Mofiqul/dracula.nvim";
+      flake = false;
+    };
+    dracula = {
+      url = "github:dracula/vim";
+      flake = false;
+    };
+    gruvbox = {
+      url = "github:ellisonleao/gruvbox.nvim";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     let
       nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
 
-      availablePlugins = [ "plenary-nvim" "nvim-tree-lua" "telescope" ];
+      availablePlugins = [
+        "plenary-nvim"
+        "nvim-tree-lua"
+        "telescope"
+        "tokyonight"
+        "onedark"
+        "catppuccin"
+        "dracula-nvim"
+        "dracula"
+        "gruvbox"
+      ];
       rawPlugins = nvimLib.plugins.inputsToRaw inputs availablePlugins;
 
       inherit (import ./lib/default.nix { inherit rawPlugins; })
@@ -34,6 +69,10 @@
       baseConfig = {
         config = {
           vim = {
+            theme = {
+              enable = true;
+              name = "catppuccin";
+            };
             filetree = {
               enable = true;
               location = "left";

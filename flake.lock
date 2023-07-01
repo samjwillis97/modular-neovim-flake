@@ -1,5 +1,53 @@
 {
   "nodes": {
+    "catppuccin": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687926646,
+        "narHash": "sha256-/pQsEooNqrAz1hjimiO9u2OhWIWmtMOvKWQB56xSJbs=",
+        "owner": "catppuccin",
+        "repo": "nvim",
+        "rev": "12894370fa3c9e2200f3724c4184354d6b79733a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "nvim",
+        "type": "github"
+      }
+    },
+    "dracula": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687207996,
+        "narHash": "sha256-wPV6g4ggwI2yHHIFH8wUp7jsfd2MXUoyXKcKmqJTbuc=",
+        "owner": "dracula",
+        "repo": "vim",
+        "rev": "3e52a0682a53dd7c2c53133d45948f5a49c5fd9a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "vim",
+        "type": "github"
+      }
+    },
+    "dracula-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1686505228,
+        "narHash": "sha256-FjQGCn+9m50CBP6KHBVuYQvbHPdApA1yShnkuiwMAfw=",
+        "owner": "Mofiqul",
+        "repo": "dracula.nvim",
+        "rev": "5716b1395b32a5865476dd3314bd8888e5f91532",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mofiqul",
+        "repo": "dracula.nvim",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -15,6 +63,22 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "gruvbox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682256511,
+        "narHash": "sha256-XTwPcq1dyZKVy1b+FUUjMEHndpcTPYSp1p7bx9m8+Bg=",
+        "owner": "ellisonleao",
+        "repo": "gruvbox.nvim",
+        "rev": "df149bccb19a02c5c2b9fa6ec0716f0c0487feb0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ellisonleao",
+        "repo": "gruvbox.nvim",
         "type": "github"
       }
     },
@@ -49,12 +113,51 @@
         "type": "github"
       }
     },
+    "onedark": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1686564552,
+        "narHash": "sha256-sFqUrXvKkV4l3hTJUwCy4i3UrY53Z+Z/2h9b/iaj6lQ=",
+        "owner": "navarasu",
+        "repo": "onedark.nvim",
+        "rev": "462b45758ea94ff30ad48979268094590a6b7b7e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "navarasu",
+        "repo": "onedark.nvim",
+        "type": "github"
+      }
+    },
+    "plenary-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688103958,
+        "narHash": "sha256-sxTxPbV3GTG+mJoLV47V00i1V0KOimcYgMNoEj4mDcA=",
+        "owner": "nvim-lua",
+        "repo": "plenary.nvim",
+        "rev": "102c02903c74b93c705406bf362049383abc87c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-lua",
+        "repo": "plenary.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "catppuccin": "catppuccin",
+        "dracula": "dracula",
+        "dracula-nvim": "dracula-nvim",
         "flake-utils": "flake-utils",
+        "gruvbox": "gruvbox",
         "nixpkgs": "nixpkgs",
         "nvim-tree-lua": "nvim-tree-lua",
-        "telescope": "telescope"
+        "onedark": "onedark",
+        "plenary-nvim": "plenary-nvim",
+        "telescope": "telescope",
+        "tokyonight": "tokyonight"
       }
     },
     "systems": {
@@ -85,6 +188,22 @@
       "original": {
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
+        "type": "github"
+      }
+    },
+    "tokyonight": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688194258,
+        "narHash": "sha256-cdRCUj0t8Y+WKcUxqhHWX6epUzAQI+kMMjn7RDa98VU=",
+        "owner": "folke",
+        "repo": "tokyonight.nvim",
+        "rev": "d785293494c59ce0940c00b8b044fc672d2902b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "tokyonight.nvim",
         "type": "github"
       }
     }
