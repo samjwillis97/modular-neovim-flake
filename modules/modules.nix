@@ -1,6 +1,7 @@
 { pkgs, lib, check ? true, }:
 let
-  modules = [ ./base ./filetree ./treesitter ./languages ./core ./build ];
+  modules =
+    [ ./base ./filetree ./treesitter ./telescope ./languages ./core ./build ];
 
   # TODO: What does this module do?
   pkgsModule = { config, ... }: {

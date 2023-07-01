@@ -21,7 +21,7 @@
     let
       nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
 
-      availablePlugins = [ "nvim-tree-lua" ];
+      availablePlugins = [ "nvim-tree-lua" "telescope" ];
       rawPlugins = nvimLib.plugins.inputsToRaw inputs availablePlugins;
 
       inherit (import ./lib/default.nix { inherit rawPlugins; })
@@ -39,6 +39,7 @@
               enable = true;
               fold = true;
             };
+            telescope.enable = true;
             languages = {
               enableTreesitter = true;
               nix.enable = true;
