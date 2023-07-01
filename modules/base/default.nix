@@ -174,24 +174,28 @@ in {
   config = {
     # vim.startPlugins = ["plenary-nvim"];
     vim.inoremap = mkIf cfg.escapeWithJK { "jk" = "<Esc>"; };
-    vim.nnoremap = mkIf (cfg.leaderKey == "space") { "<space>" = "<nop>"; }
-      // mkIf (cfg.easierSplitNavigation) {
+    vim.nnoremap =
+      (if (cfg.leaderKey == "space") then { "<space>" = "<nop>"; } else { })
+      // (if (cfg.easierSplitNavigation) then {
         "<C-J>" = "<C-W><C-J>";
         "<C-K>" = "<C-W><C-K>";
         "<C-L>" = "<C-W><C-L>";
         "<C-H>" = "<C-W><C-H>";
-      } // mkIf (cfg.centerAfterJump) {
-        "<C-u>" = "<C-u>zz";
-        "<C-d>" = "<C-d>zz";
-        "<C-i>" = "<C-i>zz";
-        "<C-o>" = "<C-o>zz";
-        "n" = "nzz";
-        "N" = "Nzz";
-        "GG" = "GGzz";
-      } // mkIf (cfg.moveByVisualLine) {
-        "j" = "gj";
-        "k" = "gk";
-      };
+      } else
+        { }) // (if (cfg.centerAfterJump) then {
+          "<C-u>" = "<C-u>zz";
+          "<C-d>" = "<C-d>zz";
+          "<C-i>" = "<C-i>zz";
+          "<C-o>" = "<C-o>zz";
+          "n" = "nzz";
+          "N" = "Nzz";
+          "GG" = "GGzz";
+        } else
+          { }) // (if (cfg.moveByVisualLine) then {
+            "j" = "gj";
+            "k" = "gk";
+          } else
+            { });
     vim.nmap = { "<leader><space>" = ":nohlsearch<CR>"; };
 
     vim.luaConfigRC.base = nvim.dag.entryAfter [ "globalsScript" ] ''
