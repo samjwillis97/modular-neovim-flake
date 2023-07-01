@@ -25,7 +25,7 @@ in {
 
     # For some reason treesitter highlighting does not work on start if this is set before syntax on
     vim.configRC.treesitter-fold = mkIf cfg.fold
-      (nvim.dag.entryAfter [ "base" ] ''
+      (nvim.dag.entryBefore [ "base" ] ''
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
         set nofoldenable

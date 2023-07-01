@@ -35,6 +35,11 @@
               enable = true;
               fold = true;
             };
+            languages = {
+              enableTreesitter = true;
+              nix.enable = true;
+              nix.treesitter.enable = true;
+            };
           };
         };
       };
