@@ -5,10 +5,23 @@
     nixpkgs = { url = "github:NixOS/nixpkgs"; };
 
     flake-utils = { url = "github:numtide/flake-utils"; };
+
+    # Plugins
+    nvim-tree = {
+      url = "github:kyazdani42/nvim-tree.lua";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
-    let inherit (import ./lib/default.nix) mkNeovimConfiguration buildPkg;
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+    let
+      nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
+
+      availablePlugins = [ "nvim-tree-lua" ];
+      rawPlugins = nvimLib.plugins.inputsToRaw inputs availablePlugins;
+
+      inherit (import ./lib/default.nix rawPlugins)
+        mkNeovimConfiguration buildPkg;
     in {
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda

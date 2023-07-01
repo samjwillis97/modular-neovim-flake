@@ -33,10 +33,27 @@
         "type": "github"
       }
     },
+    "nvim-tree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688174900,
+        "narHash": "sha256-Md0H4J8lggMGjRmb1RQ+1hd3mamXQUmZZM81nyRjH4w=",
+        "owner": "kyazdani42",
+        "repo": "nvim-tree.lua",
+        "rev": "1fe32286db79719dd6e52236f82c5b52df3ccaa9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kyazdani42",
+        "repo": "nvim-tree.lua",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nvim-tree": "nvim-tree"
       }
     },
     "systems": {

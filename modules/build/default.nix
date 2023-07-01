@@ -7,6 +7,12 @@ let
   cfgBuilt = config.built;
   cfgVim = config.vim;
 
+  inputsSubmodule = { ... }: {
+    options.src = mkOption {
+      description = "The plugin source";
+      type = types.package;
+    };
+  };
 in {
   options = {
     build = {
@@ -20,6 +26,11 @@ in {
         description = "Enable vim alias";
         type = types.bool;
         default = true;
+      };
+
+      rawPlugins = mkOption {
+        type = with types; attrsOf (submodule inputsSubmodule);
+        default = { };
       };
 
       package = mkOption {
@@ -57,8 +68,35 @@ in {
   };
 
   config = let
+    # TODO: Understand :)
+    buildPlug = name:
+      pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+        pname = name;
+        version = "master";
+        src = assert asserts.assertMsg (name != "nvim-treesitter")
+          "Use buildTreesitterPlug for building nvim-treesitter";
+          cfgBuild.rawPlugins.${pname}.src;
+      };
+
+    buildConfigPlugins = plugins:
+      map (plug:
+        (if isString plug then
+        # (if (plug == "nvim-treesitter") then
+        #   treeSitterPlug
+        # else
+        #   buildPlug plug)
+          buildPlug plug
+        else
+          plug)) (filter (f: f != null) plugins);
+
+    normalizedPlugins = cfgBuilt.startPlugins ++ (map (plugin: {
+      inherit plugin;
+      optional = true;
+    }) cfgBuilt.optPlugins);
+
     neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
       inherit (cfgBuild) viAlias vimAlias;
+      plugins = normalizedPlugins;
       customRC = cfgBuilt.configRC;
     };
   in {
@@ -77,6 +115,9 @@ in {
           inherit mapResult;
         };
       in vimConfig;
+
+      startPlugins = buildConfigPlugins cfgVim.startPlugins;
+      optPlugins = buildConfigPlugins cfgVim.optPlugins;
 
       # TODO: Really understand this whole thing properly - Seems to basically just keep 
       # overriding/overwriting attributes and creates the neovim package that was declared

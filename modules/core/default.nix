@@ -29,17 +29,17 @@ in {
       default = { };
     };
 
-    # startPlugins = nvim.types.pluginsOpt {
-    #   rawPlugins = config.build.rawPlugins;
-    #   default = [ ];
-    #   description = "List of plugins to startup.";
-    # };
+    startPlugins = nvim.types.pluginsOpt {
+      rawPlugins = config.build.rawPlugins;
+      default = [ ];
+      description = "List of plugins to startup.";
+    };
 
-    # optPlugins = nvim.types.pluginsOpt {
-    #   rawPlugins = config.build.rawPlugins;
-    #   default = [ ];
-    #   description = "List of plugins to optionally load";
-    # };
+    optPlugins = nvim.types.pluginsOpt {
+      rawPlugins = config.build.rawPlugins;
+      default = [ ];
+      description = "List of plugins to optionally load";
+    };
 
     globals = mkOption {
       default = { };
