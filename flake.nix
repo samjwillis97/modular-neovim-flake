@@ -23,7 +23,15 @@
       inherit (import ./lib/default.nix { inherit rawPlugins; })
         mkNeovimConfiguration buildPkg;
 
-      baseConfig = { config = { vim.filetree.enable = true; }; };
+      baseConfig = {
+        config = {
+          vim.filetree = {
+            enable = true;
+            location = "left";
+            width = 30;
+          };
+        };
+      };
     in {
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda
