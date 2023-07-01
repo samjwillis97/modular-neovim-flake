@@ -101,7 +101,7 @@ in {
 
   # TODO: Look into this properly, make sure it makes sense to me for later on
   config = let
-    mkVimBool = val: if val then "1" else "0";
+    mkVimBool = val: if val then "true" else "false";
     valToVim = val:
       if (isInt val) then
         (builtins.toString val)
@@ -120,27 +120,32 @@ in {
         it
       else
         "<C-${toUpper (head groups)}>${head (tail groups)}";
-    mapVimBinding = prefix: mappings:
-      mapAttrsFlatten (name: value: "${prefix} ${mapKeyBinding name} ${value}")
+
+    mapVimBinding = prefix: remap: mappings:
+      mapAttrsFlatten (name: value:
+        ''
+          vim.api.nvim_set_keymap("${prefix}", "${
+            mapKeyBinding name
+          }", "${value}", { noremap = ${if remap then "true" else "false"} })'')
       (filterNonNull mappings);
 
-    nmap = mapVimBinding "nmap" config.vim.nmap;
-    imap = mapVimBinding "imap" config.vim.imap;
-    vmap = mapVimBinding "vmap" config.vim.vmap;
-    xmap = mapVimBinding "xmap" config.vim.xmap;
-    smap = mapVimBinding "smap" config.vim.smap;
-    cmap = mapVimBinding "cmap" config.vim.cmap;
-    omap = mapVimBinding "omap" config.vim.omap;
-    tmap = mapVimBinding "tmap" config.vim.tmap;
+    nmap = mapVimBinding "n" false config.vim.nmap;
+    imap = mapVimBinding "i" false config.vim.imap;
+    vmap = mapVimBinding "v" false config.vim.vmap;
+    xmap = mapVimBinding "x" false config.vim.xmap;
+    smap = mapVimBinding "s" false config.vim.smap;
+    cmap = mapVimBinding "c" false config.vim.cmap;
+    omap = mapVimBinding "o" false config.vim.omap;
+    tmap = mapVimBinding "t" false config.vim.tmap;
 
-    nnoremap = mapVimBinding "nnoremap" config.vim.nnoremap;
-    inoremap = mapVimBinding "inoremap" config.vim.inoremap;
-    vnoremap = mapVimBinding "vnoremap" config.vim.vnoremap;
-    xnoremap = mapVimBinding "xnoremap" config.vim.xnoremap;
-    snoremap = mapVimBinding "snoremap" config.vim.snoremap;
-    cnoremap = mapVimBinding "cnoremap" config.vim.cnoremap;
-    onoremap = mapVimBinding "onoremap" config.vim.onoremap;
-    tnoremap = mapVimBinding "tnoremap" config.vim.tnoremap;
+    nnoremap = mapVimBinding "n" true config.vim.nnoremap;
+    inoremap = mapVimBinding "i" true config.vim.inoremap;
+    vnoremap = mapVimBinding "v" true config.vim.vnoremap;
+    xnoremap = mapVimBinding "x" true config.vim.xnoremap;
+    snoremap = mapVimBinding "s" true config.vim.snoremap;
+    cnoremap = mapVimBinding "c" true config.vim.cnoremap;
+    onoremap = mapVimBinding "o" true config.vim.onoremap;
+    tnoremap = mapVimBinding "t" true config.vim.tnoremap;
   in {
     vim = {
       configRC = {
@@ -180,9 +185,9 @@ in {
             onoremap
             tnoremap
           ];
-          mapConfig =
-            concatStringsSep "\n" (map (v: concatStringsSep "\n" v) maps);
-        in nvim.dag.entryAfter [ "globalsScript" ] mapConfig;
+          mapConfig = (wrapLuaConfig
+            (concatStringsSep "\n" (map (v: concatStringsSep "\n" v) maps)));
+        in nvim.dag.entryAfter [ "luaScript" ] mapConfig;
       };
     };
   };

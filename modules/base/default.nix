@@ -140,10 +140,17 @@ in {
       description = "New splits will open on the right instead of left";
     };
 
+    escapeWithJK = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''Bind "jk" to escape'';
+    };
   };
 
   config = {
     # vim.startPlugins = ["plenary-nvim"];
+    vim.inoremap = mkIf cfg.escapeWithJK { "jk" = "<Esc>"; };
+
     vim.luaConfigRC.base = nvim.dag.entryAfter [ "globalsScript" ] ''
       -- Settings that are set for everything
       vim.opt.scrolloff = ${toString cfg.scrollOffsetLines}
