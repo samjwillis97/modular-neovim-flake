@@ -11,6 +11,10 @@
       url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
     };
+    telescope = {
+      url = "github:nvim-telescope/telescope.nvim";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:

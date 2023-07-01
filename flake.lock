@@ -53,7 +53,8 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
-        "nvim-tree-lua": "nvim-tree-lua"
+        "nvim-tree-lua": "nvim-tree-lua",
+        "telescope": "telescope"
       }
     },
     "systems": {
@@ -68,6 +69,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "telescope": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688234220,
+        "narHash": "sha256-2eGF1vuAg8FtFRP6vFB+NE/T+TVAIHDdCUpZmDTVTqw=",
+        "owner": "nvim-telescope",
+        "repo": "telescope.nvim",
+        "rev": "b14de80d1cdf66f988f6550ca8577c43bb3797cd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-telescope",
+        "repo": "telescope.nvim",
         "type": "github"
       }
     }
