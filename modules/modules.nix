@@ -1,6 +1,6 @@
 { pkgs, lib, check ? true, }:
 let
-  modules = [ ./base ./core ./build ];
+  modules = [ ./base ./filetree ./core ./build ];
 
   # TODO: What does this module do?
   pkgsModule = { config, ... }: {

@@ -7,7 +7,7 @@
     flake-utils = { url = "github:numtide/flake-utils"; };
 
     # Plugins
-    nvim-tree = {
+    nvim-tree-lua = {
       url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
     };
@@ -20,8 +20,10 @@
       availablePlugins = [ "nvim-tree-lua" ];
       rawPlugins = nvimLib.plugins.inputsToRaw inputs availablePlugins;
 
-      inherit (import ./lib/default.nix rawPlugins)
+      inherit (import ./lib/default.nix { inherit rawPlugins; })
         mkNeovimConfiguration buildPkg;
+
+      baseConfig = { config = { vim.filetree.enable = true; }; };
     in {
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda
@@ -30,7 +32,7 @@
         overlays = [
           (prev: final: {
             inherit mkNeovimConfiguration;
-            neovim-base = buildPkg final;
+            neovim-base = buildPkg final [ baseConfig ];
           })
         ];
         pkgs = import nixpkgs { inherit system overlays; };
