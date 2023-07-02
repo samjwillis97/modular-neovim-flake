@@ -13,7 +13,7 @@ in {
     };
 
     indentations = {
-      enable = {
+      enable = mkOption {
         type = types.bool;
         default = true;
         description = "Enable indentation visual enhancements";
@@ -21,7 +21,7 @@ in {
 
       lineChar = mkOption {
         type = types.nullOr types.str;
-        default = "|";
+        default = "│";
         description = "Character for indentation line";
       };
 
@@ -58,11 +58,11 @@ in {
       vim.luaConfigRC.indent-blankline = nvim.dag.entryAnywhere ''
         vim.opt.list = true
 
-        ${optionalString (cfg.indentBlankline.endChar != null) ''
-          vim.opt.listchars:append({ eol = "${cfg.indentBlankline.endChar}" })``
+        ${optionalString (cfg.indentations.endChar != null) ''
+          vim.opt.listchars:append({ eol = "${cfg.indentations.endChar}" })``
         ''}
-        ${optionalString (cfg.indentBlankline.fillChar != null) ''
-          vim.opt.listchars:append({ space = "${cfg.indentBlankline.fillChar}" })
+        ${optionalString (cfg.indentations.fillChar != null) ''
+          vim.opt.listchars:append({ space = "${cfg.indentations.fillChar}" })
         ''}
 
         require("indent_blankline").setup({
