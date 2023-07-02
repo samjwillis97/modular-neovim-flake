@@ -99,6 +99,7 @@
               location = "left";
               width = 30;
             };
+            visuals.enable = true;
             statusline = { enable = true; };
             treesitter = {
               enable = true;
