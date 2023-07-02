@@ -53,7 +53,7 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.betterIcons { vim.startPlugins = [ "nvim-web-devicons" ]; })
-    (mkIf cfg.indentations {
+    (mkIf cfg.indentations.enable {
       vim.startPlugins = [ "indent-blankline" ];
       vim.luaConfigRC.indent-blankline = nvim.dag.entryAnywhere ''
         vim.opt.list = true
