@@ -11,9 +11,9 @@ in {
     vim.nnoremap = {
       "<leader>ff" = ":Telescope git_files<CR>";
       "<leader>fb" = ":Telescope buffers<CR>";
-      "<leader>gf" = ":Telescope live_grep<CR>";
-      "<leader>gw" = ":Telescope live_grep<CR>";
-      "<leader>gb" = ":Telescope current_buffer_fuzzy_find<CR>";
+      "<leader>sf" = ":Telescope live_grep<CR>";
+      "<leader>sw" = ":Telescope grep_string<CR>";
+      "<leader>sb" = ":Telescope current_buffer_fuzzy_find<CR>";
     } // (if config.vim.treesitter.enable then {
       "<leader>fs" = ":Telescope treesitter<CR>";
     } else
