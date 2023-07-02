@@ -16,7 +16,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = if (cfg.style == "evil") then [ "lualine" ] else [ ];
+    vim.startPlugins = if (cfg.style == "evil" || cfg.style == "default") then [ "lualine" ] else [ ];
     vim.luaConfigRC.statusline = nvim.dag.entryAnywhere ''
       ${optionalString (cfg.style == "default") ''
         require('lualine').setup()
