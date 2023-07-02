@@ -39,7 +39,7 @@ in {
         "<leader>gr" = ":Gitsigns reset_hunk<CR>";
         "<leader>gS" = ":Gitsigns stage_buffer<CR>";
         "<leader>gU" = ":Gitsigns reset_buffer_index<CR>";
-        "<leader>gb" = '':lua require(\"gitsigns\").blame_line{full=true}<CR>'';
+        "<leader>gb" = ":lua require('gitsigns').blame_line{full=true}<CR>";
       } else
         { });
 
