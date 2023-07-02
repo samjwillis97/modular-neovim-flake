@@ -22,10 +22,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = if (cfg.gitInterface != "none") then
-      [ cfg.gitInterface ]
-    else
-      [ ] ++ (if (cfg.gutterSigns) then [ "gitsigns" ] else [ ]);
+    vim.startPlugins =
+      (if (cfg.gitInterface != "none") then [ cfg.gitInterface ] else [ ])
+      ++ (if (cfg.gutterSigns) then [ "gitsigns" ] else [ ]);
 
     vim.nnoremap = (if (cfg.gitInterface == "fugitive") then {
       "<leader>gg" = ":Git<CR>";
@@ -39,9 +38,9 @@ in {
         "<leader>gr" = ":Gitsigns reset_hunk<CR>";
         "<leader>gS" = ":Gitsigns stage_buffer<CR>";
         "<leader>gU" = ":Gitsigns reset_buffer_index<CR>";
+        "<leader>gb" = ":lua require('gitsigns').blame_line{full=true}<CR>";
       } else
         { });
-    # "<leader>gb" = ":lua require('gitsigns').blame_line{full=true}<CR>";
 
     vim.vnoremap = if (cfg.gutterSigns) then {
       "<leader>gs" = ":Gitsigns stage_hunk<CR>";
@@ -50,7 +49,7 @@ in {
       { };
 
     vim.luaConfigRC.git = nvim.dag.entryAnywhere ''
-      ${optionalString cfg.gutterSigns "require('gitsigns').setup({})"};
+      ${optionalString cfg.gutterSigns "require('gitsigns').setup()"};
     '';
   };
 }
