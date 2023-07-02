@@ -242,7 +242,8 @@
         "onedark": "onedark",
         "plenary-nvim": "plenary-nvim",
         "telescope": "telescope",
-        "tokyonight": "tokyonight"
+        "tokyonight": "tokyonight",
+        "treesitter-context": "treesitter-context"
       }
     },
     "systems": {
@@ -289,6 +290,22 @@
       "original": {
         "owner": "folke",
         "repo": "tokyonight.nvim",
+        "type": "github"
+      }
+    },
+    "treesitter-context": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688045960,
+        "narHash": "sha256-qeu6mfxlybJD0u9fpjoqUxGpSjm6ZnhXb7A3hAFyess=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter-context",
+        "rev": "63f3ffc50b0afc59be1015153d00922498085be8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter-context",
         "type": "github"
       }
     }

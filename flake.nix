@@ -38,6 +38,10 @@
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
     };
+    treesitter-context = {
+      url = "github:nvim-treesitter/nvim-treesitter-context";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -78,6 +82,7 @@
         "gitsigns"
         "nvim-web-devicons"
         "lualine"
+        "treesitter-context"
         "indent-blankline"
         "tokyonight"
         "onedark"
@@ -114,7 +119,6 @@
             languages = {
               enableTreesitter = true;
               nix.enable = true;
-              nix.treesitter.enable = true;
             };
           };
         };

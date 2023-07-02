@@ -5,7 +5,7 @@ let cfg = config.vim.treesitter;
 in {
   options.vim.treesitter = {
     enable = mkEnableOption
-      "treesitter, also enabled automatically through language options"; # TODO: Curiours how this works
+      "treesitter, also enabled automatically through language options";
 
     fold = mkEnableOption "fold with treesitter";
 
@@ -17,11 +17,18 @@ in {
         use the `vim.languages.<language>.treesitter.enable` option
       '';
     };
+
+    context = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Show current context at the top of the buffer using treesitter";
+    };
+    # TODO: tree-sitter context
   };
 
   # TODO: Implement CMP at some point here, I have removed for now
   config = mkIf cfg.enable {
-    vim.startPlugins = [ "nvim-treesitter" ];
+    vim.startPlugins = [ "nvim-treesitter" ] ++ (if cfg.context then [ "treesitter-context" ] else [ ]);
 
     # For some reason treesitter highlighting does not work on start if this is set before syntax on
     vim.configRC.treesitter-fold = mkIf cfg.fold
@@ -32,6 +39,7 @@ in {
       '');
 
     vim.luaConfigRC.treesitter = nvim.dag.entryAnywhere ''
+      ${optionalString cfg.context "require('treesitter-context').setup()"}
       require'nvim-treesitter.configs'.setup {
         highlight = {
           enable = true,
