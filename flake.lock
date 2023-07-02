@@ -66,6 +66,22 @@
         "type": "github"
       }
     },
+    "fugitive": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1686612451,
+        "narHash": "sha256-gK9qJnBRpc2n0ED6w2GEx9Exrtw4R0jIwnevI1r0M2k=",
+        "owner": "tpope",
+        "repo": "vim-fugitive",
+        "rev": "43f18ab9155c853a84ded560c6104e6300ad41da",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tpope",
+        "repo": "vim-fugitive",
+        "type": "github"
+      }
+    },
     "gruvbox": {
       "flake": false,
       "locked": {
@@ -151,6 +167,7 @@
         "dracula": "dracula",
         "dracula-nvim": "dracula-nvim",
         "flake-utils": "flake-utils",
+        "fugitive": "fugitive",
         "gruvbox": "gruvbox",
         "nixpkgs": "nixpkgs",
         "nvim-tree-lua": "nvim-tree-lua",

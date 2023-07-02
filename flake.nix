@@ -18,6 +18,10 @@
       url = "github:nvim-telescope/telescope.nvim";
       flake = false;
     };
+    fugitive = {
+      url = "github:tpope/vim-fugitive";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -54,6 +58,7 @@
         "plenary-nvim"
         "nvim-tree-lua"
         "telescope"
+        "fugitive"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -73,6 +78,7 @@
               enable = true;
               name = "catppuccin";
             };
+            git.enable = true;
             filetree = {
               enable = true;
               location = "left";

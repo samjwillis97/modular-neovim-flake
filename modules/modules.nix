@@ -5,6 +5,7 @@ let
     ./filetree
     ./treesitter
     ./telescope
+    ./git
     ./languages
     ./theme
     ./core
