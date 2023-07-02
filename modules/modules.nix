@@ -9,6 +9,7 @@ let
     ./statusline
     ./languages
     ./theme
+    ./visuals
     ./core
     ./build
   ];

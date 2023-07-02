@@ -30,6 +30,10 @@
       url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
+    nvim-web-devicons = {
+      url = "github:nvim-tree/nvim-web-devicons";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -68,6 +72,7 @@
         "telescope"
         "fugitive"
         "gitsigns"
+        "nvim-web-devicons"
         "lualine"
         "tokyonight"
         "onedark"

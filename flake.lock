@@ -161,6 +161,22 @@
         "type": "github"
       }
     },
+    "nvim-web-devicons": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687651460,
+        "narHash": "sha256-lN8LUgQ0sJDMByFkUmfVy6h2EVPAP3hqrwqE0++XgMQ=",
+        "owner": "nvim-tree",
+        "repo": "nvim-web-devicons",
+        "rev": "9ab9b0b894b2388a9dbcdee5f00ce72e25d85bf9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-tree",
+        "repo": "nvim-web-devicons",
+        "type": "github"
+      }
+    },
     "onedark": {
       "flake": false,
       "locked": {
@@ -205,6 +221,7 @@
         "lualine": "lualine",
         "nixpkgs": "nixpkgs",
         "nvim-tree-lua": "nvim-tree-lua",
+        "nvim-web-devicons": "nvim-web-devicons",
         "onedark": "onedark",
         "plenary-nvim": "plenary-nvim",
         "telescope": "telescope",
