@@ -9,7 +9,7 @@ in {
     enable = mkEnableOption "statusline";
 
     style = mkOption {
-      type = types.enum [ "evil" ];
+      type = types.enum [ "evil" "default" ];
       default = "evil";
       description = "Style for the statusline";
     };
@@ -18,6 +18,9 @@ in {
   config = mkIf cfg.enable {
     vim.startPlugins = if (cfg.style == "evil") then [ "lualine" ] else [ ];
     vim.luaConfigRC.statusline = nvim.dag.entryAnywhere ''
+      ${optionalString (cfg.style == "default") ''
+        require('lualine').setup()
+      ''}
       ${optionalString (cfg.style == "evil") evilLine.evil};
     '';
   };
