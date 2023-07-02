@@ -6,6 +6,7 @@ let
     ./treesitter
     ./telescope
     ./git
+    ./statusline
     ./languages
     ./theme
     ./core

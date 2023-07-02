@@ -26,6 +26,10 @@
       url = "github:lewis6991/gitsigns.nvim";
       flake = false;
     };
+    lualine = {
+      url = "github:nvim-lualine/lualine.nvim";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -64,6 +68,7 @@
         "telescope"
         "fugitive"
         "gitsigns"
+        "lualine"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -89,6 +94,7 @@
               location = "left";
               width = 30;
             };
+            statusline.enable = true;
             treesitter = {
               enable = true;
               fold = true;

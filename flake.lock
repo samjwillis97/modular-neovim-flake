@@ -114,6 +114,22 @@
         "type": "github"
       }
     },
+    "lualine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683213422,
+        "narHash": "sha256-ltHE8UIquGo07BSlFGM1l3wmTNN43i8kx6QY7Fj2CNo=",
+        "owner": "nvim-lualine",
+        "repo": "lualine.nvim",
+        "rev": "05d78e9fd0cdfb4545974a5aa14b1be95a86e9c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-lualine",
+        "repo": "lualine.nvim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1688115279,
@@ -186,6 +202,7 @@
         "fugitive": "fugitive",
         "gitsigns": "gitsigns",
         "gruvbox": "gruvbox",
+        "lualine": "lualine",
         "nixpkgs": "nixpkgs",
         "nvim-tree-lua": "nvim-tree-lua",
         "onedark": "onedark",
