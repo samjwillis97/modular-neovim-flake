@@ -39,9 +39,9 @@ in {
         "<leader>gr" = ":Gitsigns reset_hunk<CR>";
         "<leader>gS" = ":Gitsigns stage_buffer<CR>";
         "<leader>gU" = ":Gitsigns reset_buffer_index<CR>";
-        "<leader>gb" = ":lua require('gitsigns').blame_line{full=true}<CR>";
       } else
         { });
+    # "<leader>gb" = ":lua require('gitsigns').blame_line{full=true}<CR>";
 
     vim.vnoremap = if (cfg.gutterSigns) then {
       "<leader>gs" = ":Gitsigns stage_hunk<CR>";
