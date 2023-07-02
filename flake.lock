@@ -82,6 +82,22 @@
         "type": "github"
       }
     },
+    "gitsigns": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687264756,
+        "narHash": "sha256-V16DU/uq5D9GmvNjdZEVIj5xG9JoS6tII1Y9dev0As8=",
+        "owner": "lewis6991",
+        "repo": "gitsigns.nvim",
+        "rev": "a36bc3360d584d39b4fb076d855c4180842d4444",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lewis6991",
+        "repo": "gitsigns.nvim",
+        "type": "github"
+      }
+    },
     "gruvbox": {
       "flake": false,
       "locked": {
@@ -168,6 +184,7 @@
         "dracula-nvim": "dracula-nvim",
         "flake-utils": "flake-utils",
         "fugitive": "fugitive",
+        "gitsigns": "gitsigns",
         "gruvbox": "gruvbox",
         "nixpkgs": "nixpkgs",
         "nvim-tree-lua": "nvim-tree-lua",

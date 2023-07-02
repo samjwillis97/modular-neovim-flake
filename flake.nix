@@ -22,6 +22,10 @@
       url = "github:tpope/vim-fugitive";
       flake = false;
     };
+    gitsigns = {
+      url = "github:lewis6991/gitsigns.nvim";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -59,6 +63,7 @@
         "nvim-tree-lua"
         "telescope"
         "fugitive"
+        "gitsigns"
         "tokyonight"
         "onedark"
         "catppuccin"
