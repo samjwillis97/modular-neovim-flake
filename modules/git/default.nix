@@ -50,7 +50,7 @@ in {
       { };
 
     vim.luaConfigRC.git = nvim.dag.entryAnywhere ''
-      ${optionalString cfg.gutterSigns ''require("gitsigns").setup()''};
+      ${optionalString cfg.gutterSigns "require('gitsigns').setup({})"};
     '';
   };
 }
