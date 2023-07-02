@@ -34,6 +34,10 @@
       url = "github:nvim-tree/nvim-web-devicons";
       flake = false;
     };
+    indent-blankline = {
+      url = "github:lukas-reineke/indent-blankline.nvim";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -74,6 +78,7 @@
         "gitsigns"
         "nvim-web-devicons"
         "lualine"
+        "indent-blankline"
         "tokyonight"
         "onedark"
         "catppuccin"
