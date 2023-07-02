@@ -39,7 +39,7 @@ in {
 
       highlightCurrentContext = mkOption {
         type = types.bool;
-        default = true;
+        default = false;
         description = "Highlight current conext from treesitter";
       };
 
