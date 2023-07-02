@@ -94,10 +94,7 @@
               location = "left";
               width = 30;
             };
-            statusline = {
-              enable = true;
-              style = "default";
-            };
+            statusline = { enable = true; };
             treesitter = {
               enable = true;
               fold = true;
