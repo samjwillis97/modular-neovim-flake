@@ -50,6 +50,10 @@
       url = "github:ethanholz/nvim-lastplace";
       flake = false;
     };
+    lspconfig = {
+      url = "github:neovim/nvim-lspconfig";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -94,6 +98,7 @@
         "indent-blankline"
         "autopairs"
         "nvim-lastplace"
+        "lspconfig"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -135,12 +140,19 @@
               fold = true;
             };
             telescope.enable = true;
+            lsp = {
+              enable = true;
+              lspconfig.enable = true;
+            };
             languages = {
               # TODO: CMP
               # TODO: LSP
               # TODO: Formatters
               enableTreesitter = true;
-              nix.enable = true;
+              nix = {
+                enable = true;
+                lsp.enable = true;
+              };
             };
           };
         };

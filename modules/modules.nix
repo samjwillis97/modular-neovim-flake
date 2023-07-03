@@ -11,6 +11,8 @@ let
     ./theme
     ./visuals
     ./qol
+    ./lsp
+    ./format
     ./core
     ./build
   ];
