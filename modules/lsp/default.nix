@@ -1,8 +1,11 @@
 { lib, config, ... }:
 with lib;
 with builtins;
-let cfg = config.vim.lsp;
-in {
+let
+  cfg = config.vim.lsp;
+  usingNvimCmp = config.vim.autocomplete.enable;
+in
+{
   imports = [ ./lspconfig.nix ./lspkind.nix ];
   options.vim.lsp = {
     enable = mkEnableOption "lsp";
@@ -15,6 +18,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    vim.startPlugins = optional usingNvimCmp "cmp-nvim-lsp";
+
     vim.luaConfigRC.lsp-setup = ''
       vim.g.formatsave = ${boolToString cfg.formatOnSave};
 
@@ -51,7 +56,8 @@ in {
       end
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
+      ${optionalString usingNvimCmp
+      "capabilities = require('cmp_nvim_lsp').default_capabilities()"}
     '';
-    # TODO: cmp
   };
 }

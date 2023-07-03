@@ -78,6 +78,14 @@
       url = "github:hrsh7th/vim-vsnip";
       flake = false;
     };
+    cmp-treesitter = {
+      url = "github:ray-x/cmp-treesitter";
+      flake = false;
+    };
+    cmp-nvim-lsp = {
+      url = "github:hrsh7th/cmp-nvim-lsp";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -129,6 +137,8 @@
         "cmp-vsnip"
         "cmp-path"
         "vim-vsnip"
+        "cmp-treesitter"
+        "cmp-nvim-lsp"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -176,9 +186,7 @@
               lspconfig.enable = true;
               lspkind.enable = true;
             };
-            autocomplete = {
-              enable = true;
-            };
+            autocomplete = { enable = true; };
             languages = {
               enableTreesitter = true;
               nix = {

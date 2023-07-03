@@ -1,8 +1,11 @@
-{ pkgs, config, lib, ... }:
+{ config, lib, ... }:
 with lib;
 with builtins;
-let cfg = config.vim.treesitter;
-in {
+let
+  cfg = config.vim.treesitter;
+  usingNvimCmp = config.vim.autocomplete.enable;
+in
+{
   options.vim.treesitter = {
     enable = mkEnableOption
       "treesitter, also enabled automatically through language options";
@@ -23,12 +26,12 @@ in {
       default = true;
       description = "Show current context at the top of the buffer using treesitter";
     };
-    # TODO: tree-sitter context
   };
 
-  # TODO: Implement CMP at some point here, I have removed for now
   config = mkIf cfg.enable {
-    vim.startPlugins = [ "nvim-treesitter" ] ++ (if cfg.context then [ "treesitter-context" ] else [ ]);
+    vim.startPlugins = [ "nvim-treesitter" ] ++ (if cfg.context then [ "treesitter-context" ] else [ ]) ++ (if usingNvimCmp then [ "cmp-treesitter" ] else [ ]);
+
+    vim.autocomplete.sources = mkIf usingNvimCmp { "treesitter" = "[Treesitter]"; };
 
     # For some reason treesitter highlighting does not work on start if this is set before syntax on
     vim.configRC.treesitter-fold = mkIf cfg.fold
