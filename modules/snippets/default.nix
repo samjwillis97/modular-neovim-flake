@@ -9,6 +9,7 @@ in {
     };
   };
 
+  # FIXME: Does this even work...
   config = mkIf cfg.vsnip.enable {
     vim.startPlugins = [ "vim-vsnip" ];
   };
