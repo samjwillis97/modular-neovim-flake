@@ -2,7 +2,6 @@
 with lib;
 with builtins;
 let
-  # TODO: Why this? - must be something to do with how options are declared that I am missing 😬
   cfgBuild = config.build;
   cfgBuilt = config.built;
   cfgVim = config.vim;
@@ -69,7 +68,6 @@ in {
 
   config = let
     buildPlug = name:
-      # TODO: Understand :)
       pkgs.vimUtils.buildVimPluginFrom2Nix rec {
         pname = name;
         version = "master";
