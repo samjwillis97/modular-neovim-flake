@@ -42,6 +42,10 @@
       url = "github:nvim-treesitter/nvim-treesitter-context";
       flake = false;
     };
+    autopairs = {
+      url = "github:windwp/nvim-autopairs";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -84,6 +88,7 @@
         "lualine"
         "treesitter-context"
         "indent-blankline"
+        "autopairs"
         "tokyonight"
         "onedark"
         "catppuccin"

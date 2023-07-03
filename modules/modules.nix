@@ -10,6 +10,7 @@ let
     ./languages
     ./theme
     ./visuals
+    ./qol
     ./core
     ./build
   ];

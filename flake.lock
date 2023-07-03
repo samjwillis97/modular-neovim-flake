@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "autopairs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687083034,
+        "narHash": "sha256-x+9+KLkvwKQ+J4qCnBLpfN3VTlz+52oJ9p4VV/dHZ1I=",
+        "owner": "windwp",
+        "repo": "nvim-autopairs",
+        "rev": "e8f7dd7a72de3e7b6626c050a802000e69d53ff0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "windwp",
+        "repo": "nvim-autopairs",
+        "type": "github"
+      }
+    },
     "catppuccin": {
       "flake": false,
       "locked": {
@@ -227,6 +243,7 @@
     },
     "root": {
       "inputs": {
+        "autopairs": "autopairs",
         "catppuccin": "catppuccin",
         "dracula": "dracula",
         "dracula-nvim": "dracula-nvim",
