@@ -46,6 +46,10 @@
       url = "github:windwp/nvim-autopairs";
       flake = false;
     };
+    nvim-lastplace = {
+      url = "github:ethanholz/nvim-lastplace";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -89,6 +93,7 @@
         "treesitter-context"
         "indent-blankline"
         "autopairs"
+        "nvim-lastplace"
         "tokyonight"
         "onedark"
         "catppuccin"

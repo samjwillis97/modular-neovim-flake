@@ -177,6 +177,22 @@
         "type": "github"
       }
     },
+    "nvim-lastplace": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1685984290,
+        "narHash": "sha256-peaBcsF8TxWUaBr8WBR3TRpxiG1AYvzlgpTTNAklYZk=",
+        "owner": "ethanholz",
+        "repo": "nvim-lastplace",
+        "rev": "aeb0e0bd399288092729da89a9e51dda4ccbc9ec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ethanholz",
+        "repo": "nvim-lastplace",
+        "type": "github"
+      }
+    },
     "nvim-tree-lua": {
       "flake": false,
       "locked": {
@@ -254,6 +270,7 @@
         "indent-blankline": "indent-blankline",
         "lualine": "lualine",
         "nixpkgs": "nixpkgs",
+        "nvim-lastplace": "nvim-lastplace",
         "nvim-tree-lua": "nvim-tree-lua",
         "nvim-web-devicons": "nvim-web-devicons",
         "onedark": "onedark",
