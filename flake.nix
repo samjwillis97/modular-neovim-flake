@@ -111,11 +111,13 @@
             git.enable = true;
             filetree = {
               enable = true;
-              location = "left";
+              location = "center";
               width = 30;
             };
             visuals.enable = true;
+            # TODO: Borders/No Borders
             qol.enable = true;
+            # TODO: Lastplace
             statusline = { enable = true; };
             treesitter = {
               enable = true;
