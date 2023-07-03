@@ -7,8 +7,9 @@ let
       type = types.bool;
       default = false;
     };
-in {
-  imports = [ ./nix ];
+in
+{
+  imports = [ ./nix ./typescript ];
   options.vim.languages = {
     enableLSP = mkEnable "LSP";
     enableTreesitter = mkEnable "treesitter";

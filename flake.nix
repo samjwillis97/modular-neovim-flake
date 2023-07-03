@@ -155,6 +155,8 @@
         config = {
           vim = {
             # TODO: Tmux
+            # TODO: tpope commentary
+            # TODO: tpope surround
             theme = {
               enable = true;
               name = "catppuccin";
@@ -193,6 +195,10 @@
                 enable = true;
                 lsp.enable = true;
                 format.enable = true;
+              };
+              typescript = {
+                enable = true;
+                lsp.enable = true;
               };
             };
           };

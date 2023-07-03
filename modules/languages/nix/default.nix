@@ -8,7 +8,7 @@ let
   noFormat = "on_attach = attach_keymaps";
 
   defaultServer = "nil";
-  language_servers = {
+  servers = {
     nil = {
       package = pkgs.nil;
       internalFormatter = true;
@@ -77,13 +77,13 @@ in
       };
       server = mkOption {
         description = "Nix LSP server to use";
-        type = types.str;
+        type = types.enum (attrNames servers);
         default = defaultServer;
       };
       package = mkOption {
         description = "Nix LSP server package";
         type = types.package;
-        default = language_servers.${cfg.lsp.server}.package;
+        default = servers.${cfg.lsp.server}.package;
       };
     };
 
@@ -127,9 +127,10 @@ in
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.nix-lsp =
-        language_servers.${cfg.lsp.server}.lspConfig;
+        servers.${cfg.lsp.server}.lspConfig;
     })
 
+    # TODO: Address
     # (mkIf (cfg.format.enable && !language_servers.${cfg.lsp.server}.internalFormatter) {
     #   vim.lsp.null-ls.enable = true;
     #   vim.lsp.null-ls.sources.nix-format = formats.${cfg.format.type}.nullConfig;
