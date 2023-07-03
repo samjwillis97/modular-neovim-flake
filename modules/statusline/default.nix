@@ -4,7 +4,8 @@ with builtins;
 let
   cfg = config.vim.statusline;
   evilLine = import ./evil.nix;
-in {
+in
+{
   options.vim.statusline = {
     enable = mkEnableOption "statusline";
 
