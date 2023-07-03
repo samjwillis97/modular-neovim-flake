@@ -12,6 +12,8 @@ let
     ./visuals
     ./qol
     ./lsp
+    ./snippets
+    ./completion
     ./core
     ./build
   ];
@@ -25,4 +27,5 @@ let
       _module.check = check; # TODO: What does check do?
     };
   };
-in modules ++ [ pkgsModule ]
+in
+modules ++ [ pkgsModule ]

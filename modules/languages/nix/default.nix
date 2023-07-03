@@ -7,7 +7,6 @@ let
   useFormat = "on_attach = default_on_attach";
   noFormat = "on_attach = attach_keymaps";
 
-  # TODO: Formatting
   defaultServer = "nil";
   language_servers = {
     nil = {

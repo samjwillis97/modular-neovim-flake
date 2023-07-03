@@ -3,7 +3,7 @@ with lib;
 with builtins;
 let cfg = config.vim.lsp;
 in {
-  imports = [ ./lspconfig.nix ];
+  imports = [ ./lspconfig.nix ./lspkind.nix ];
   options.vim.lsp = {
     enable = mkEnableOption "lsp";
 

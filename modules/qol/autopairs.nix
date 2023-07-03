@@ -9,13 +9,13 @@ in {
       default = true;
       description = "Enables autopairs";
     };
-
-    # TODO: CMP
   };
 
   config = mkIf (cfg.enable && cfg.autopairs.enable) {
     vim.startPlugins = [ "autopairs" ];
     vim.luaConfigRC.autopairs =
-      nvim.dag.entryAnywhere "require('nvim-autopairs').setup()";
+      nvim.dag.entryAnywhere ''
+        require('nvim-autopairs').setup()
+      '';
   };
 }

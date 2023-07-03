@@ -21,7 +21,7 @@ in {
       ${optionalString (cfg.style == "default") ''
         require('lualine').setup()
       ''}
-      ${optionalString (cfg.style == "evil") evilLine.evil};
+      ${optionalString (cfg.style == "evil") evilLine.evil}
     '';
   };
 }

@@ -54,6 +54,30 @@
       url = "github:neovim/nvim-lspconfig";
       flake = false;
     };
+    lspkind = {
+      url = "github:onsails/lspkind.nvim";
+      flake = false;
+    };
+    nvim-cmp = {
+      url = "github:hrsh7th/nvim-cmp";
+      flake = false;
+    };
+    cmp-buffer = {
+      url = "github:hrsh7th/cmp-buffer";
+      flake = false;
+    };
+    cmp-vsnip = {
+      url = "github:hrsh7th/cmp-vsnip";
+      flake = false;
+    };
+    cmp-path = {
+      url = "github:hrsh7th/cmp-path";
+      flake = false;
+    };
+    vim-vsnip = {
+      url = "github:hrsh7th/vim-vsnip";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -99,6 +123,12 @@
         "autopairs"
         "nvim-lastplace"
         "lspconfig"
+        "lspkind"
+        "nvim-cmp"
+        "cmp-buffer"
+        "cmp-vsnip"
+        "cmp-path"
+        "vim-vsnip"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -114,6 +144,7 @@
       baseConfig = {
         config = {
           vim = {
+            # TODO: Tmux
             theme = {
               enable = true;
               name = "catppuccin";
@@ -143,11 +174,12 @@
             lsp = {
               enable = true;
               lspconfig.enable = true;
+              lspkind.enable = true;
+            };
+            autocomplete = {
+              enable = true;
             };
             languages = {
-              # TODO: CMP
-              # TODO: LSP
-              # TODO: Formatters
               enableTreesitter = true;
               nix = {
                 enable = true;
@@ -158,7 +190,8 @@
           };
         };
       };
-    in {
+    in
+    {
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda
     } // flake-utils.lib.eachDefaultSystem (system:
@@ -170,7 +203,8 @@
           })
         ];
         pkgs = import nixpkgs { inherit system overlays; };
-      in {
+      in
+      {
         packages = rec {
           neovim-base = pkgs.neovim-base;
           default = neovim-base;
