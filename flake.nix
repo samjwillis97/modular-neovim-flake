@@ -115,6 +115,7 @@
               width = 30;
             };
             visuals.enable = true;
+            qol.enable = true;
             statusline = { enable = true; };
             treesitter = {
               enable = true;

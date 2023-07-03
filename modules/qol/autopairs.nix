@@ -1,7 +1,7 @@
 { lib, config, ... }:
 with lib;
 with builtins;
-let cfg = config.vim.qol.autopairs;
+let cfg = config.vim.qol;
 in {
   options.vim.qol.autopairs = {
     enable = mkOption {
@@ -13,7 +13,7 @@ in {
     # TODO: CMP
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && cfg.autopairs.enable) {
     vim.startPlugins = [ "autopairs" ];
     vim.luaConfigRC.autopairs =
       nvim.dag.entryAnywhere "require('nvim-autopairs').setup()";
