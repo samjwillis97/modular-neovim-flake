@@ -22,7 +22,7 @@ let
           settings = {
             ["nil"] = {
           ${optionalString (cfg.format.type == "alejandra") ''
-            formatting = {
+            formatting = {{
               command = {"${cfg.format.package}/bin/alejandra", "--quiet"},
             },
           ''}
@@ -38,7 +38,26 @@ let
       '';
     };
   };
-in {
+
+  defaultFormat = "nixpkgs-fmt";
+  formats = {
+    alejandra = {
+      package = pkgs.alejandra;
+      nullConfig = ''
+        table.insert(
+          ls_sources,
+          null_ls.builtins.formatting.alejandra.with({
+            command = "${cfg.format.package}/bin/alejandra"
+          })
+        )
+      '';
+    };
+    nixpkgs-fmt = {
+      package = pkgs.nixpkgs-fmt;
+    };
+  };
+in
+{
   options.vim.languages.nix = {
     enable = mkEnableOption "Nix language support";
 
@@ -111,5 +130,10 @@ in {
       vim.lsp.lspconfig.sources.nix-lsp =
         language_servers.${cfg.lsp.server}.lspConfig;
     })
+
+    # (mkIf (cfg.format.enable && !language_servers.${cfg.lsp.server}.internalFormatter) {
+    #   vim.lsp.null-ls.enable = true;
+    #   vim.lsp.null-ls.sources.nix-format = formats.${cfg.format.type}.nullConfig;
+    # })
   ]);
 }

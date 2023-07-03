@@ -12,7 +12,6 @@ let
     ./visuals
     ./qol
     ./lsp
-    ./format
     ./core
     ./build
   ];
