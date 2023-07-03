@@ -123,6 +123,7 @@
             # TODO: Colorizer
             # TODO: Harpoon
             # TODO: outline
+            # TODO: which-key
             statusline = { enable = true; };
             treesitter = {
               enable = true;
