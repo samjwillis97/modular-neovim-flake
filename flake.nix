@@ -199,6 +199,7 @@
               typescript = {
                 enable = true;
                 lsp.enable = true;
+                format.enable = true; # FIXME: I don't think this is working
               };
             };
           };
