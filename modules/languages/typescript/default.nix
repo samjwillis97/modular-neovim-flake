@@ -64,9 +64,14 @@ let
       '';
     };
   };
-in {
+in
+{
   options.vim.languages.typescript = {
-    enable = mkEnableOption "Typescript language support";
+    enable = mkOption {
+      type = types.bool;
+      default = config.vim.languages.enableAll;
+      description = "Typescript language support";
+    };
 
     treesitter = {
       enable = mkOption {

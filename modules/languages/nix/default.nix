@@ -58,7 +58,11 @@ let
 in
 {
   options.vim.languages.nix = {
-    enable = mkEnableOption "Nix language support";
+    enable = mkOption {
+      type = types.bool;
+      default = config.vim.languages.enableAll;
+      description = "Nix language support";
+    };
 
     treesitter = {
       enable = mkOption {

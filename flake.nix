@@ -191,16 +191,9 @@
             autocomplete = { enable = true; };
             languages = {
               enableTreesitter = true;
-              nix = {
-                enable = true;
-                lsp.enable = true;
-                format.enable = true;
-              };
-              typescript = {
-                enable = true;
-                lsp.enable = true;
-                format.enable = true; # FIXME: I don't think this is working
-              };
+              enableLSP = true;
+              enableFormat = true;
+              enableAll = true;
             };
           };
         };

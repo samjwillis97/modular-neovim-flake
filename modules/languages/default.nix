@@ -11,6 +11,7 @@ in
 {
   imports = [ ./nix ./typescript ];
   options.vim.languages = {
+    enableAll = mkEnable "all Languages";
     enableLSP = mkEnable "LSP";
     enableTreesitter = mkEnable "treesitter";
     enableFormat = mkEnable "formatting";
