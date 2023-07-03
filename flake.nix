@@ -116,8 +116,13 @@
             };
             visuals.enable = true;
             # TODO: Borders/No Borders
+            # TODO: Dashboard
             qol.enable = true;
             # TODO: Lastplace
+            # TODO: TODO comments
+            # TODO: Colorizer
+            # TODO: Harpoon
+            # TODO: outline
             statusline = { enable = true; };
             treesitter = {
               enable = true;
@@ -125,6 +130,9 @@
             };
             telescope.enable = true;
             languages = {
+              # TODO: CMP
+              # TODO: LSP
+              # TODO: Formatters
               enableTreesitter = true;
               nix.enable = true;
             };
