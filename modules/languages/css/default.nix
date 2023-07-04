@@ -2,17 +2,17 @@
 with lib;
 with builtins;
 let
-  cfg = config.vim.languages.html;
+  cfg = config.vim.languages.css;
 
   defaultServer = "vscode-language-server";
   servers = {
     vscode-language-server = {
-      package = pkgs.nodePackages.vscode-html-languageserver-bin;
+      package = pkgs.nodePackages.vscode-css-languageserver-bin;
       lspConfig = ''
-        lspconfig.html.setup{
+        lspconfig.cssls.setup{
           capabilities = capabilities;
           on_attach = default_on_attach;
-          cmd = {"${cfg.lsp.package}/bin/html-languageserver", "--stdio"}
+          cmd = {"${cfg.lsp.package}/bin/css-languageserver", "--stdio"}
         }
       '';
     };
@@ -34,42 +34,35 @@ let
   };
 in
 {
-  options.vim.languages.html = {
+  options.vim.languages.css = {
     enable = mkOption {
       type = types.bool;
       default = config.vim.languages.enableAll;
-      description = "HTML language support";
+      description = "CSS language support";
     };
 
     treesitter = {
       enable = mkOption {
-        description = "Enable HTML treesitter";
+        description = "Enable CSS treesitter";
         type = types.bool;
         default = config.vim.languages.enableTreesitter;
       };
-      package = nvim.types.mkGrammarOption pkgs "html";
-
-      autotagHtml = mkOption {
-        description =
-          "Enable autoclose/autorename of html tags (nvim-ts-autotag)";
-        type = types.bool;
-        default = true;
-      };
+      package = nvim.types.mkGrammarOption pkgs "css";
     };
 
     lsp = {
       enable = mkOption {
-        description = "Enable HTML LSP support";
+        description = "Enable CSS LSP support";
         type = types.bool;
         default = config.vim.languages.enableLSP;
       };
       server = mkOption {
-        description = "HTML LSP server to use";
+        description = "CSS LSP server to use";
         type = with types; enum (attrNames servers);
         default = defaultServer;
       };
       package = mkOption {
-        description = "HTML LSP server package";
+        description = "CSS LSP server package";
         type = types.package;
         default = servers.${cfg.lsp.server}.package;
       };
@@ -77,17 +70,17 @@ in
 
     format = {
       enable = mkOption {
-        description = "Enable HTML formatting";
+        description = "Enable CSS formatting";
         type = types.bool;
         default = config.vim.languages.enableFormat;
       };
       type = mkOption {
-        description = "HTML formatter to use";
+        description = "CSS formatter to use";
         type = with types; enum (attrNames formats);
         default = defaultFormat;
       };
       package = mkOption {
-        description = "HTML formatter package";
+        description = "CSS formatter package";
         type = types.package;
         default = formats.${cfg.format.type}.package;
       };
@@ -98,23 +91,16 @@ in
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
       vim.treesitter.grammars = [ cfg.treesitter.package ];
-
-      vim.startPlugins = optional cfg.treesitter.autotagHtml "nvim-ts-autotag";
-
-      vim.luaConfigRC.html-autotag = mkIf cfg.treesitter.autotagHtml
-        (nvim.dag.entryAnywhere ''
-          require('nvim-ts-autotag').setup()
-        '');
     })
 
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
-      vim.lsp.lspconfig.sources.html-lsp = servers.${cfg.lsp.server}.lspConfig;
+      vim.lsp.lspconfig.sources.css-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
 
     (mkIf cfg.format.enable {
       vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.html-format =
+      vim.lsp.null-ls.sources.css-format =
         formats.${cfg.format.type}.nullConfig;
     })
   ]);

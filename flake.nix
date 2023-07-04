@@ -236,13 +236,13 @@
             };
             autocomplete = { enable = true; };
             languages = {
-              # TODO: css
-              # TODO: tailwind
-              # TODO: svelte
-              # TODO: angular
+              # TODO: css (cssls)
+              # TODO: tailwind (tailwindcss-language-server)
+              # TODO: svelte (svelte-language-server)
+              # TODO: angular (angularls)
               # TODO: csharp
-              # TODO: json
-              # TODO: yaml
+              # TODO: json (jsonls)
+              # TODO: yaml (yaml-language-server)
               # TODO: rust
               enableTreesitter = true;
               enableLSP = true;
