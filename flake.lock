@@ -434,6 +434,22 @@
         "type": "github"
       }
     },
+    "nvim-ts-autotag": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1686883732,
+        "narHash": "sha256-4qTtXYA5HyG1sADV0wsiccO/G89qEoYPmlg8tTx7h8g=",
+        "owner": "windwp",
+        "repo": "nvim-ts-autotag",
+        "rev": "6be1192965df35f94b8ea6d323354f7dc7a557e4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "windwp",
+        "repo": "nvim-ts-autotag",
+        "type": "github"
+      }
+    },
     "nvim-web-devicons": {
       "flake": false,
       "locked": {
@@ -511,6 +527,7 @@
         "nvim-code-action-menu": "nvim-code-action-menu",
         "nvim-lastplace": "nvim-lastplace",
         "nvim-tree-lua": "nvim-tree-lua",
+        "nvim-ts-autotag": "nvim-ts-autotag",
         "nvim-web-devicons": "nvim-web-devicons",
         "onedark": "onedark",
         "plenary-nvim": "plenary-nvim",

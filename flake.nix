@@ -122,6 +122,10 @@
       url = "github:christoomey/vim-tmux-navigator";
       flake = false;
     };
+    nvim-ts-autotag = {
+      url = "github:windwp/nvim-ts-autotag";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -184,6 +188,7 @@
         "undotree"
         "harpoon"
         "tmux-navigator"
+        "nvim-ts-autotag"
         "tokyonight"
         "onedark"
         "catppuccin"
