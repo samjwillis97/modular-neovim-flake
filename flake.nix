@@ -118,6 +118,10 @@
       url = "github:tpope/vim-surround";
       flake = false;
     };
+    tmux-navigator = {
+      url = "github:christoomey/vim-tmux-navigator";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -179,6 +183,7 @@
         "colorizer"
         "undotree"
         "harpoon"
+        "tmux-navigator"
         "tokyonight"
         "onedark"
         "catppuccin"

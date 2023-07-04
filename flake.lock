@@ -516,6 +516,7 @@
         "plenary-nvim": "plenary-nvim",
         "surround": "surround",
         "telescope": "telescope",
+        "tmux-navigator": "tmux-navigator",
         "tokyonight": "tokyonight",
         "treesitter-context": "treesitter-context",
         "undotree": "undotree",
@@ -566,6 +567,22 @@
       "original": {
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
+        "type": "github"
+      }
+    },
+    "tmux-navigator": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673311166,
+        "narHash": "sha256-gF1b5aBQTNQm2hCY5aR+RSU4cCNG356Yg6uPnlgqS4o=",
+        "owner": "christoomey",
+        "repo": "vim-tmux-navigator",
+        "rev": "cdd66d6a37d991bba7997d593586fc51a5b37aa8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "christoomey",
+        "repo": "vim-tmux-navigator",
         "type": "github"
       }
     },
