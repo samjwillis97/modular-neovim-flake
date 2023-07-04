@@ -237,7 +237,6 @@
             autocomplete = { enable = true; };
             languages = {
               # TODO: tailwind (tailwindcss-language-server)
-              # TODO: svelte (svelte-language-server)
               # TODO: angular (angularls)
               # TODO: csharp
               # TODO: json (jsonls)
