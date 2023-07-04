@@ -202,7 +202,6 @@
             # TODO: Dashboard
             qol.enable = true;
             # TODO: TODO comments
-            # TODO: Harpoon
             # TODO: outline
             # TODO: which-key
             statusline = { enable = true; };
