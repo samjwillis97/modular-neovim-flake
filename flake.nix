@@ -196,7 +196,6 @@
             telescope.enable = true;
             lsp = {
               # TODO: Code Actions
-              # TODO: Fidget spinner
               enable = true;
               lspconfig.enable = true;
               lspkind.enable = true;
