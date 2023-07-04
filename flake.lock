@@ -338,6 +338,22 @@
         "type": "github"
       }
     },
+    "nvim-code-action-menu": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1671523188,
+        "narHash": "sha256-7szx+Me6WhrANbmfQ6C6gfSVB2owd02b3iZYhz7K6wY=",
+        "owner": "weilbith",
+        "repo": "nvim-code-action-menu",
+        "rev": "e4399dbaf6eabff998d3d5f1cbcd8d9933710027",
+        "type": "github"
+      },
+      "original": {
+        "owner": "weilbith",
+        "repo": "nvim-code-action-menu",
+        "type": "github"
+      }
+    },
     "nvim-lastplace": {
       "flake": false,
       "locked": {
@@ -441,6 +457,7 @@
         "nixpkgs": "nixpkgs",
         "null-ls": "null-ls",
         "nvim-cmp": "nvim-cmp",
+        "nvim-code-action-menu": "nvim-code-action-menu",
         "nvim-lastplace": "nvim-lastplace",
         "nvim-tree-lua": "nvim-tree-lua",
         "nvim-web-devicons": "nvim-web-devicons",

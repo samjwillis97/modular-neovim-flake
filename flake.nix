@@ -94,6 +94,10 @@
       url = "github:j-hui/fidget.nvim?ref=legacy";
       flake = false;
     };
+    nvim-code-action-menu = {
+      url = "github:weilbith/nvim-code-action-menu";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -149,6 +153,7 @@
         "cmp-nvim-lsp"
         "null-ls"
         "fidget"
+        "nvim-code-action-menu"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -195,8 +200,8 @@
             };
             telescope.enable = true;
             lsp = {
-              # TODO: Code Actions
               enable = true;
+              codeActionMenu.enable = true;
               lspconfig.enable = true;
               lspkind.enable = true;
               null-ls.enable = true;
