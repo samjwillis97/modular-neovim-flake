@@ -236,7 +236,6 @@
             };
             autocomplete = { enable = true; };
             languages = {
-              # TODO: css (cssls)
               # TODO: tailwind (tailwindcss-language-server)
               # TODO: svelte (svelte-language-server)
               # TODO: angular (angularls)
@@ -253,8 +252,7 @@
           };
         };
       };
-    in
-    {
+    in {
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda
     } // flake-utils.lib.eachDefaultSystem (system:
@@ -266,8 +264,7 @@
           })
         ];
         pkgs = import nixpkgs { inherit system overlays; };
-      in
-      {
+      in {
         packages = rec {
           neovim-base = pkgs.neovim-base;
           default = neovim-base;
