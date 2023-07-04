@@ -98,6 +98,10 @@
       url = "github:weilbith/nvim-code-action-menu";
       flake = false;
     };
+    colorizer = {
+      url = "github:norcalli/nvim-colorizer.lua";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -154,6 +158,7 @@
         "null-ls"
         "fidget"
         "nvim-code-action-menu"
+        "colorizer"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -186,10 +191,8 @@
             # TODO: Borders/No Borders
             # TODO: Dashboard
             qol.enable = true;
-            # TODO: Lastplace
             # TODO: Undotree
             # TODO: TODO comments
-            # TODO: Colorizer
             # TODO: Harpoon
             # TODO: outline
             # TODO: which-key
