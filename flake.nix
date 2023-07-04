@@ -185,6 +185,7 @@
             };
             telescope.enable = true;
             lsp = {
+              # TODO: Code Actions
               enable = true;
               lspconfig.enable = true;
               lspkind.enable = true;
