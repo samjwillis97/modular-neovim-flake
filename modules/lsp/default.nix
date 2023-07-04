@@ -6,7 +6,7 @@ let
   usingNvimCmp = config.vim.autocomplete.enable;
 in
 {
-  imports = [ ./lspconfig.nix ./lspkind.nix ];
+  imports = [ ./lspconfig.nix ./lspkind.nix ./null_ls.nix ];
   options.vim.lsp = {
     enable = mkEnableOption "lsp";
 

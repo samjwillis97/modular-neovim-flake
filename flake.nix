@@ -86,6 +86,10 @@
       url = "github:hrsh7th/cmp-nvim-lsp";
       flake = false;
     };
+    null-ls = {
+      url = "github:jose-elias-alvarez/null-ls.nvim";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -139,6 +143,7 @@
         "vim-vsnip"
         "cmp-treesitter"
         "cmp-nvim-lsp"
+        "null-ls"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -186,15 +191,18 @@
             telescope.enable = true;
             lsp = {
               # TODO: Code Actions
+              # TODO: Fidget spinner
               enable = true;
               lspconfig.enable = true;
               lspkind.enable = true;
+              null-ls.enable = true;
             };
             autocomplete = { enable = true; };
             languages = {
               enableTreesitter = true;
               enableLSP = true;
               enableFormat = true;
+              enableExtraDiagnostics = true;
               enableAll = true;
             };
           };

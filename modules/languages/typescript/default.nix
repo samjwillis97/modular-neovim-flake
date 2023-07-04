@@ -4,9 +4,6 @@ with builtins;
 let
   cfg = config.vim.languages.typescript;
 
-  useFormat = "on_attach = default_on_attach";
-  noFormat = "on_attach = attach_keymaps";
-
   defaultServer = "tsserver";
   servers = {
     tsserver = {
@@ -15,21 +12,7 @@ let
         lspconfig.tsserver.setup {
           capabilities = capabilities;
           on_attach = attach_keymaps,
-          cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" },
-          ${if cfg.format.enable then useFormat else noFormat},
-          ${
-            optionalString cfg.format.enable ''
-              settings = {
-                ["tsserver"] = {
-              ${optionalString (cfg.format.type == "prettier") ''
-                formatting = {
-                  command = {"${cfg.format.package}/bin/prettier --stdin-filepath"},
-                },
-              ''}
-                },
-              };
-            ''
-          }
+          cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" }
         }
       '';
     };
@@ -166,19 +149,18 @@ in
       vim.lsp.lspconfig.sources.ts-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
 
-    # (mkIf cfg.format.enable {
-    #   vim.lsp.null-ls.enable = true;
-    #   vim.lsp.null-ls.sources.ts-format = formats.${cfg.format.type}.nullConfig;
-    # })
+    (mkIf cfg.format.enable {
+      vim.lsp.null-ls.enable = true;
+      vim.lsp.null-ls.sources.ts-format = formats.${cfg.format.type}.nullConfig;
+    })
 
-    # TODO: Address
-    # (mkIf cfg.extraDiagnostics.enable {
-    #   vim.lsp.null-ls.enable = true;
-    #   vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
-    #     lang = "ts";
-    #     config = cfg.extraDiagnostics.types;
-    #     inherit diagnostics;
-    #   };
-    # })
+    (mkIf cfg.extraDiagnostics.enable {
+      vim.lsp.null-ls.enable = true;
+      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
+        lang = "ts";
+        config = cfg.extraDiagnostics.types;
+        inherit diagnostics;
+      };
+    })
   ]);
 }
