@@ -199,6 +199,17 @@
             };
             autocomplete = { enable = true; };
             languages = {
+              # TODO: html
+              # TODO: css
+              # TODO: tailwind
+              # TODO: svelte
+              # TODO: angular
+              # TODO: python
+              # TODO: csharp
+              # TODO: json
+              # TODO: yaml
+              # TODO: go
+              # TODO: rust
               enableTreesitter = true;
               enableLSP = true;
               enableFormat = true;
