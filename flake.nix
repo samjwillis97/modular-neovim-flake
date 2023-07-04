@@ -110,6 +110,10 @@
       url = "github:ThePrimeagen/harpoon";
       flake = false;
     };
+    commentary = {
+      url = "github:tpope/vim-commentary";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -169,6 +173,7 @@
         "colorizer"
         "undotree"
         "harpoon"
+        "commentary"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -185,7 +190,6 @@
         config = {
           vim = {
             # TODO: Tmux
-            # TODO: tpope commentary
             # TODO: tpope surround
             theme = {
               enable = true;

@@ -172,7 +172,7 @@ in {
   };
 
   config = {
-    vim.startPlugins = [ "plenary-nvim" ];
+    vim.startPlugins = [ "plenary-nvim" "commentary" ];
     vim.inoremap = mkIf cfg.escapeWithJK { "jk" = "<Esc>"; };
     vim.nnoremap =
       (if (cfg.leaderKey == "space") then { "<space>" = "<nop>"; } else { })
@@ -183,19 +183,19 @@ in {
         "<C-H>" = "<C-W><C-H>";
       } else
         { }) // (if (cfg.centerAfterJump) then {
-          "<C-u>" = "<C-u>zz";
-          "<C-d>" = "<C-d>zz";
-          "<C-i>" = "<C-i>zz";
-          "<C-o>" = "<C-o>zz";
-          "n" = "nzz";
-          "N" = "Nzz";
-          "GG" = "GGzz";
-        } else
-          { }) // (if (cfg.moveByVisualLine) then {
-            "j" = "gj";
-            "k" = "gk";
-          } else
-            { });
+        "<C-u>" = "<C-u>zz";
+        "<C-d>" = "<C-d>zz";
+        "<C-i>" = "<C-i>zz";
+        "<C-o>" = "<C-o>zz";
+        "n" = "nzz";
+        "N" = "Nzz";
+        "GG" = "GGzz";
+      } else
+        { }) // (if (cfg.moveByVisualLine) then {
+        "j" = "gj";
+        "k" = "gk";
+      } else
+        { });
     vim.nmap = { "<leader><space>" = ":nohlsearch<CR>"; };
 
     vim.luaConfigRC.base = nvim.dag.entryAfter [ "globalsScript" ] ''

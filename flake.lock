@@ -128,6 +128,22 @@
         "type": "github"
       }
     },
+    "commentary": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667247706,
+        "narHash": "sha256-wPNAXFC3rgYJ1YkyyMqfUxiiozNldrk5ifpNHhNifyY=",
+        "owner": "tpope",
+        "repo": "vim-commentary",
+        "rev": "e87cd90dc09c2a203e13af9704bd0ef79303d755",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tpope",
+        "repo": "vim-commentary",
+        "type": "github"
+      }
+    },
     "dracula": {
       "flake": false,
       "locked": {
@@ -476,6 +492,7 @@
         "cmp-treesitter": "cmp-treesitter",
         "cmp-vsnip": "cmp-vsnip",
         "colorizer": "colorizer",
+        "commentary": "commentary",
         "dracula": "dracula",
         "dracula-nvim": "dracula-nvim",
         "fidget": "fidget",

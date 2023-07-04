@@ -53,7 +53,8 @@ let
     };
     nixpkgs-fmt = { package = pkgs.nixpkgs-fmt; };
   };
-in {
+in
+{
   options.vim.languages.nix = {
     enable = mkOption {
       type = types.bool;
@@ -115,6 +116,14 @@ in {
           {
             pattern = "nix",
             command = [[setlocal tabstop=2 shiftwidth=2 softtabstop=2]],
+          }
+        )
+
+        vim.api.nvim_create_autocmd(
+          { "FileType" },
+          {
+            pattern = "nix",
+            command = [[setlocal commentstring=#\ %s]],
           }
         )
       '';
