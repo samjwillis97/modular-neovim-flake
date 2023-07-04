@@ -199,7 +199,6 @@
       baseConfig = {
         config = {
           vim = {
-            # TODO: Tmux
             theme = {
               enable = true;
               name = "catppuccin";
