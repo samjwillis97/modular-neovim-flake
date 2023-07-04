@@ -106,6 +106,10 @@
       url = "github:mbbill/undotree";
       flake = false;
     };
+    harpoon = {
+      url = "github:ThePrimeagen/harpoon";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -160,10 +164,11 @@
         "cmp-treesitter"
         "cmp-nvim-lsp"
         "null-ls"
-        "undotree"
         "fidget"
         "nvim-code-action-menu"
         "colorizer"
+        "undotree"
+        "harpoon"
         "tokyonight"
         "onedark"
         "catppuccin"
