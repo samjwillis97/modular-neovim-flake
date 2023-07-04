@@ -9,7 +9,7 @@ let
     };
 in
 {
-  imports = [ ./nix ./typescript ./html ./python ];
+  imports = [ ./nix ./typescript ./html ./python ./go ];
   options.vim.languages = {
     enableAll = mkEnable "all Languages";
     enableLSP = mkEnable "LSP";
