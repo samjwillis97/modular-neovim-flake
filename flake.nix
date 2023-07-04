@@ -102,6 +102,10 @@
       url = "github:norcalli/nvim-colorizer.lua";
       flake = false;
     };
+    undotree = {
+      url = "github:mbbill/undotree";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -156,6 +160,7 @@
         "cmp-treesitter"
         "cmp-nvim-lsp"
         "null-ls"
+        "undotree"
         "fidget"
         "nvim-code-action-menu"
         "colorizer"
@@ -191,7 +196,6 @@
             # TODO: Borders/No Borders
             # TODO: Dashboard
             qol.enable = true;
-            # TODO: Undotree
             # TODO: TODO comments
             # TODO: Harpoon
             # TODO: outline

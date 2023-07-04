@@ -483,6 +483,7 @@
         "telescope": "telescope",
         "tokyonight": "tokyonight",
         "treesitter-context": "treesitter-context",
+        "undotree": "undotree",
         "vim-vsnip": "vim-vsnip"
       }
     },
@@ -546,6 +547,22 @@
       "original": {
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter-context",
+        "type": "github"
+      }
+    },
+    "undotree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677343895,
+        "narHash": "sha256-VrU0usn0akKUtZarvWxL1kD7RgCVBEuZBSQHF5myd40=",
+        "owner": "mbbill",
+        "repo": "undotree",
+        "rev": "485f01efde4e22cb1ce547b9e8c9238f36566f21",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mbbill",
+        "repo": "undotree",
         "type": "github"
       }
     },
