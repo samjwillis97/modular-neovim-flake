@@ -23,7 +23,7 @@ let
                 ["tsserver"] = {
               ${optionalString (cfg.format.type == "prettier") ''
                 formatting = {
-                  command = {"${cfg.format.package}/bin/prettier"},
+                  command = {"${cfg.format.package}/bin/prettier --stdin-filepath"},
                 },
               ''}
                 },

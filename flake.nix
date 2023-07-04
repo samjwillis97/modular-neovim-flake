@@ -172,6 +172,7 @@
             # TODO: Dashboard
             qol.enable = true;
             # TODO: Lastplace
+            # TODO: Undotree
             # TODO: TODO comments
             # TODO: Colorizer
             # TODO: Harpoon
