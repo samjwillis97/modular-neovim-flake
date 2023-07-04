@@ -90,6 +90,10 @@
       url = "github:jose-elias-alvarez/null-ls.nvim";
       flake = false;
     };
+    fidget = {
+      url = "github:j-hui/fidget.nvim?ref=legacy";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -144,6 +148,7 @@
         "cmp-treesitter"
         "cmp-nvim-lsp"
         "null-ls"
+        "fidget"
         "tokyonight"
         "onedark"
         "catppuccin"

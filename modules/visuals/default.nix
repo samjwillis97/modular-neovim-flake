@@ -1,8 +1,11 @@
 { config, lib, ... }:
 with lib;
 with builtins;
-let cfg = config.vim.visuals;
-in {
+let
+  cfg = config.vim.visuals;
+  lspEnabled = config.vim.lsp.enable;
+in
+{
   options.vim.visuals = {
     enable = mkEnableOption "visual enhancements";
 
@@ -49,6 +52,14 @@ in {
         description = "Use treesiter for indentation";
       };
     };
+
+    lspSpinner = {
+      enable = mkOption {
+        description = "enable lsp spinner";
+        type = types.bool;
+        default = config.vim.lsp.enable;
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -78,6 +89,12 @@ in {
               boolToString (cfg.indentations.highlightCurrentContext)
             },
         })
+      '';
+    })
+    (mkIf (cfg.lspSpinner.enable && lspEnabled) {
+      vim.startPlugins = [ "fidget" ];
+      vim.luaConfigRC.fidget = nvim.dag.entryAnywhere ''
+        require("fidget").setup{}
       '';
     })
   ]);
