@@ -51,12 +51,9 @@ let
         )
       '';
     };
-    nixpkgs-fmt = {
-      package = pkgs.nixpkgs-fmt;
-    };
+    nixpkgs-fmt = { package = pkgs.nixpkgs-fmt; };
   };
-in
-{
+in {
   options.vim.languages.nix = {
     enable = mkOption {
       type = types.bool;
@@ -130,14 +127,13 @@ in
 
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
-      vim.lsp.lspconfig.sources.nix-lsp =
-        servers.${cfg.lsp.server}.lspConfig;
+      vim.lsp.lspconfig.sources.nix-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
 
-    # TODO: Address
-    # (mkIf (cfg.format.enable && !language_servers.${cfg.lsp.server}.internalFormatter) {
-    #   vim.lsp.null-ls.enable = true;
-    #   vim.lsp.null-ls.sources.nix-format = formats.${cfg.format.type}.nullConfig;
-    # })
+    (mkIf (cfg.format.enable && !servers.${cfg.lsp.server}.internalFormatter) {
+      vim.lsp.null-ls.enable = true;
+      vim.lsp.null-ls.sources.nix-format =
+        formats.${cfg.format.type}.nullConfig;
+    })
   ]);
 }
