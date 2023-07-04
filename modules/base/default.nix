@@ -172,7 +172,7 @@ in {
   };
 
   config = {
-    vim.startPlugins = [ "plenary-nvim" "commentary" ];
+    vim.startPlugins = [ "plenary-nvim" "commentary" "surround" ];
     vim.inoremap = mkIf cfg.escapeWithJK { "jk" = "<Esc>"; };
     vim.nnoremap =
       (if (cfg.leaderKey == "space") then { "<space>" = "<nop>"; } else { })

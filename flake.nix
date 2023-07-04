@@ -114,6 +114,10 @@
       url = "github:tpope/vim-commentary";
       flake = false;
     };
+    surround = {
+      url = "github:tpope/vim-surround";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -148,6 +152,8 @@
 
       availablePlugins = [
         "plenary-nvim"
+        "commentary"
+        "surround"
         "nvim-tree-lua"
         "telescope"
         "fugitive"
@@ -173,7 +179,6 @@
         "colorizer"
         "undotree"
         "harpoon"
-        "commentary"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -190,7 +195,6 @@
         config = {
           vim = {
             # TODO: Tmux
-            # TODO: tpope surround
             theme = {
               enable = true;
               name = "catppuccin";

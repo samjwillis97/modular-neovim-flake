@@ -514,11 +514,28 @@
         "nvim-web-devicons": "nvim-web-devicons",
         "onedark": "onedark",
         "plenary-nvim": "plenary-nvim",
+        "surround": "surround",
         "telescope": "telescope",
         "tokyonight": "tokyonight",
         "treesitter-context": "treesitter-context",
         "undotree": "undotree",
         "vim-vsnip": "vim-vsnip"
+      }
+    },
+    "surround": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1666730476,
+        "narHash": "sha256-DZE5tkmnT+lAvx/RQHaDEgEJXRKsy56KJY919xiH1lE=",
+        "owner": "tpope",
+        "repo": "vim-surround",
+        "rev": "3d188ed2113431cf8dac77be61b842acb64433d9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tpope",
+        "repo": "vim-surround",
+        "type": "github"
       }
     },
     "systems": {
