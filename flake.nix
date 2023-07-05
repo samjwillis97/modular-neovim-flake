@@ -201,56 +201,71 @@
       inherit (import ./lib/default.nix { inherit rawPlugins; })
         mkNeovimConfiguration buildPkg;
 
-      baseConfig = {
-        config = {
-          vim = {
-            theme = {
-              enable = true;
-              name = "catppuccin";
-            };
-            git.enable = true;
-            filetree = {
-              enable = true;
-              location = "center";
-              width = 30;
-            };
-            visuals.enable = true;
-            # TODO: Borders/No Borders
-            # TODO: Dashboard
-            qol.enable = true;
-            # TODO: TODO comments
-            # TODO: outline
-            # TODO: which-key
-            statusline = { enable = true; };
-            treesitter = {
-              enable = true;
-              fold = true;
-            };
-            telescope.enable = true;
-            lsp = {
-              enable = true;
-              codeActionMenu.enable = true;
-              lspconfig.enable = true;
-              lspkind.enable = true;
-              null-ls.enable = true;
-            };
-            autocomplete = { enable = true; };
-            languages = {
-              # TODO: tailwind (tailwindcss-language-server)
-              # TODO: angular (angularls)
-              # TODO: csharp
-              # TODO: json (jsonls)
-              # TODO: yaml (yaml-language-server)
-              # TODO: rust
-              enableTreesitter = true;
-              enableLSP = true;
-              enableFormat = true;
-              enableExtraDiagnostics = true;
-              enableAll = true;
-            };
-          };
+      bareConfig = {
+        filetree.enable = true;
+        theme.enable = false;
+        git.enable = false;
+        visuals.enable = false;
+        qol.enable = false;
+        statusline.enable = false;
+        treesitter.enable = false;
+        telescope.enable = false;
+        lsp.enable = false;
+        autocomplete.enable = false;
+      };
+
+      baseConfig = bareConfig // {
+        theme = {
+          enable = true;
+          name = "catppuccin";
+        };
+        filetree = {
+          enable = true;
+          location = "center";
+        };
+        qol.enable = true;
+        #       # TODO: TODO comments
+        #       # TODO: outline
+        #       # TODO: which-key
+        statusline.enable = true;
+        telescope.enable = true;
+        visuals.enable = true;
+        git.enable = true;
+        #       # TODO: Borders/No Borders
+        #       # TODO: Dashboard
+      };
+
+      lspBase = baseConfig // {
+        treesitter = {
+          enable = true;
+          fold = true;
+        };
+        lsp = {
+          enable = true;
+          codeActionMenu.enable = true;
+          lspconfig.enable = true;
+          lspkind.enable = true;
+          null-ls.enable = true;
+        };
+        autocomplete.enable = true;
+      };
+
+      fullConfig = lspBase // {
+        languages = {
+          enableTreesitter = true;
+          enableLSP = true;
+          enableFormat = true;
+          enableExtraDiagnostics = true;
+          enableAll = true;
         };
       };
+
+      #         # TODO: tailwind (tailwindcss-language-server)
+      #         # TODO: angular (angularls)
+      #         # TODO: csharp
+      #         # TODO: json (jsonls)
+      #         # TODO: yaml (yaml-language-server)
+      #         # TODO: rust
     in
     {
 
@@ -260,26 +275,38 @@
         overlays = [
           (prev: final: {
             inherit mkNeovimConfiguration;
-            neovim-base = buildPkg final [ baseConfig ];
+            neovim-bare = buildPkg final [{ config.vim = bareConfig; }];
+            neovim-base = buildPkg final [{ config.vim = baseConfig; }];
+            neovim-full = buildPkg final [{ config.vim = fullConfig; }];
           })
         ];
         pkgs = import nixpkgs { inherit system overlays; };
       in
       {
         packages = rec {
+          neovim-bare = pkgs.neovim-bare;
           neovim-base = pkgs.neovim-base;
+          neovim-full = pkgs.neovim-full;
           default = neovim-base;
         };
 
         apps = rec {
+          neovim-bare = flake-utils.lib.mkApp {
+            drv = self.packages.${system}.neovim-bare;
+            exePath = "/bin/nvim";
+          };
           neovim-base = flake-utils.lib.mkApp {
             drv = self.packages.${system}.neovim-base;
             exePath = "/bin/nvim";
           };
-          default = neovim-base;
+          neovim-full = flake-utils.lib.mkApp {
+            drv = self.packages.${system}.neovim-full;
+            exePath = "/bin/nvim";
+          };
+          default = neovim-full;
         };
 
         devShells.default =
-          pkgs.mkShell { nativeBuildInputs = [ pkgs.neovim-base ]; };
+          pkgs.mkShell { nativeBuildInputs = [ pkgs.neovim-full ]; };
       });
 }
