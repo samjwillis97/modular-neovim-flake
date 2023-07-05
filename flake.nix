@@ -231,6 +231,17 @@
         telescope.enable = true;
         visuals.enable = true;
         git.enable = true;
+        treesitter = {
+          enable = true;
+          fold = true;
+        };
+        languages = {
+          enableAll = true;
+          enableTreesitter = true;
+          enableLSP = false;
+          enableFormat = false;
+          enableExtraDiagnostics = false;
+        };
         #       # TODO: Borders/No Borders
         #       # TODO: Dashboard
       };
