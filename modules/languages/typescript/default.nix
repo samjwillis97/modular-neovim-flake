@@ -7,7 +7,7 @@ let
   enabledServerConfigs = listToAttrs (map (v: { name = v; value = servers.${v}.lspConfig; }) cfg.lsp.servers);
   enabledServerPackages = listToAttrs (map (v: { name = v; value = servers.${v}.package; }) cfg.lsp.servers);
 
-  defaultServers = [ "tsserver" ];
+  defaultServers = [ "tsserver" "eslint" ];
   servers = {
     tsserver = {
       package = pkgs.nodePackages.typescript-language-server;
@@ -19,10 +19,21 @@ let
         }
       '';
     };
+    eslint = {
+      package = pkgs.nodePackages.eslint;
+      lspConfig = ''
+        lspconfig.eslint.setup {
+          capabilities = capabilities;
+          on_attach = attach_keymaps,
+          cmd = { "${enabledServerPackages.eslint}/bin/eslint", "--stdio" }
+        }
+      '';
+    };
     # FIXME: This doesn't actually exist - trying to add it though, cannot execute see: 
     # https://github.com/angular/vscode-ng-language-service/issues/1899
+    # okay this is fucking me
     angularls = {
-      package = pkgs.nodePackages."@angular/language-server";
+      package = pkgs.vscode-ng-language-service;
       lspConfig = ''
         lspconfig.angularls.setup {
           capabilities = capabilities;
@@ -48,20 +59,8 @@ let
     };
   };
 
-  defaultDiagnostics = [ "eslint" ];
-  diagnostics = {
-    eslint = {
-      package = pkgs.nodePackages.eslint;
-      nullConfig = pkg: ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.diagnostics.eslint.with({
-            command = "${pkg}/bin/eslint",
-          })
-        )
-      '';
-    };
-  };
+  defaultDiagnostics = [ ];
+  diagnostics = { };
 in
 {
   options.vim.languages.typescript = {
