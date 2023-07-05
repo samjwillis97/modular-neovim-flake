@@ -4,7 +4,10 @@ with builtins;
 let
   cfg = config.vim.languages.typescript;
 
-  defaultServer = "tsserver";
+  enabledServerConfigs = listToAttrs (map (v: { name = v; value = servers.${v}.lspConfig; }) cfg.lsp.servers);
+  enabledServerPackages = listToAttrs (map (v: { name = v; value = servers.${v}.package; }) cfg.lsp.servers);
+
+  defaultServers = [ "tsserver" ];
   servers = {
     tsserver = {
       package = pkgs.nodePackages.typescript-language-server;
@@ -12,7 +15,19 @@ let
         lspconfig.tsserver.setup {
           capabilities = capabilities;
           on_attach = attach_keymaps,
-          cmd = { "${cfg.lsp.package}/bin/typescript-language-server", "--stdio" }
+          cmd = { "${enabledServerPackages.tsserver}/bin/typescript-language-server", "--stdio" }
+        }
+      '';
+    };
+    # FIXME: This doesn't actually exist - trying to add it though, cannot execute see: 
+    # https://github.com/angular/vscode-ng-language-service/issues/1899
+    angularls = {
+      package = pkgs.nodePackages."@angular/language-server";
+      lspConfig = ''
+        lspconfig.angularls.setup {
+          capabilities = capabilities;
+          on_attach = attach_keymaps,
+          cmd = { "${enabledServerPackages.angularls}/bin/ngserver"}
         }
       '';
     };
@@ -72,15 +87,15 @@ in
         type = types.bool;
         default = config.vim.languages.enableLSP;
       };
-      server = mkOption {
-        description = "Typescript LSP server to use";
-        type = types.enum (attrNames servers);
-        default = defaultServer;
+      servers = mkOption {
+        description = "Typescript LSP servers to use";
+        type = types.listOf (types.enum (attrNames servers));
+        default = defaultServers;
       };
-      package = mkOption {
-        description = "Typescript LSP server package";
-        type = types.package;
-        default = servers.${cfg.lsp.server}.package;
+      packages = mkOption {
+        description = "Typescript LSP server packages";
+        type = types.listOf types.package;
+        default = map (v: servers.${v}.package) cfg.lsp.servers;
       };
     };
 
@@ -146,7 +161,8 @@ in
 
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
-      vim.lsp.lspconfig.sources.ts-lsp = servers.${cfg.lsp.server}.lspConfig;
+
+      vim.lsp.lspconfig.sources = enabledServerConfigs;
     })
 
     (mkIf cfg.format.enable {
