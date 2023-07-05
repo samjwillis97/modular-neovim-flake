@@ -1,8 +1,11 @@
 { lib, config, ... }:
 with lib;
 with builtins;
-let cfg = config.vim.filetree;
-in {
+let
+  cfg = config.vim.filetree;
+  visualCfg = config.vim.visuals;
+in
+{
   options.vim.filetree = {
     enable = mkEnableOption "filetree";
 
@@ -103,7 +106,8 @@ in {
                         local center_x = (screen_w - window_w) / 2
                         local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
                         return {
-                            border = "none",
+                            ${optionalString (!visualCfg.enable) ''border = "none",''}
+                            ${optionalString (visualCfg.enable && visualCfg.borderType == "rounded") ''border = "rounded",''}
                             relative = "editor",
                             row = center_y,
                             col = center_x,

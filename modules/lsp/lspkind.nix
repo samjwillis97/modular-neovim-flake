@@ -1,6 +1,7 @@
 { config, lib, ... }:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.lsp;
 in
 {

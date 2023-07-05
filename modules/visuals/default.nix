@@ -9,6 +9,12 @@ in
   options.vim.visuals = {
     enable = mkEnableOption "visual enhancements";
 
+    borderType = mkOption {
+      type = types.enum [ "rounded" "normal" "none" ];
+      default = "none";
+      description = "Border styling on dialogs";
+    };
+
     betterIcons = mkOption {
       type = types.bool;
       default = true;

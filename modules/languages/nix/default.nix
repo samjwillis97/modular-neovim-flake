@@ -14,6 +14,7 @@ let
       internalFormatter = true;
       lspConfig = ''
         lspconfig.nil_ls.setup{
+          handlers = handlers,
           capabilities = capabilities,
         ${if cfg.format.enable then useFormat else noFormat},
           cmd = {"${cfg.lsp.package}/bin/nil"},

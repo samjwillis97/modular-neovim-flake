@@ -229,7 +229,10 @@
         #       # TODO: which-key
         statusline.enable = true;
         telescope.enable = true;
-        visuals.enable = true;
+        visuals = {
+          enable = true;
+          borderType = "none";
+        };
         git.enable = true;
         treesitter = {
           enable = true;
