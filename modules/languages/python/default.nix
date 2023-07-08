@@ -29,6 +29,17 @@ with builtins; let
           })
         )
       '';
+      formatterHandler = ''
+        python = {
+          function()
+            return {
+              exe = "${cfg.format.package}/bin/black",
+              args = { "-q", "-" },
+              stdin = true,
+            }
+          end,
+        },
+      '';
     };
   };
 in
@@ -97,8 +108,8 @@ in
     })
 
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.python-format = formats.${cfg.format.type}.nullConfig;
+      vim.formatter.enable = true;
+      vim.formatter.fileTypes.python = formats.${cfg.format.type}.formatterHandler;
     })
   ]);
 }

@@ -46,7 +46,6 @@ let
   };
 
   defaultFormat = "prettier";
-  # TODO: Change this to the other formatter, null_ls is slow as balls
   formats = {
     prettier = {
       package = pkgs.nodePackages.prettier;
