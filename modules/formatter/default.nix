@@ -1,10 +1,8 @@
 { lib, config, ... }:
 with lib;
 with builtins;
-let
-  cfg = config.vim.formatter;
-in
-{
+let cfg = config.vim.formatter;
+in {
   options.vim.formatter = {
     enable = mkEnableOption "formatter";
 
@@ -37,17 +35,13 @@ in
       ''}
     '';
 
-    vim.luaConfigRC.formatter-setup-start = nvim.dag.entryAfter [ "formatter" ] ''
-      require("formatter").setup({
-        filetype = {
-    '';
-
-    vim.luaConfigRC.formatter-setup-end = nvim.dag.entryAfter [ "formatter-setup-start" ] ''
-        }
-      })
-    '';
-  }
-    {
-      vim.luaConfigRC = mapAttrs (_: v: (nvim.dag.entryBefore [ "formatter-setup-end" ] v)) cfg.fileTypes;
-    }]);
+    vim.luaConfigRC.formatter-setup-start =
+      nvim.dag.entryAfter [ "formatter" ] ''
+        require("formatter").setup({
+          filetype = {
+          ${concatLines (mapAttrsToList (_: v: v) cfg.fileTypes)}
+          }
+        })
+      '';
+  }]);
 }

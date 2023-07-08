@@ -30,6 +30,21 @@ let
           })
         )
       '';
+      formatterHandler = ''
+        typescript = {
+          function()
+            return {
+              exe = "${cfg.format.package}/bin/prettier",
+              args = {
+                "--stdin-filepath",
+                util.escape_path(util.get_current_buffer_file_path()),
+              },
+              stdin = true,
+              try_node_modules = true,
+            }
+          end,
+        },
+      '';
     };
   };
 in
@@ -113,9 +128,8 @@ in
     })
 
     (mkIf cfg.format.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.html-format =
-        formats.${cfg.format.type}.nullConfig;
+      vim.formatter.enable = true;
+      vim.formatter.fileTypes.html = formats.${cfg.format.type}.formatterHandler;
     })
   ]);
 }

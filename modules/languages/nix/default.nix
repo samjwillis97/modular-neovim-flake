@@ -4,9 +4,6 @@ with builtins;
 let
   cfg = config.vim.languages.nix;
 
-  useFormat = "on_attach = default_on_attach";
-  noFormat = "on_attach = attach_keymaps";
-
   defaultServer = "nil";
   servers = {
     nil = {
@@ -16,24 +13,8 @@ let
         lspconfig.nil_ls.setup{
           handlers = handlers,
           capabilities = capabilities,
-        ${if cfg.format.enable then useFormat else noFormat},
+          on_attach = default_on_attach,
           cmd = {"${cfg.lsp.package}/bin/nil"},
-        ${optionalString cfg.format.enable ''
-          settings = {
-            ["nil"] = {
-          ${optionalString (cfg.format.type == "alejandra") ''
-            formatting = {{
-              command = {"${cfg.format.package}/bin/alejandra", "--quiet"},
-            },
-          ''}
-          ${optionalString (cfg.format.type == "nixpkgs-fmt") ''
-            formatting = {
-              command = {"${cfg.format.package}/bin/nixpkgs-fmt"},
-            },
-          ''}
-            },
-          };
-        ''}
         }
       '';
     };
@@ -52,7 +33,20 @@ let
         )
       '';
     };
-    nixpkgs-fmt = { package = pkgs.nixpkgs-fmt; };
+    nixpkgs-fmt = {
+      package = pkgs.nixpkgs-fmt;
+      formatterHandler = ''
+                nix = {
+        	  function()
+                    return {
+                      exe = "${cfg.format.package}/bin/nixpkgs-fmt",
+                      stdin = true,
+                      args = {},
+                    }
+        	  end,
+                },
+      '';
+    };
   };
 in
 {
@@ -140,10 +134,9 @@ in
       vim.lsp.lspconfig.sources.nix-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
 
-    (mkIf (cfg.format.enable && !servers.${cfg.lsp.server}.internalFormatter) {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources.nix-format =
-        formats.${cfg.format.type}.nullConfig;
+    (mkIf cfg.format.enable {
+      vim.formatter.enable = true;
+      vim.formatter.fileTypes.nix = formats.${cfg.format.type}.formatterHandler;
     })
   ]);
 }
