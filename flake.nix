@@ -126,6 +126,10 @@
       url = "github:windwp/nvim-ts-autotag";
       flake = false;
     };
+    formatter-nvim = {
+      url = "github:mhartington/formatter.nvim";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -189,6 +193,7 @@
         "harpoon"
         "tmux-navigator"
         "nvim-ts-autotag"
+        "formatter-nvim"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -250,6 +255,7 @@
       };
 
       lspBase = baseConfig // {
+        formatter.enable = true;
         treesitter = {
           enable = true;
           fold = true;

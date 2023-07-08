@@ -211,6 +211,22 @@
         "type": "github"
       }
     },
+    "formatter-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682889121,
+        "narHash": "sha256-c3XEhHB31VKv7vStpTpaIxqHCNM+8I3UyPix89pLZ0M=",
+        "owner": "mhartington",
+        "repo": "formatter.nvim",
+        "rev": "fa4f2729cc2909db599169f22d8e55632d4c8d59",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mhartington",
+        "repo": "formatter.nvim",
+        "type": "github"
+      }
+    },
     "fugitive": {
       "flake": false,
       "locked": {
@@ -513,6 +529,7 @@
         "dracula-nvim": "dracula-nvim",
         "fidget": "fidget",
         "flake-utils": "flake-utils",
+        "formatter-nvim": "formatter-nvim",
         "fugitive": "fugitive",
         "gitsigns": "gitsigns",
         "gruvbox": "gruvbox",

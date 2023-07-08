@@ -12,6 +12,7 @@ let
     ./visuals
     ./qol
     ./lsp
+    ./formatter
     ./snippets
     ./completion
     ./core
