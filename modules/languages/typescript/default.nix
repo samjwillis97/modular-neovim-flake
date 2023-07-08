@@ -7,7 +7,7 @@ let
   enabledServerConfigs = listToAttrs (map (v: { name = v; value = servers.${v}.lspConfig; }) cfg.lsp.servers);
   enabledServerPackages = listToAttrs (map (v: { name = v; value = servers.${v}.package; }) cfg.lsp.servers);
 
-  defaultServers = [ "tsserver" "eslint" ];
+  defaultServers = [ "tsserver" ];
   servers = {
     tsserver = {
       package = pkgs.nodePackages.typescript-language-server;
@@ -19,13 +19,14 @@ let
         }
       '';
     };
+    # FIXME: This is broken, vscode-langservers-extracted doesnt include eslint
     eslint = {
-      package = pkgs.nodePackages.eslint;
+      package = pkgs.nodePackages.vscode-langservers-extracted;
       lspConfig = ''
         lspconfig.eslint.setup {
           capabilities = capabilities;
           on_attach = attach_keymaps,
-          cmd = { "${enabledServerPackages.eslint}/bin/eslint", "--stdio" }
+          cmd = { "${enabledServerPackages.eslint}/bin/vscode-eslint-language-server", "--stdio" }
         }
       '';
     };
@@ -45,6 +46,7 @@ let
   };
 
   defaultFormat = "prettier";
+  # TODO: Change this to the other formatter, null_ls is slow as balls
   formats = {
     prettier = {
       package = pkgs.nodePackages.prettier;
@@ -59,8 +61,20 @@ let
     };
   };
 
-  defaultDiagnostics = [ ];
-  diagnostics = { };
+  defaultDiagnostics = [ "eslint" ];
+  diagnostics = {
+    eslint = {
+      package = pkgs.nodePackages.eslint;
+      nullConfig = pkg: ''
+        table.insert(
+          ls_sources,
+          null_ls.builtins.diagnostics.eslint.with({
+            command = "${pkg}/bin/eslint",
+          })
+        )
+      '';
+    };
+  };
 in
 {
   options.vim.languages.typescript = {
