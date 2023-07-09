@@ -250,7 +250,7 @@
           enableFormat = false;
           enableExtraDiagnostics = false;
         };
-        #       # TODO: Borders/No Borders
+        #       # TODO: Finish Borders/No Borders
         #       # TODO: Dashboard
       };
 
@@ -283,8 +283,6 @@
       #         # TODO: tailwind (tailwindcss-language-server)
       #         # TODO: angular (angularls)
       #         # TODO: csharp
-      #         # TODO: json (jsonls)
-      #         # TODO: yaml (yaml-language-server)
       #         # TODO: rust
     in
     {

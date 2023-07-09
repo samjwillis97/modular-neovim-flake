@@ -7,8 +7,9 @@ let
       type = types.bool;
       default = false;
     };
-in {
-  imports = [ ./nix ./typescript ./html ./python ./go ./css ./svelte ./terraform ];
+in
+{
+  imports = [ ./nix ./typescript ./html ./python ./go ./css ./svelte ./terraform ./json ./yaml ];
   options.vim.languages = {
     enableAll = mkEnable "all Languages";
     enableLSP = mkEnable "LSP";
