@@ -17,7 +17,7 @@ in
 
     width = mkOption {
       type = types.int;
-      default = 30;
+      default = 35;
       description = ''
         Width of the file tree in columns when location is "left" or "right", and the ratio to full screen when "center"'';
     };

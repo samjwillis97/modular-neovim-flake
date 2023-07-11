@@ -57,6 +57,14 @@ in
         format_callback(client, bufnr)
       end
 
+      
+      -- see: https://github.com/williamboman/mason-lspconfig.nvim/issues/211
+      csharp_on_attach = function(client, bufnr)
+        client.server_capabilities.semanticTokensProvider = nil
+        attach_keymaps(client, bufnr)
+        format_callback(client, bufnr)
+      end
+
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       ${optionalString usingNvimCmp
       "capabilities = require('cmp_nvim_lsp').default_capabilities()"}

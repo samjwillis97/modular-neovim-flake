@@ -9,7 +9,20 @@ let
     };
 in
 {
-  imports = [ ./nix ./typescript ./html ./python ./go ./css ./svelte ./terraform ./json ./yaml ./bash ];
+  imports = [
+    ./nix
+    ./typescript
+    ./html
+    ./python
+    ./go
+    ./css
+    ./svelte
+    ./terraform
+    ./json
+    ./yaml
+    ./bash
+    ./csharp
+  ];
   options.vim.languages = {
     enableAll = mkEnable "all Languages";
     enableLSP = mkEnable "LSP";
