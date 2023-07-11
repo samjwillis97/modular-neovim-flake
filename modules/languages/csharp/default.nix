@@ -16,6 +16,28 @@ with builtins; let
     };
   };
 
+  defaultFormat = "dotnet";
+  formats = {
+    dotnet = {
+      package = pkgs.dotnet-sdk;
+      formatterHandler = ''
+        typescript = {
+          function()
+            return {
+              exe = "${cfg.format.package}/bin/dotnet",
+              args = {
+                "format",
+                "whitespace",
+                "--include",
+              },
+              stdin = false,
+            }
+          end,
+        },
+      '';
+    };
+  };
+
 in
 {
   options.vim.languages.csharp = {
@@ -46,6 +68,24 @@ in
         default = defaultServer;
       };
     };
+
+    format = {
+      enable = mkOption {
+        description = "Enable C# formatting";
+        type = types.bool;
+        default = config.vim.languages.enableFormat;
+      };
+      type = mkOption {
+        description = "C# formatter to use";
+        type = with types; enum (attrNames formats);
+        default = defaultFormat;
+      };
+      package = mkOption {
+        description = "C# formatter package";
+        type = types.package;
+        default = formats.${cfg.format.type}.package;
+      };
+    };
   };
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
@@ -56,6 +96,11 @@ in
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
       vim.lsp.lspconfig.sources.csharp-lsp = servers.${cfg.lsp.server}.lspConfig;
+    })
+
+    (mkIf cfg.format.enable {
+      vim.formatter.enable = true;
+      vim.formatter.fileTypes.csharp = formats.${cfg.format.type}.formatterHandler;
     })
   ]);
 }
