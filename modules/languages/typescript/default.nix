@@ -7,7 +7,7 @@ let
   enabledServerConfigs = listToAttrs (map (v: { name = v; value = servers.${v}.lspConfig; }) cfg.lsp.servers);
   enabledServerPackages = listToAttrs (map (v: { name = v; value = servers.${v}.package; }) cfg.lsp.servers);
 
-  defaultServers = [ "tsserver" ];
+  defaultServers = [ "tsserver" "eslint" ];
   servers = {
     tsserver = {
       package = pkgs.nodePackages.typescript-language-server;
@@ -19,7 +19,6 @@ let
         }
       '';
     };
-    # FIXME: This is broken, vscode-langservers-extracted doesnt include eslint
     eslint = {
       package = pkgs.nodePackages.vscode-langservers-extracted;
       lspConfig = ''
@@ -75,7 +74,7 @@ let
     };
   };
 
-  defaultDiagnostics = [ "eslint" ];
+  defaultDiagnostics = [ ];
   diagnostics = {
     eslint = {
       package = pkgs.nodePackages.eslint;
