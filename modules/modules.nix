@@ -15,6 +15,7 @@ let
     ./formatter
     ./snippets
     ./completion
+    ./debugger
     ./core
     ./build
   ];

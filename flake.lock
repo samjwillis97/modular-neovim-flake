@@ -144,6 +144,38 @@
         "type": "github"
       }
     },
+    "dap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1689603845,
+        "narHash": "sha256-M7YIUAJLdaU0J0t3a35W/X6Y6jtuJlK0ArbXHOjnXJw=",
+        "owner": "mfussenegger",
+        "repo": "nvim-dap",
+        "rev": "d17d1bba23ec72a157bd183c57840c39e323f515",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfussenegger",
+        "repo": "nvim-dap",
+        "type": "github"
+      }
+    },
+    "dap-ui": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1689371609,
+        "narHash": "sha256-z6TFe7+r/g2tfgdXr6PCPri5lSboi66zZmsdyWTI1BM=",
+        "owner": "rcarriga",
+        "repo": "nvim-dap-ui",
+        "rev": "85b16ac2309d85c88577cd8ee1733ce52be8227e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rcarriga",
+        "repo": "nvim-dap-ui",
+        "type": "github"
+      }
+    },
     "dracula": {
       "flake": false,
       "locked": {
@@ -526,6 +558,8 @@
         "cmp-vsnip": "cmp-vsnip",
         "colorizer": "colorizer",
         "commentary": "commentary",
+        "dap": "dap",
+        "dap-ui": "dap-ui",
         "dracula": "dracula",
         "dracula-nvim": "dracula-nvim",
         "fidget": "fidget",

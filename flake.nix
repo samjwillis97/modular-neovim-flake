@@ -130,6 +130,14 @@
       url = "github:mhartington/formatter.nvim";
       flake = false;
     };
+    dap = {
+      url = "github:mfussenegger/nvim-dap";
+      flake = false;
+    };
+    dap-ui = {
+      url = "github:rcarriga/nvim-dap-ui";
+      flake = false;
+    };
 
     # Themes
     tokyonight = {
@@ -194,6 +202,8 @@
         "tmux-navigator"
         "nvim-ts-autotag"
         "formatter-nvim"
+        "dap"
+        "dap-ui"
         "tokyonight"
         "onedark"
         "catppuccin"
@@ -274,16 +284,16 @@
         languages = {
           enableTreesitter = true;
           enableLSP = true;
-          enableFormat = true;
+          enableFormat = false;
           enableExtraDiagnostics = true;
           enableAll = true;
         };
+        debugger.enable = true;
       };
 
       #         # TODO: tailwind (tailwindcss-language-server)
       #         # TODO: angular (angularls)
-      #         # TODO: csharp
-      #         # TODO: rust
+      #         # TODO: rust lsp
     in
     {
 
