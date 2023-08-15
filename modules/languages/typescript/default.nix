@@ -48,14 +48,6 @@ let
   formats = {
     prettier = {
       package = pkgs.nodePackages.prettier;
-      nullConfig = ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.formatting.prettier.with({
-            command = "${cfg.format.package}/bin/prettier",
-          })
-        )
-      '';
       formatterHandler = ''
         typescript = {
           function()
@@ -70,21 +62,6 @@ let
             }
           end,
         },
-      '';
-    };
-  };
-
-  defaultDiagnostics = [ ];
-  diagnostics = {
-    eslint = {
-      package = pkgs.nodePackages.eslint;
-      nullConfig = pkg: ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.diagnostics.eslint.with({
-            command = "${pkg}/bin/eslint",
-          })
-        )
       '';
     };
   };
@@ -142,20 +119,6 @@ in
         default = formats.${cfg.format.type}.package;
       };
     };
-
-    extraDiagnostics = {
-      enable = mkOption {
-        description = "Enable extra Typescript diagnostics";
-        type = types.bool;
-        default = config.vim.languages.enableExtraDiagnostics;
-      };
-      types = lib.nvim.types.diagnostics {
-        langDesc = "Typescript";
-        inherit diagnostics;
-        inherit defaultDiagnostics;
-      };
-    };
-
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -194,15 +157,6 @@ in
     (mkIf cfg.format.enable {
       vim.formatter.enable = true;
       vim.formatter.fileTypes.typescript = formats.${cfg.format.type}.formatterHandler;
-    })
-
-    (mkIf cfg.extraDiagnostics.enable {
-      vim.lsp.null-ls.enable = true;
-      vim.lsp.null-ls.sources = lib.nvim.languages.diagnosticsToLua {
-        lang = "ts";
-        config = cfg.extraDiagnostics.types;
-        inherit diagnostics;
-      };
     })
   ]);
 }

@@ -86,10 +86,6 @@
       url = "github:hrsh7th/cmp-nvim-lsp";
       flake = false;
     };
-    null-ls = {
-      url = "github:jose-elias-alvarez/null-ls.nvim";
-      flake = false;
-    };
     fidget = {
       url = "github:j-hui/fidget.nvim?ref=legacy";
       flake = false;
@@ -193,7 +189,6 @@
         "vim-vsnip"
         "cmp-treesitter"
         "cmp-nvim-lsp"
-        "null-ls"
         "fidget"
         "nvim-code-action-menu"
         "colorizer"
@@ -258,7 +253,6 @@
           enableTreesitter = true;
           enableLSP = false;
           enableFormat = false;
-          enableExtraDiagnostics = false;
         };
         #       # TODO: Finish Borders/No Borders
         #       # TODO: Dashboard
@@ -275,7 +269,6 @@
           codeActionMenu.enable = true;
           lspconfig.enable = true;
           lspkind.enable = true;
-          null-ls.enable = true;
         };
         autocomplete.enable = true;
       };
@@ -285,7 +278,6 @@
           enableTreesitter = true;
           enableLSP = true;
           enableFormat = false;
-          enableExtraDiagnostics = true;
           enableAll = true;
         };
         debugger.enable = true;

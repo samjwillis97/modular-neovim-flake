@@ -28,6 +28,5 @@ in
     enableLSP = mkEnable "LSP";
     enableTreesitter = mkEnable "treesitter";
     enableFormat = mkEnable "formatting";
-    enableExtraDiagnostics = mkEnable "extra diagnostics";
   };
 }
