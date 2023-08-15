@@ -6,157 +6,157 @@
     flake-utils = { url = "github:numtide/flake-utils"; };
 
     # Plugins
-    plenary-nvim = {
+    plugin-plenary-nvim = {
       url = "github:nvim-lua/plenary.nvim";
       flake = false;
     };
-    nvim-tree-lua = {
+    plugin-nvim-tree-lua = {
       url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
     };
-    telescope = {
+    plugin-telescope = {
       url = "github:nvim-telescope/telescope.nvim";
       flake = false;
     };
-    fugitive = {
+    plugin-fugitive = {
       url = "github:tpope/vim-fugitive";
       flake = false;
     };
-    gitsigns = {
+    plugin-gitsigns = {
       url = "github:lewis6991/gitsigns.nvim";
       flake = false;
     };
-    lualine = {
+    plugin-lualine = {
       url = "github:nvim-lualine/lualine.nvim";
       flake = false;
     };
-    nvim-web-devicons = {
+    plugin-nvim-web-devicons = {
       url = "github:nvim-tree/nvim-web-devicons";
       flake = false;
     };
-    indent-blankline = {
+    plugin-indent-blankline = {
       url = "github:lukas-reineke/indent-blankline.nvim";
       flake = false;
     };
-    treesitter-context = {
+    plugin-treesitter-context = {
       url = "github:nvim-treesitter/nvim-treesitter-context";
       flake = false;
     };
-    autopairs = {
+    plugin-autopairs = {
       url = "github:windwp/nvim-autopairs";
       flake = false;
     };
-    nvim-lastplace = {
+    plugin-nvim-lastplace = {
       url = "github:ethanholz/nvim-lastplace";
       flake = false;
     };
-    lspconfig = {
+    plugin-lspconfig = {
       url = "github:neovim/nvim-lspconfig";
       flake = false;
     };
-    lspkind = {
+    plugin-lspkind = {
       url = "github:onsails/lspkind.nvim";
       flake = false;
     };
-    nvim-cmp = {
+    plugin-nvim-cmp = {
       url = "github:hrsh7th/nvim-cmp";
       flake = false;
     };
-    cmp-buffer = {
+    plugin-cmp-buffer = {
       url = "github:hrsh7th/cmp-buffer";
       flake = false;
     };
-    cmp-vsnip = {
+    plugin-cmp-vsnip = {
       url = "github:hrsh7th/cmp-vsnip";
       flake = false;
     };
-    cmp-path = {
+    plugin-cmp-path = {
       url = "github:hrsh7th/cmp-path";
       flake = false;
     };
-    vim-vsnip = {
+    plugin-vim-vsnip = {
       url = "github:hrsh7th/vim-vsnip";
       flake = false;
     };
-    cmp-treesitter = {
+    plugin-cmp-treesitter = {
       url = "github:ray-x/cmp-treesitter";
       flake = false;
     };
-    cmp-nvim-lsp = {
+    plugin-cmp-nvim-lsp = {
       url = "github:hrsh7th/cmp-nvim-lsp";
       flake = false;
     };
-    fidget = {
+    plugin-fidget = {
       url = "github:j-hui/fidget.nvim?ref=legacy";
       flake = false;
     };
-    nvim-code-action-menu = {
+    plugin-nvim-code-action-menu = {
       url = "github:weilbith/nvim-code-action-menu";
       flake = false;
     };
-    colorizer = {
+    plugin-colorizer = {
       url = "github:norcalli/nvim-colorizer.lua";
       flake = false;
     };
-    undotree = {
+    plugin-undotree = {
       url = "github:mbbill/undotree";
       flake = false;
     };
-    harpoon = {
+    plugin-harpoon = {
       url = "github:ThePrimeagen/harpoon";
       flake = false;
     };
-    commentary = {
+    plugin-commentary = {
       url = "github:tpope/vim-commentary";
       flake = false;
     };
-    surround = {
+    plugin-surround = {
       url = "github:tpope/vim-surround";
       flake = false;
     };
-    tmux-navigator = {
+    plugin-tmux-navigator = {
       url = "github:christoomey/vim-tmux-navigator";
       flake = false;
     };
-    nvim-ts-autotag = {
+    plugin-nvim-ts-autotag = {
       url = "github:windwp/nvim-ts-autotag";
       flake = false;
     };
-    formatter-nvim = {
+    plugin-formatter-nvim = {
       url = "github:mhartington/formatter.nvim";
       flake = false;
     };
-    dap = {
+    plugin-dap = {
       url = "github:mfussenegger/nvim-dap";
       flake = false;
     };
-    dap-ui = {
+    plugin-dap-ui = {
       url = "github:rcarriga/nvim-dap-ui";
       flake = false;
     };
 
     # Themes
-    tokyonight = {
+    plugin-tokyonight = {
       url = "github:folke/tokyonight.nvim";
       flake = false;
     };
-    onedark = {
+    plugin-onedark = {
       url = "github:navarasu/onedark.nvim";
       flake = false;
     };
-    catppuccin = {
+    plugin-catppuccin = {
       url = "github:catppuccin/nvim";
       flake = false;
     };
-    dracula-nvim = {
+    plugin-dracula-nvim = {
       url = "github:Mofiqul/dracula.nvim";
       flake = false;
     };
-    dracula = {
+    plugin-dracula = {
       url = "github:dracula/vim";
       flake = false;
     };
-    gruvbox = {
+    plugin-gruvbox = {
       url = "github:ellisonleao/gruvbox.nvim";
       flake = false;
     };
@@ -165,48 +165,7 @@
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     let
       nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
-
-      availablePlugins = [
-        "plenary-nvim"
-        "commentary"
-        "surround"
-        "nvim-tree-lua"
-        "telescope"
-        "fugitive"
-        "gitsigns"
-        "nvim-web-devicons"
-        "lualine"
-        "treesitter-context"
-        "indent-blankline"
-        "autopairs"
-        "nvim-lastplace"
-        "lspconfig"
-        "lspkind"
-        "nvim-cmp"
-        "cmp-buffer"
-        "cmp-vsnip"
-        "cmp-path"
-        "vim-vsnip"
-        "cmp-treesitter"
-        "cmp-nvim-lsp"
-        "fidget"
-        "nvim-code-action-menu"
-        "colorizer"
-        "undotree"
-        "harpoon"
-        "tmux-navigator"
-        "nvim-ts-autotag"
-        "formatter-nvim"
-        "dap"
-        "dap-ui"
-        "tokyonight"
-        "onedark"
-        "catppuccin"
-        "dracula-nvim"
-        "dracula"
-        "gruvbox"
-      ];
-      rawPlugins = nvimLib.plugins.inputsToRaw inputs availablePlugins;
+      rawPlugins = nvimLib.plugins.fromInputs inputs "plugin-";
 
       inherit (import ./lib/default.nix { inherit rawPlugins; })
         mkNeovimConfiguration buildPkg;
