@@ -22,6 +22,7 @@ in
     ./yaml
     ./bash
     ./csharp
+    ./elixir
   ];
   options.vim.languages = {
     enableAll = mkEnable "all Languages";
