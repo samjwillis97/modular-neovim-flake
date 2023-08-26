@@ -14,7 +14,7 @@ let
           handlers = handlers,
           capabilities = capabilities,
           on_attach = default_on_attach,
-          cmd = {"${cfg.lsp.package}/bin/language_server.sh"},
+          cmd = {"${cfg.lsp.package}/bin/elixir-ls"},
         }
       '';
     };
