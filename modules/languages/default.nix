@@ -29,5 +29,6 @@ in
     enableLSP = mkEnable "LSP";
     enableTreesitter = mkEnable "treesitter";
     enableFormat = mkEnable "formatting";
+    enableDebugger = mkEnable "debugger";
   };
 }

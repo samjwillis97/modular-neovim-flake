@@ -44,6 +44,62 @@ let
     };
   };
 
+  enabledDebuggerPackages = listToAttrs (map (v: { name = v; value = debuggers.${v}.package; }) cfg.debugger.debuggers);
+  enabledDebuggerConfigs = listToAttrs (map (v: { name = "${v}-config"; value = debuggers.${v}.dapConfig; }) cfg.debugger.debuggers);
+  enabledDebuggerAdapters = listToAttrs (map (v: { name = "${v}-adapter"; value = debuggers.${v}.dapAdapter; }) cfg.debugger.debuggers);
+
+  defaultDebuggers = ["vscode-js-debug-node"];
+  debuggers = {
+    vscode-js-debug-node = {
+      package = pkgs.vscode-js-debug;
+      dapAdapter = ''
+        -- require("dap-vscode-js").setup({
+        --   -- node_path = "${pkgs.nodejs_18}/bin/node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+        --   -- debugger_path = "${enabledDebuggerPackages.vscode-js-debug-node}/src", -- Path to vscode-js-debug installation.
+        --   debugger_cmd = { "${pkgs.nodejs_18}/bin/node", "${enabledDebuggerPackages.vscode-js-debug-node}/src/dapDebugServer.js" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+        --   adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+        --   -- log_file_path = "~/dap-log", -- Path for file logging
+        --   -- log_file_level = true, -- Logging level for output to file. Set to false to disable file logging.
+        --   -- log_console_level = vim.log.levels.DEBUG, -- Logging level for output to console. Set to false to disable console output.
+        -- })
+
+        require("dap").adapters["pwa-node"] = {
+          type = "server",
+          host = "localhost",
+          port = "''${port}",
+          executable = {
+            command = "${pkgs.nodejs_18}/bin/node",
+            args = {"${enabledDebuggerPackages.vscode-js-debug-node}/src/dapDebugServer.js", "''${port}"},
+          }
+        }
+      '';
+      dapConfig = ''
+      require("dap").configurations.javascript = {
+        {
+          type = "pwa-node",
+          request = "launch",
+          name = "Launch file",
+          program = "''${file}",
+          cwd = "''${workspaceFolder}",
+          port = 8123,
+        },
+      }
+
+      require("dap").configurations.typescript = {
+        {
+          type = "pwa-node",
+          request = "launch",
+          name = "Launch file",
+          program = "''${file}",
+          cwd = "''${workspaceFolder}",
+          port = 8123,
+        },
+      }
+      '';
+    };
+  };
+
+
   defaultFormat = "prettier";
   formats = {
     prettier = {
@@ -102,6 +158,24 @@ in
       };
     };
 
+    debugger = {
+      enable = mkOption {
+        description = "Enable Typescript Debugger support";
+        type = types.bool;
+        default = config.vim.languages.enableDebugger;
+      };
+      debuggers = mkOption {
+        description = "Typescript LSP servers to use";
+        type = types.listOf (types.enum (attrNames debuggers));
+        default = defaultDebuggers;
+      };
+      packages = mkOption {
+        description = "Typescript LSP server packages";
+        type = types.listOf types.package;
+        default = map (v: debuggers.${v}.package) cfg.debugger.debuggers;
+      };
+    };
+
     format = {
       enable = mkOption {
         description = "Enable Typescript formatting";
@@ -152,6 +226,17 @@ in
       vim.lsp.lspconfig.enable = true;
 
       vim.lsp.lspconfig.sources = enabledServerConfigs;
+    })
+
+    (mkIf cfg.debugger.enable {
+      vim.debugger.enable = true;
+
+      # vim.startPlugins = [
+      #   "nvim-dap-vscode-js"
+      # ];
+
+      vim.debugger.configs = enabledDebuggerConfigs;
+      vim.debugger.adapters = enabledDebuggerAdapters;
     })
 
     (mkIf cfg.format.enable {

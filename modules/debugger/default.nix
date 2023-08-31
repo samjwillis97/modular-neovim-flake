@@ -14,14 +14,14 @@ in
       default = { };
     };
 
-    configurations = mkOption {
+    configs = mkOption {
       description = "dap configurations";
       type = with types; attrsOf str;
       default = { };
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable) (mkMerge [{
     vim.startPlugins = [
       "dap"
       "dap-ui"
@@ -91,5 +91,15 @@ in
         dapui.close()
       end
     '';
-  };
+  }
+  {
+    vim.luaConfigRC = mapAttrs (_: v: (nvim.dag.entryAfter[ "dap" ] v))
+      cfg.configs;
+  }
+  {
+    vim.luaConfigRC = mapAttrs (_: v: (nvim.dag.entryAfter[ "dap" ] v))
+      cfg.adapters;
+  }
+  ]);
+
 }

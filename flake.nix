@@ -134,6 +134,10 @@
       url = "github:rcarriga/nvim-dap-ui";
       flake = false;
     };
+    plugin-nvim-dap-vscode-js = {
+      url = "github:mxsdev/nvim-dap-vscode-js";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -159,6 +163,11 @@
     plugin-gruvbox = {
       url = "github:ellisonleao/gruvbox.nvim";
       flake = false;
+    };
+
+    vscode-js-debug = {
+      url = "github:willruggiano/vscode-js-debug.nix";
+      flake = true;
     };
   };
 
@@ -236,6 +245,7 @@
         languages = {
           enableTreesitter = true;
           enableLSP = true;
+          enableDebugger = true;
           enableFormat = false;
           enableAll = true;
         };
@@ -252,6 +262,9 @@
     } // flake-utils.lib.eachDefaultSystem (system:
       let
         overlays = [
+          (prev: final: {
+            vscode-js-debug = inputs.vscode-js-debug.packages.${system}.vscode-js-debug;
+          })
           (prev: final: {
             inherit mkNeovimConfiguration;
             neovim-bare = buildPkg final [{ config.vim = bareConfig; }];
