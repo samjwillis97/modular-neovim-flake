@@ -204,7 +204,23 @@ in
         vim.api.nvim_create_autocmd(
           { "FileType" },
           {
+            pattern = "tsx",
+            command = [[setlocal tabstop=2 shiftwidth=2 softtabstop=2]],
+          }
+        )
+
+        vim.api.nvim_create_autocmd(
+          { "FileType" },
+          {
             pattern = "js",
+            command = [[setlocal tabstop=2 shiftwidth=2 softtabstop=2]],
+          }
+        )
+
+        vim.api.nvim_create_autocmd(
+          { "FileType" },
+          {
+            pattern = "jsx",
             command = [[setlocal tabstop=2 shiftwidth=2 softtabstop=2]],
           }
         )

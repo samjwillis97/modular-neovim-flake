@@ -23,6 +23,7 @@ in
     ./bash
     ./csharp
     ./elixir
+    ./ocaml
   ];
   options.vim.languages = {
     enableAll = mkEnable "all Languages";
