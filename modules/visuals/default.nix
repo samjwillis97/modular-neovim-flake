@@ -82,18 +82,21 @@ in
           vim.opt.listchars:append({ space = "${cfg.indentations.fillChar}" })
         ''}
 
-        require("indent_blankline").setup({
+        require("ibl").setup({
+          indent = {
             char = "${cfg.indentations.lineChar}",
-            show_end_of_line = ${
+          },
+          scope = {
+            show_end = ${
               boolToString (cfg.indentations.endChar != null)
             },
-            use_treesitter = ${boolToString (cfg.indentations.useTreesitter)},
-            show_current_context = ${
+            show_exact_scope = ${
               boolToString (cfg.indentations.highlightCurrentContext)
             },
-            show_current_context_start = ${
+            show_start = ${
               boolToString (cfg.indentations.highlightCurrentContext)
             },
+          },
         })
       '';
     })

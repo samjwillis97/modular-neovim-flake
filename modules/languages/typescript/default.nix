@@ -48,7 +48,7 @@ let
   enabledDebuggerConfigs = listToAttrs (map (v: { name = "${v}-config"; value = debuggers.${v}.dapConfig; }) cfg.debugger.debuggers);
   enabledDebuggerAdapters = listToAttrs (map (v: { name = "${v}-adapter"; value = debuggers.${v}.dapAdapter; }) cfg.debugger.debuggers);
 
-  defaultDebuggers = ["vscode-js-debug-node"];
+  defaultDebuggers = [];
   debuggers = {
     vscode-js-debug-node = {
       package = pkgs.vscode-js-debug;
