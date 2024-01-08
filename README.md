@@ -4,3 +4,8 @@ Attempting to build out my neovim config in a modular fashion in effort to under
 
 - [jordanisaacs](https://github.com/jordanisaacs/neovim-flake)
 - [wiltaylor](https://github.com/wiltaylor/neovim-flake)
+
+
+## To Address
+
+- Treesitter errors, `:checkhealth nvim-treesitter`
