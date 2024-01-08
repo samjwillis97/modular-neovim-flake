@@ -102,7 +102,33 @@ let
     prettier = {
       package = pkgs.nodePackages.prettier;
       formatterHandler = ''
+        javascript = {
+          function()
+            return {
+              exe = "${cfg.format.package}/bin/prettier",
+              args = {
+                "--stdin-filepath",
+                util.escape_path(util.get_current_buffer_file_path()),
+              },
+              stdin = true,
+              try_node_modules = true,
+            }
+          end,
+        },
         typescript = {
+          function()
+            return {
+              exe = "${cfg.format.package}/bin/prettier",
+              args = {
+                "--stdin-filepath",
+                util.escape_path(util.get_current_buffer_file_path()),
+              },
+              stdin = true,
+              try_node_modules = true,
+            }
+          end,
+        },
+        typescriptreact = {
           function()
             return {
               exe = "${cfg.format.package}/bin/prettier",

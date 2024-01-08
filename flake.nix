@@ -246,7 +246,7 @@
           enableTreesitter = true;
           enableLSP = true;
           enableDebugger = true;
-          enableFormat = false;
+          enableFormat = true;
           enableAll = true;
         };
         debugger.enable = true;

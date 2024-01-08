@@ -21,7 +21,7 @@ with builtins; let
     dotnet = {
       package = pkgs.dotnet-sdk;
       formatterHandler = ''
-        typescript = {
+        csharp = {
           function()
             return {
               exe = "${cfg.format.package}/bin/dotnet",
