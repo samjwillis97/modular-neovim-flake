@@ -3,6 +3,7 @@ with lib;
 with builtins;
 let
   cfg = config.vim.treesitter;
+  usingLsp = config.vim.lsp.enable;
   usingNvimCmp = config.vim.autocomplete.enable;
 in
 {
@@ -29,9 +30,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = [ "nvim-treesitter" ] ++ (if cfg.context then [ "treesitter-context" ] else [ ]) ++ (if usingNvimCmp then [ "cmp-treesitter" ] else [ ]);
+    vim.startPlugins = [ "nvim-treesitter" ] ++ (if cfg.context then [ "treesitter-context" ] else [ ]) ++ (if usingNvimCmp && !usingLsp then [ "cmp-treesitter" ] else [ ]);
 
-    vim.autocomplete.sources = { "treesitter" = "[Treesitter]"; };
+    vim.autocomplete.sources = if usingLsp then {} else { "treesitter" = "[Treesitter]"; };
 
     # For some reason treesitter highlighting does not work on start if this is set before syntax on
     vim.configRC.treesitter-fold = mkIf cfg.fold

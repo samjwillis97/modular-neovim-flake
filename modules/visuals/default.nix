@@ -105,7 +105,7 @@ in
             show_start = false,
             show_end = false,
             highlight = {
-              "RainbowGreen",
+              "RainbowViolet",
             },
             ''}
           },

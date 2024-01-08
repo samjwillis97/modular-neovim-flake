@@ -18,6 +18,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    vim.lsp.lspkind.enable = true;
+
     vim.startPlugins = optional usingNvimCmp "cmp-nvim-lsp";
 
     vim.autocomplete.sources = { "nvim_lsp" = "[LSP]"; };

@@ -3,7 +3,6 @@ with lib;
 with builtins;
 let
   cfg = config.vim.autocomplete;
-  lspkindEnabled = config.vim.lsp.enable && config.vim.lsp.lspkind.enable;
 
   builtSources =
     concatMapStringsSep
@@ -22,9 +21,7 @@ let
         cfg.sources);
 
   dagPlacement =
-    if lspkindEnabled
-    then nvim.dag.entryAfter [ "lspkind" ]
-    else nvim.dag.entryAnywhere;
+    nvim.dag.entryAfter [ "lspkind" ];
 in
 {
   options.vim.autocomplete = {
@@ -45,29 +42,6 @@ in
       example = ''
         {nvim-cmp = null; buffer = "[Buffer]";}
       '';
-    };
-
-    formatting = {
-      format = mkOption {
-        description = nvim.nmd.asciiDoc ''
-          The function used to customize the appearance of the completion menu.
-
-          If <<opt-vim.lsp.lspkind.enable>> is true, then the function
-          will be called before modifications from lspkind.
-
-          Default is to call the menu mapping function.
-        '';
-        type = types.str;
-        default = "nvim_cmp_menu_map";
-        example = nvim.nmd.literalAsciiDoc ''
-          [source,lua]
-          ---
-          function(entry, vim_item)
-            return vim_item
-          end
-          ---
-        '';
-      };
     };
   };
 
@@ -96,10 +70,6 @@ in
         print(vim_item.menu)
         return vim_item
       end
-
-      ${optionalString lspkindEnabled ''
-        lspkind_opts.before = ${cfg.formatting.format}
-      ''}
 
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -171,13 +141,28 @@ in
         completion = {
           completeopt = 'menu,menuone,noinsert',
         },
+
+        -- See: https://github.com/fitrh/init.nvim/blob/main/lua/config/plugin/cmp/setup.lua#L39-L56
         formatting = {
-          format =
-      ${
-        if lspkindEnabled
-        then "lspkind.cmp_format(lspkind_opts)"
-        else cfg.formatting.format
-      },
+          fields = { "kind", "abbr", "menu" },
+          format = function(entry, item)
+            local kind = item.kind
+            local kind_hl_group = ("CmpItemKind%s"):format(kind)
+
+            item.kind_hl_group = kind_hl_group
+            item.kind = (" %s "):format(lspkind.symbolic(kind))
+
+            item.menu_hl_group = kind_hl_group
+            item.menu = kind
+
+            local third_win_width = math.floor(vim.api.nvim_win_get_width(0) / 3)
+            if vim.api.nvim_strwidth(item.abbr) > third_win_width then
+              item.abbr = ("%s…"):format(item.abbr:sub(1, third_win_width))
+            end
+            item.abbr = ("%s "):format(item.abbr)
+
+            return item
+          end,
         }
       })
       ${optionalString (config.vim.qol.autopairs.enable) ''

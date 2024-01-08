@@ -166,7 +166,7 @@
     };
 
     vscode-js-debug = {
-      url = "github:willruggiano/vscode-js-debug.nix";
+      url = "github:samjwillis97/vscode-js-debug.nix";
       flake = true;
     };
   };
@@ -263,7 +263,7 @@
       let
         overlays = [
           (prev: final: {
-            vscode-js-debug = inputs.vscode-js-debug.packages.${system}.vscode-js-debug;
+            vscode-js-debug = inputs.vscode-js-debug.packages.${system}.latest;
           })
           (prev: final: {
             inherit mkNeovimConfiguration;

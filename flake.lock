@@ -862,15 +862,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1702664918,
-        "narHash": "sha256-5RmHdOun0lWiTbSae7zcDDDoCunHKR1dbm2ChER0sm4=",
-        "owner": "willruggiano",
+        "lastModified": 1704689072,
+        "narHash": "sha256-PpQ/hPgfe1sxNX58q9z3DakeAVBwhe4+et6mb3A/tN0=",
+        "owner": "samjwillis97",
         "repo": "vscode-js-debug.nix",
-        "rev": "2336afac95e1269f150e4f328eef5007cf68cac8",
+        "rev": "9c862f6e6b4e36f7ee3a7e82bb211b65425c66da",
         "type": "github"
       },
       "original": {
-        "owner": "willruggiano",
+        "owner": "samjwillis97",
         "repo": "vscode-js-debug.nix",
         "type": "github"
       }
