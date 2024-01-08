@@ -30,7 +30,7 @@ in
 
       lineChar = mkOption {
         type = types.nullOr types.str;
-        default = "│";
+        default = "▎";
         description = "Character for indentation line";
       };
 
@@ -46,16 +46,10 @@ in
         description = "Character at end of line";
       };
 
-      highlightCurrentContext = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Highlight current conext from treesitter";
-      };
-
-      useTreesitter = mkOption {
+      highlightScope = mkOption {
         type = types.bool;
         default = true;
-        description = "Use treesiter for indentation";
+        description = "Highlight current scope";
       };
     };
 
@@ -82,20 +76,38 @@ in
           vim.opt.listchars:append({ space = "${cfg.indentations.fillChar}" })
         ''}
 
+        ${optionalString (cfg.indentations.highlightScope) ''
+        local hooks = require("ibl.hooks")
+        -- create the highlight groups in the highlight setup hook, so they are reset
+        -- every time the colorscheme changes
+        hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+            vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+            vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+            vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+            vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+            vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+            vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+            vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+        end)
+        ''}
+
         require("ibl").setup({
           indent = {
             char = "${cfg.indentations.lineChar}",
           },
           scope = {
-            show_end = ${
-              boolToString (cfg.indentations.endChar != null)
+            -- TODO: Fix up the nix config above
+            enabled = ${
+              boolToString cfg.indentations.highlightScope
             },
-            show_exact_scope = ${
-              boolToString (cfg.indentations.highlightCurrentContext)
+            ${optionalString (cfg.indentations.highlightScope) ''
+            show_exact_scope = true,
+            show_start = false,
+            show_end = false,
+            highlight = {
+              "RainbowGreen",
             },
-            show_start = ${
-              boolToString (cfg.indentations.highlightCurrentContext)
-            },
+            ''}
           },
         })
       '';
