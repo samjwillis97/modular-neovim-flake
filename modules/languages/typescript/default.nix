@@ -132,6 +132,7 @@ in
         default = config.vim.languages.enableTreesitter;
       };
       tsPackage = nvim.types.mkGrammarOption pkgs "typescript";
+      tsxPackage = nvim.types.mkGrammarOption pkgs "tsx";
       jsPackage = nvim.types.mkGrammarOption pkgs "javascript";
     };
 
@@ -230,7 +231,7 @@ in
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
       vim.treesitter.grammars =
-        [ cfg.treesitter.tsPackage cfg.treesitter.jsPackage ];
+        [ cfg.treesitter.tsPackage cfg.treesitter.tsxPackage cfg.treesitter.jsPackage ];
     })
 
     (mkIf cfg.lsp.enable {
