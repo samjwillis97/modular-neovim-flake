@@ -7,7 +7,6 @@ in {
     enable = mkEnableOption "snippets";
   };
 
-  # FIXME: Does this even work...
   config = mkIf cfg.enable {
     vim.startPlugins = [ "luasnip" "friendly-snippets" ];
 

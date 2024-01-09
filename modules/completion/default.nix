@@ -21,7 +21,7 @@ let
         cfg.sources);
 
   dagPlacement =
-    nvim.dag.entryAfter [ "lspkind" ];
+    nvim.dag.entryAfter [ "lspkind" "snippets" ];
 in
 {
   options.vim.autocomplete = {
@@ -50,10 +50,12 @@ in
       "nvim-cmp"
       "cmp-buffer"
       "cmp-path"
+      "cmp_luasnip"
     ];
 
     vim.autocomplete.sources = {
       "nvim-cmp" = null;
+      "luasnip" = "[Snippet]";
       "buffer" = "[Buffer]";
       "crates" = "[Crates]";
       "path" = "[Path]";
@@ -77,6 +79,11 @@ in
 
       local cmp = require("cmp")
       cmp.setup({
+        snippet = {
+          expand = function(args)
+            require'luasnip'.lsp_expand(args.body)
+          end
+        },
         sources = {
           ${builtSources}
         },
@@ -94,8 +101,8 @@ in
           ['<C-n>'] = cmp.mapping(function (fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
+            elseif ls.expand_or_jumpable() then
+              ls.expand_or_jump()
             elseif has_words_before() then
               cmp.complete()
             end
@@ -103,8 +110,8 @@ in
           ['<C-p>'] = cmp.mapping(function (fallback)
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
+            elseif ls.jumpable(-1) then
+              ls.jump(-1)
             end
           end, { 'i', 's' })
         },

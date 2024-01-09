@@ -74,6 +74,10 @@
       url = "github:L3MON4D3/LuaSnip";
       flake = false;
     };
+    plugin-cmp_luasnip = {
+      url = "github:saadparwaiz1/cmp_luasnip";
+      flake = false;
+    };
     plugin-friendly-snippets = {
       url = "github:rafamadriz/friendly-snippets";
       flake = false;

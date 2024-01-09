@@ -184,6 +184,22 @@
         "type": "github"
       }
     },
+    "plugin-cmp_luasnip": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696878902,
+        "narHash": "sha256-nUJJl2zyK/oSwz5RzI9j3gf9zpDfCImCYbPbVsyXgz8=",
+        "owner": "saadparwaiz1",
+        "repo": "cmp_luasnip",
+        "rev": "05a9ab28b53f71d1aece421ef32fee2cb857a843",
+        "type": "github"
+      },
+      "original": {
+        "owner": "saadparwaiz1",
+        "repo": "cmp_luasnip",
+        "type": "github"
+      }
+    },
     "plugin-colorizer": {
       "flake": false,
       "locked": {
@@ -762,6 +778,7 @@
         "plugin-cmp-nvim-lsp": "plugin-cmp-nvim-lsp",
         "plugin-cmp-path": "plugin-cmp-path",
         "plugin-cmp-treesitter": "plugin-cmp-treesitter",
+        "plugin-cmp_luasnip": "plugin-cmp_luasnip",
         "plugin-colorizer": "plugin-colorizer",
         "plugin-commentary": "plugin-commentary",
         "plugin-dap": "plugin-dap",
