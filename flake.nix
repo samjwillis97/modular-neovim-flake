@@ -66,16 +66,16 @@
       url = "github:hrsh7th/cmp-buffer";
       flake = false;
     };
-    plugin-cmp-vsnip = {
-      url = "github:hrsh7th/cmp-vsnip";
-      flake = false;
-    };
     plugin-cmp-path = {
       url = "github:hrsh7th/cmp-path";
       flake = false;
     };
-    plugin-vim-vsnip = {
-      url = "github:hrsh7th/vim-vsnip";
+    plugin-luasnip = {
+      url = "github:L3MON4D3/LuaSnip";
+      flake = false;
+    };
+    plugin-friendly-snippets = {
+      url = "github:rafamadriz/friendly-snippets";
       flake = false;
     };
     plugin-cmp-treesitter = {
