@@ -19,7 +19,8 @@ let
   };
 
   cfg = config.vim.theme;
-in {
+in
+{
   options.vim.theme = {
     supportedThemes = mkOption {
       description = "Supported themes";

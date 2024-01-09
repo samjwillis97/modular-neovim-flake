@@ -21,6 +21,8 @@ in
       description = "Better file icons etc.";
     };
 
+    transparentBackground = mkEnableOption "allow transparent background";
+
     indentations = {
       enable = mkOption {
         type = types.bool;
@@ -64,6 +66,12 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.betterIcons { vim.startPlugins = [ "nvim-web-devicons" ]; })
+    (mkIf cfg.transparentBackground {
+      vim.luaConfigRC.transparentBackground = nvim.dag.entryAfter [ "theme" ] ''
+        vim.opt.termguicolors = true
+        vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
+      '';
+    })
     (mkIf cfg.indentations.enable {
       vim.startPlugins = [ "indent-blankline" ];
       vim.luaConfigRC.indent-blankline = nvim.dag.entryAnywhere ''

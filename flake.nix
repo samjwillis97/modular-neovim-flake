@@ -253,6 +253,11 @@
           enableFormat = true;
           enableAll = true;
         };
+        visuals = {
+          enable = true;
+          borderType = "none";
+          transparentBackground = true;
+        };
         debugger.enable = true;
       };
 
