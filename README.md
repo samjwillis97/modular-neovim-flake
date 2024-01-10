@@ -1,5 +1,8 @@
 # My Modular Neovim
 
+![Screenshot 2024-01-10 at 12 54 13 pm](https://github.com/samjwillis97/modular-neovim-flake/assets/37866085/9bc6329e-e874-408c-9ba7-6b427d8bc3a7)
+
+
 Attempting to build out my neovim config in a modular fashion in effort to understand nix packaging better. Inspired by the likes of:
 
 - [jordanisaacs](https://github.com/jordanisaacs/neovim-flake)
