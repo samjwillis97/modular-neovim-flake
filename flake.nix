@@ -142,6 +142,10 @@
       url = "github:mxsdev/nvim-dap-vscode-js";
       flake = false;
     };
+    plugin-transparent = {
+      url = "github:xiyaowong/transparent.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {

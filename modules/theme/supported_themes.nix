@@ -19,6 +19,7 @@ let
   };
 
   cfg = config.vim.theme;
+  isTransparentBackground = config.vim.visuals.transparentBackground;
 in
 {
   options.vim.theme = {
@@ -55,7 +56,7 @@ in
       setup = ''
         -- Catppuccin theme
         require('catppuccin').setup {
-          flavour = "${cfg.style}"
+          flavour = "${cfg.style}",
         }
         -- setup must be called before loading
         vim.cmd.colorscheme "catppuccin"

@@ -67,9 +67,12 @@ in
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.betterIcons { vim.startPlugins = [ "nvim-web-devicons" ]; })
     (mkIf cfg.transparentBackground {
+      vim.startPlugins = [ "transparent" ];
       vim.luaConfigRC.transparentBackground = nvim.dag.entryAfter [ "theme" ] ''
-        vim.opt.termguicolors = true
-        vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
+        require("transparent").setup({
+          extra_groups = {
+          },
+        })
       '';
     })
     (mkIf cfg.indentations.enable {
@@ -125,7 +128,13 @@ in
     (mkIf (cfg.lspSpinner.enable && lspEnabled) {
       vim.startPlugins = [ "fidget" ];
       vim.luaConfigRC.fidget = nvim.dag.entryAnywhere ''
-        require("fidget").setup{}
+        require("fidget").setup({
+          ${optionalString (cfg.transparentBackground) ''
+          window = {
+            blend = 0,
+          },
+          ''}
+        })
       '';
     })
   ]);

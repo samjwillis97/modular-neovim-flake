@@ -697,6 +697,22 @@
         "type": "github"
       }
     },
+    "plugin-transparent": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1699805216,
+        "narHash": "sha256-wT+7rmp08r0XYGp+MhjJX8dsFTar8+nf10CV9OdkOSk=",
+        "owner": "xiyaowong",
+        "repo": "transparent.nvim",
+        "rev": "fd35a46f4b7c1b244249266bdcb2da3814f01724",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xiyaowong",
+        "repo": "transparent.nvim",
+        "type": "github"
+      }
+    },
     "plugin-treesitter-context": {
       "flake": false,
       "locked": {
@@ -810,6 +826,7 @@
         "plugin-telescope": "plugin-telescope",
         "plugin-tmux-navigator": "plugin-tmux-navigator",
         "plugin-tokyonight": "plugin-tokyonight",
+        "plugin-transparent": "plugin-transparent",
         "plugin-treesitter-context": "plugin-treesitter-context",
         "plugin-undotree": "plugin-undotree",
         "vscode-js-debug": "vscode-js-debug"
