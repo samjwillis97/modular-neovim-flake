@@ -49,7 +49,7 @@ let
   enabledDebuggerAdapters = listToAttrs (map (v: { name = "${v}-adapter"; value = debuggers.${v}.dapAdapter; }) cfg.debugger.debuggers);
 
   # FIXME: this is broken, even using my fork 😔
-  defaultDebuggers = [];
+  defaultDebuggers = [ ];
   # defaultDebuggers = ["vscode-js-debug-node"];
   debuggers = {
     vscode-js-debug-node = {

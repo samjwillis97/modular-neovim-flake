@@ -254,7 +254,7 @@
           enableTreesitter = true;
           enableLSP = true;
           enableDebugger = true;
-          enableFormat = true;
+          enableFormat = false;
           enableAll = true;
         };
         visuals = {
