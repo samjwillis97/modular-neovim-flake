@@ -263,6 +263,7 @@
           transparentBackground = true;
         };
         debugger.enable = true;
+        nmap = { "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>"; };
       };
 
       #         # TODO: tailwind (tailwindcss-language-server)
