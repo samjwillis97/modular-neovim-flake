@@ -24,6 +24,7 @@ in
     ./csharp
     ./elixir
     ./ocaml
+    ./rust
   ];
   options.vim.languages = {
     enableAll = mkEnable "all Languages";
