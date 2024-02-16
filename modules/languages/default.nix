@@ -25,6 +25,7 @@ in
     ./elixir
     ./ocaml
     ./rust
+    ./lua
   ];
   options.vim.languages = {
     enableAll = mkEnable "all Languages";
