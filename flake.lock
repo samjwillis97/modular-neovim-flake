@@ -684,11 +684,11 @@
     "plugin-octo": {
       "flake": false,
       "locked": {
-        "lastModified": 1708078943,
-        "narHash": "sha256-3Fe92mYXO4kKtHD22zmcTfCwfUOxx6tJnpCvCgod+zs=",
+        "lastModified": 1708087057,
+        "narHash": "sha256-H6n6CseVv5CBmvWhSnb0ZYfwtXn+plUDNGFEmOFln6Y=",
         "owner": "samjwillis97",
         "repo": "octo.nvim",
-        "rev": "aa1ddc996d6c3de7868848008618f04ee92e1d00",
+        "rev": "481f93c1ea7b41140367cd5155ce7b72898dba24",
         "type": "github"
       },
       "original": {
