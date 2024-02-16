@@ -16,6 +16,7 @@ let
     ./snippets
     ./completion
     ./debugger
+    ./review
     ./core
     ./build
   ];

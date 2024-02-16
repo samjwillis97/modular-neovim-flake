@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs = { url = "github:NixOS/nixpkgs/nixos-unstable"; };
     flake-utils = { url = "github:numtide/flake-utils"; };
+    agenix = { url = "github:ryantm/agenix"; };
 
     # Plugins
     plugin-plenary-nvim = {
@@ -146,6 +147,10 @@
       url = "github:xiyaowong/transparent.nvim";
       flake = false;
     };
+    plugin-octo = {
+      url = "github:samjwillis97/octo.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -263,6 +268,7 @@
           transparentBackground = true;
         };
         debugger.enable = true;
+        review.enable = true;
         nmap = { "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>"; };
       };
 
@@ -278,6 +284,7 @@
         overlays = [
           (prev: final: {
             vscode-js-debug = inputs.vscode-js-debug.packages.${system}.latest;
+            agenix = inputs.agenix.packages.${system}.default;
           })
           (prev: final: {
             inherit mkNeovimConfiguration;
@@ -313,6 +320,6 @@
         };
 
         devShells.default =
-          pkgs.mkShell { nativeBuildInputs = [ pkgs.neovim-full ]; };
+          pkgs.mkShell { nativeBuildInputs = [ pkgs.neovim-full pkgs.agenix ]; };
       });
 }
