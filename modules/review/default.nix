@@ -8,7 +8,7 @@ let
     name = "ghCliWithPAT";
     runtimeInputs = [ pkgs.gh ];
     text = ''
-      GH_TOKEN=$(${pkgs.age}/bin/age -d -i /var/agenix/github-primary ${../../secrets/gh_pat.age})
+      GH_TOKEN=$(echo ${cfg.tokenPath})
       export GH_TOKEN
 
       ${pkgs.gh}/bin/gh "$@"
@@ -18,6 +18,12 @@ in
 {
   options.vim.review = {
     enable = mkEnableOption "review";
+
+    tokenPath = mkOption {
+      description = "Path to a file containting github PAT, if not provided assumption is made that `gh` is on path and authenticated.";
+      type = types.nullOr (types.path);
+      default = null;
+    };
   };
 
   config = mkIf (cfg.enable) {
@@ -30,7 +36,13 @@ in
     vim.startPlugins = [ "octo" ];
     vim.luaConfigRC.octo = nvim.dag.entryAnywhere ''
       require("octo").setup({
-        gh_cmd = "${ghCliWithPAT}/bin/ghCliWithPAT",
+        ${
+          if (isNull cfg.tokenPath)
+          then
+            "gh_cmd = \"gh\""
+          else 
+            "gh_cmd = \"${ghCliWithPAT}/bin/ghCliWithPAT\""
+        }
       })
     '';
   };
