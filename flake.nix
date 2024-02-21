@@ -296,6 +296,8 @@
         pkgs = import nixpkgs { inherit system overlays; };
       in
       {
+        buildNeovimPackage = (config: buildPkg [{ config.vim = config; }]);
+
         packages = rec {
           neovim-bare = pkgs.neovim-bare;
           neovim-base = pkgs.neovim-base;
