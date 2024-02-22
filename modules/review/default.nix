@@ -21,7 +21,7 @@ in
 
     tokenPath = mkOption {
       description = "Path to a file containting github PAT, if not provided assumption is made that `gh` is on path and authenticated.";
-      type = types.nullOr (types.path or types.string);
+      type = with types; nullOr (oneOf [ path string ]);
       default = null;
     };
   };
