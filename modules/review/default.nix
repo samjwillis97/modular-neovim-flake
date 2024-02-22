@@ -8,7 +8,7 @@ let
     name = "ghCliWithPAT";
     runtimeInputs = [ pkgs.gh ];
     text = ''
-      GH_TOKEN=$(echo ${cfg.tokenPath})
+      GH_TOKEN=$(cat ${cfg.tokenPath})
       export GH_TOKEN
 
       ${pkgs.gh}/bin/gh "$@"
