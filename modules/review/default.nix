@@ -4,16 +4,12 @@ with builtins;
 let
   cfg = config.vim.review;
 
-  ghCliWithPAT = pkgs.writeShellApplication {
-    name = "ghCliWithPAT";
-    runtimeInputs = [ pkgs.gh ];
-    text = ''
-      GH_TOKEN=$(cat \"${cfg.tokenPath}\")
-      export GH_TOKEN
+  ghCliWithPAT = pkgs.writeShellScriptBin "ghCliWithPAT" ''
+    GH_TOKEN=$(cat ${cfg.tokenPath})
+    export GH_TOKEN
 
-      ${pkgs.gh}/bin/gh "$@"
-    '';
-  };
+    ${pkgs.gh}/bin/gh "$@"
+  '';
 in
 {
   options.vim.review = {
