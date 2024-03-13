@@ -268,7 +268,6 @@
           transparentBackground = true;
         };
         debugger.enable = true;
-        review.enable = true;
         nmap = { "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>"; };
       };
 

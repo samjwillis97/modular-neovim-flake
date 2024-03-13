@@ -25,7 +25,7 @@ in
     filters = {
       custom = mkOption {
         type = with types; listOf str;
-        default = [ ".git" "node_modules" ".devenv" ];
+        default = [ "^.git$" "node_modules" ".devenv" ".direnv" ];
         description = "Files and directories to hide in the tree by default";
       };
       gitIgnore = mkOption {
