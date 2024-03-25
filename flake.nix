@@ -151,6 +151,10 @@
       url = "github:samjwillis97/octo.nvim";
       flake = false;
     };
+    plugin-copilot = {
+      url = "github:github/copilot.vim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -268,6 +272,10 @@
           transparentBackground = true;
         };
         debugger.enable = true;
+        autocomplete = {
+          enable = true;
+          copilot.enable = true;
+        };
         nmap = { "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>"; };
       };
 

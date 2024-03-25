@@ -312,6 +312,22 @@
         "type": "github"
       }
     },
+    "plugin-copilot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710452859,
+        "narHash": "sha256-tcLrto1Y66MtPnfIcU2PBOxqE0xilVl4JyKU6ddS7bA=",
+        "owner": "github",
+        "repo": "copilot.vim",
+        "rev": "9484e35cf222e9360e05450622a884f95c662c4c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "github",
+        "repo": "copilot.vim",
+        "type": "github"
+      }
+    },
     "plugin-dap": {
       "flake": false,
       "locked": {
@@ -894,6 +910,7 @@
         "plugin-cmp_luasnip": "plugin-cmp_luasnip",
         "plugin-colorizer": "plugin-colorizer",
         "plugin-commentary": "plugin-commentary",
+        "plugin-copilot": "plugin-copilot",
         "plugin-dap": "plugin-dap",
         "plugin-dap-ui": "plugin-dap-ui",
         "plugin-dracula": "plugin-dracula",
