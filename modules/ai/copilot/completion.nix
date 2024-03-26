@@ -2,11 +2,18 @@
 with lib;
 with builtins;
 let
-  cfg = config.vim.autocomplete.copilot;
+  enable = config.vim.ai.copilot.enableAll;
+  cfg = config.vim.ai.copilot.completion;
 in
 {
-  options.vim.autocomplete.copilot = {
-    enable = mkEnableOption "copilot";
+  options.vim.ai.copilot.completion = {
+    enable = mkOption {
+      type = types.bool;
+      default = enable;
+      description = ''
+        Enable Copilot completion.
+      '';
+    };
 
     nodeCommand = mkOption {
       type = types.str;

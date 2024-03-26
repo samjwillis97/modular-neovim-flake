@@ -328,6 +328,23 @@
         "type": "github"
       }
     },
+    "plugin-copilot-chat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1711324116,
+        "narHash": "sha256-0eJ/8MZli4KKo0RXirBaqWvK+zMM3LAfTDeVe7qHZ1c=",
+        "owner": "CopilotC-Nvim",
+        "repo": "CopilotChat.nvim",
+        "rev": "2b53687d0ccc025f07972dd8ac11cc74b9f17722",
+        "type": "github"
+      },
+      "original": {
+        "owner": "CopilotC-Nvim",
+        "ref": "canary",
+        "repo": "CopilotChat.nvim",
+        "type": "github"
+      }
+    },
     "plugin-dap": {
       "flake": false,
       "locked": {
@@ -911,6 +928,7 @@
         "plugin-colorizer": "plugin-colorizer",
         "plugin-commentary": "plugin-commentary",
         "plugin-copilot": "plugin-copilot",
+        "plugin-copilot-chat": "plugin-copilot-chat",
         "plugin-dap": "plugin-dap",
         "plugin-dap-ui": "plugin-dap-ui",
         "plugin-dracula": "plugin-dracula",

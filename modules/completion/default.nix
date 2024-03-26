@@ -24,11 +24,7 @@ let
     nvim.dag.entryAfter [ "lspkind" "snippets" ];
 in
 {
-  imports = [
-    ./copilot.nix
-  ];
-
-  options.vim.autocomplete = {
+    options.vim.autocomplete = {
     enable = mkEnableOption "autocomplete";
 
     sources = mkOption {

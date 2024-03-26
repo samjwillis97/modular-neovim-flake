@@ -155,6 +155,10 @@
       url = "github:github/copilot.vim";
       flake = false;
     };
+    plugin-copilot-chat = {
+      url = "github:CopilotC-Nvim/CopilotChat.nvim/canary";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -274,7 +278,9 @@
         debugger.enable = true;
         autocomplete = {
           enable = true;
-          copilot.enable = true;
+        };
+        ai = {
+          copilot.enableAll = true;
         };
         nmap = { "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>"; };
       };
