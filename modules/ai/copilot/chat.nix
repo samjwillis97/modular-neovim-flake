@@ -15,8 +15,6 @@ in
       '';
     };
 
-    # I want a list of options that will be used to create prompts
-    # each prompt starts with a question and alos has a selection function
     prompts = mkOption {
       type = types.listOf (types.submodule ({...}: {
         options = {
@@ -25,9 +23,9 @@ in
             description = "The name for the prompt. Has to be unique and PascalCase.";
           };
 
-          question = mkOption {
+          prompt = mkOption {
             type = types.str;
-            description = "The question for the prompt.";
+            description = "The specific prompt.";
           };
 
           selection = mkOption {
@@ -47,12 +45,16 @@ in
     vim.startPlugins = [ "copilot-chat" ];
     vim.ai.copilot.completion.enable = true;
     vim.luaConfigRC.copilot-chat = nvim.dag.entryAnywhere ''
+      ${optionalString (length cfg.prompts > 0) ''
+      local select = require('CopilotChat.select')
+      ''}
+
       local chat = require("CopilotChat").setup {
         ${optionalString (length cfg.prompts > 0) ''
           prompts = {
             ${concatStringsSep "\n" (map (prompt: ''
               ${prompt.name} = {
-                prompt = "${prompt.question}",
+                prompt = "${prompt.prompt}",
                 ${optionalString (prompt.selection != null) ''selection = ${prompt.selection},''}
               },
             '') cfg.prompts)}
