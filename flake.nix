@@ -280,7 +280,9 @@
           enable = true;
         };
         ai = {
-          copilot.enableAll = true;
+          copilot = {
+            enableAll = true;
+          };
         };
         nmap = { "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>"; };
       };
