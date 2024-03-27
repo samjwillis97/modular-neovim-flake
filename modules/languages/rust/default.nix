@@ -13,10 +13,12 @@ with builtins; let
           on_attach = default_on_attach;
           cmd = { "${cfg.lsp.package}/bin/rust-analyzer" };
           settings = {
-            files = {
-              excludeDirs = { ".direnv", },
-            },
-          };
+            ['rust-analyzer'] = {
+              files = {
+                excludeDirs = { ".direnv" }
+              }
+            }
+          }
         }
       '';
     };
