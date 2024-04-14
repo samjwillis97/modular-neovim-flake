@@ -29,7 +29,19 @@ in
 
   config = mkIf cfg.enable {
     vim.startPlugins =
-      (if (cfg.gitInterface != "none") then [ cfg.gitInterface ] else [ ])
+      (
+        if (cfg.gitInterface == "fugitive") then
+          [ "fugitive" ]
+        else if (cfg.gitInterface == "fugit2") then
+          [
+            "fugit2"
+            "nui"
+            "plenary-nvim"
+            "nvim-web-devicons"
+          ]
+        else
+          [ ]
+      )
       ++ (if (cfg.gutterSigns) then [ "gitsigns" ] else [ ]);
 
     vim.nnoremap =
@@ -38,6 +50,11 @@ in
           {
             "<leader>gg" = ":Git<CR>";
             "<leader>gB" = ":Git blame<CR>";
+          }
+        else if (cfg.gitInterface == "fugit2") then
+          {
+            "<leader>gg" = ":Fugitive<CR>";
+            "<leader>gB" = ":Fugitive blame<CR>";
           }
         else
           { }

@@ -162,8 +162,12 @@
       url = "github:CopilotC-Nvim/CopilotChat.nvim/canary";
       flake = false;
     };
-    plugin-codesnap = {
-      url = "github:mistricky/codesnap.nvim";
+    plugin-fugit2 = {
+      url = "github:SuperBo/fugit2.nvim";
+      flake = false;
+    };
+    plugin-nui= {
+      url = "github:MunifTanjim/nui.nvim";
       flake = false;
     };
 
@@ -244,7 +248,10 @@
           enable = true;
           borderType = "none";
         };
-        git.enable = true;
+        git = {
+          enable = true;
+          gitInterface = "fugit2";
+        };
         treesitter = {
           enable = true;
           fold = true;
@@ -294,11 +301,6 @@
         ai = {
           copilot = {
             enableAll = true;
-          };
-        };
-        sharing = {
-          codesnap = {
-            enable = true;
           };
         };
         nmap = {
