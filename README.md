@@ -8,10 +8,6 @@ Attempting to build out my neovim config in a modular fashion in effort to under
 - [jordanisaacs](https://github.com/jordanisaacs/neovim-flake)
 - [wiltaylor](https://github.com/wiltaylor/neovim-flake)
 
-## Require Files
-
-- For the `review` module which uses `Octo` the private key for the Github agenix is required at `/var/agenix/github-primary`
-
 
 ## Helpful vim commands
 
