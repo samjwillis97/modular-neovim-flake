@@ -1,8 +1,10 @@
 { lib, config, ... }:
 with lib;
 with builtins;
-let cfg = config.vim.qol;
-in {
+let
+  cfg = config.vim.qol;
+in
+{
   imports = [
     ./autopairs.nix
     ./lastplace.nix
@@ -11,5 +13,7 @@ in {
     ./harpoon.nix
     ./tmux-navigator.nix
   ];
-  options.vim.qol = { enable = mkEnableOption "qol"; };
+  options.vim.qol = {
+    enable = mkEnableOption "qol";
+  };
 }

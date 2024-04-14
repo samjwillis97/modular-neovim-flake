@@ -6,7 +6,11 @@ let
   usingNvimCmp = config.vim.autocomplete.enable;
 in
 {
-  imports = [ ./lspconfig.nix ./lspkind.nix ./code-action.nix ];
+  imports = [
+    ./lspconfig.nix
+    ./lspkind.nix
+    ./code-action.nix
+  ];
   options.vim.lsp = {
     enable = mkEnableOption "lsp";
 
@@ -22,7 +26,9 @@ in
 
     vim.startPlugins = optional usingNvimCmp "cmp-nvim-lsp";
 
-    vim.autocomplete.sources = { "nvim_lsp" = "[LSP]"; };
+    vim.autocomplete.sources = {
+      "nvim_lsp" = "[LSP]";
+    };
 
     vim.luaConfigRC.lsp-setup = ''
       vim.g.formatsave = ${boolToString cfg.formatOnSave};
@@ -59,7 +65,7 @@ in
         format_callback(client, bufnr)
       end
 
-      
+
       -- see: https://github.com/williamboman/mason-lspconfig.nvim/issues/211
       csharp_on_attach = function(client, bufnr)
         client.server_capabilities.semanticTokensProvider = nil
@@ -68,8 +74,7 @@ in
       end
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      ${optionalString usingNvimCmp
-      "capabilities = require('cmp_nvim_lsp').default_capabilities()"}
+      ${optionalString usingNvimCmp "capabilities = require('cmp_nvim_lsp').default_capabilities()"}
     '';
   };
 }

@@ -20,8 +20,7 @@ in
     {
       vim.startPlugins = [ "lspconfig" ];
       vim.luaConfigRC.lspconfig = nvim.dag.entryAfter [ "lsp-setup" ] ''
-        ${optionalString
-        (visualCfg.enable && visualCfg.borderType == "normal") ''
+        ${optionalString (visualCfg.enable && visualCfg.borderType == "normal") ''
           local border = {
             {"🭽", "FloatBorder"},
             {"▔", "FloatBorder"},
@@ -33,8 +32,7 @@ in
             {"▏", "FloatBorder"},
           }
         ''}
-        ${optionalString
-        (visualCfg.enable && visualCfg.borderType == "rounded") ''
+        ${optionalString (visualCfg.enable && visualCfg.borderType == "rounded") ''
           local border = {
             { "╭", "FloatBorder" },
             { "─", "FloatBorder" },
@@ -59,8 +57,7 @@ in
       '';
     }
     {
-      vim.luaConfigRC = mapAttrs (_: v: (nvim.dag.entryAfter [ "lspconfig" ] v))
-        cfg.lspconfig.sources;
+      vim.luaConfigRC = mapAttrs (_: v: (nvim.dag.entryAfter [ "lspconfig" ] v)) cfg.lspconfig.sources;
     }
   ]);
 }

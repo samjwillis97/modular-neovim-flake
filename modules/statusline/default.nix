@@ -10,7 +10,10 @@ in
     enable = mkEnableOption "statusline";
 
     style = mkOption {
-      type = types.enum [ "evil" "default" ];
+      type = types.enum [
+        "evil"
+        "default"
+      ];
       default = "evil";
       description = "Style for the statusline";
     };

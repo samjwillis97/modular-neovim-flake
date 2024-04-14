@@ -1,8 +1,10 @@
 { lib, config, ... }:
 with lib;
 with builtins;
-let cfg = config.vim.qol;
-in {
+let
+  cfg = config.vim.qol;
+in
+{
   options.vim.qol.tmux-navigator = {
     enable = mkOption {
       type = types.bool;

@@ -2,8 +2,12 @@
   description = "Sam's Modular Neovim Flake 🤭";
 
   inputs = {
-    nixpkgs = { url = "github:NixOS/nixpkgs/nixos-unstable"; };
-    flake-utils = { url = "github:numtide/flake-utils"; };
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-unstable";
+    };
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
 
     # Plugins
     plugin-plenary-nvim = {
@@ -158,6 +162,10 @@
       url = "github:CopilotC-Nvim/CopilotChat.nvim/canary";
       flake = false;
     };
+    plugin-codesnap = {
+      url = "github:mistricky/codesnap.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -191,13 +199,18 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      ...
+    }@inputs:
     let
       nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
       rawPlugins = nvimLib.plugins.fromInputs inputs "plugin-";
 
-      inherit (import ./lib/default.nix { inherit rawPlugins; })
-        mkNeovimConfiguration buildPkg;
+      inherit (import ./lib/default.nix { inherit rawPlugins; }) mkNeovimConfiguration buildPkg;
 
       bareConfig = {
         filetree.enable = true;
@@ -283,27 +296,33 @@
             enableAll = true;
           };
         };
-        nmap = { "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>"; };
+        sharing = {
+          codesnap = {
+            enable = true;
+          };
+        };
+        nmap = {
+          "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>";
+        };
       };
-
-      #         # TODO: tailwind (tailwindcss-language-server)
-      #         # TODO: angular (angularls)
-      #         # TODO: rust lsp
     in
+    #         # TODO: tailwind (tailwindcss-language-server)
+    #         # TODO: angular (angularls)
+    #         # TODO: rust lsp
     {
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda
-    } // flake-utils.lib.eachDefaultSystem (system:
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
       let
         overlays = [
-          (prev: final: {
-            vscode-js-debug = inputs.vscode-js-debug.packages.${system}.latest;
-          })
+          (prev: final: { vscode-js-debug = inputs.vscode-js-debug.packages.${system}.latest; })
           (prev: final: {
             inherit mkNeovimConfiguration;
-            neovim-bare = buildPkg final [{ config.vim = bareConfig; }];
-            neovim-base = buildPkg final [{ config.vim = baseConfig; }];
-            neovim-full = buildPkg final [{ config.vim = fullConfig; }];
+            neovim-bare = buildPkg final [ { config.vim = bareConfig; } ];
+            neovim-base = buildPkg final [ { config.vim = baseConfig; } ];
+            neovim-full = buildPkg final [ { config.vim = fullConfig; } ];
           })
         ];
         pkgs = import nixpkgs { inherit system overlays; };
@@ -334,8 +353,10 @@
           default = neovim-full;
         };
 
-        devShells.default =
-          pkgs.mkShell { nativeBuildInputs = [ pkgs.neovim-full ]; };
-      }) // {
-      };
+        devShells.default = pkgs.mkShell { nativeBuildInputs = [ pkgs.neovim-full ]; };
+
+        formatter = pkgs.nixfmt-rfc-style;
+      }
+    )
+    // { };
 }

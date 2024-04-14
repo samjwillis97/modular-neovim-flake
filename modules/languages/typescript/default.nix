@@ -1,13 +1,31 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 with builtins;
 let
   cfg = config.vim.languages.typescript;
 
-  enabledServerConfigs = listToAttrs (map (v: { name = v; value = servers.${v}.lspConfig; }) cfg.lsp.servers);
-  enabledServerPackages = listToAttrs (map (v: { name = v; value = servers.${v}.package; }) cfg.lsp.servers);
+  enabledServerConfigs = listToAttrs (
+    map (v: {
+      name = v;
+      value = servers.${v}.lspConfig;
+    }) cfg.lsp.servers
+  );
+  enabledServerPackages = listToAttrs (
+    map (v: {
+      name = v;
+      value = servers.${v}.package;
+    }) cfg.lsp.servers
+  );
 
-  defaultServers = [ "tsserver" "eslint" ];
+  defaultServers = [
+    "tsserver"
+    "eslint"
+  ];
   servers = {
     tsserver = {
       package = pkgs.nodePackages.typescript-language-server;
@@ -44,9 +62,24 @@ let
     };
   };
 
-  enabledDebuggerPackages = listToAttrs (map (v: { name = v; value = debuggers.${v}.package; }) cfg.debugger.debuggers);
-  enabledDebuggerConfigs = listToAttrs (map (v: { name = "${v}-config"; value = debuggers.${v}.dapConfig; }) cfg.debugger.debuggers);
-  enabledDebuggerAdapters = listToAttrs (map (v: { name = "${v}-adapter"; value = debuggers.${v}.dapAdapter; }) cfg.debugger.debuggers);
+  enabledDebuggerPackages = listToAttrs (
+    map (v: {
+      name = v;
+      value = debuggers.${v}.package;
+    }) cfg.debugger.debuggers
+  );
+  enabledDebuggerConfigs = listToAttrs (
+    map (v: {
+      name = "${v}-config";
+      value = debuggers.${v}.dapConfig;
+    }) cfg.debugger.debuggers
+  );
+  enabledDebuggerAdapters = listToAttrs (
+    map (v: {
+      name = "${v}-adapter";
+      value = debuggers.${v}.dapAdapter;
+    }) cfg.debugger.debuggers
+  );
 
   # FIXME: this is broken, even using my fork 😔
   defaultDebuggers = [ ];
@@ -76,7 +109,6 @@ let
         }
       '';
 
-
       dapConfig = ''
         dap.configurations["typescript"] = {
           {
@@ -95,7 +127,6 @@ let
       '';
     };
   };
-
 
   defaultFormat = "prettier";
   formats = {
@@ -258,8 +289,11 @@ in
 
     (mkIf cfg.treesitter.enable {
       vim.treesitter.enable = true;
-      vim.treesitter.grammars =
-        [ cfg.treesitter.tsPackage cfg.treesitter.tsxPackage cfg.treesitter.jsPackage ];
+      vim.treesitter.grammars = [
+        cfg.treesitter.tsPackage
+        cfg.treesitter.tsxPackage
+        cfg.treesitter.jsPackage
+      ];
     })
 
     (mkIf cfg.lsp.enable {
@@ -271,9 +305,7 @@ in
     (mkIf cfg.debugger.enable {
       vim.debugger.enable = true;
 
-      vim.startPlugins = [
-        "nvim-dap-vscode-js"
-      ];
+      vim.startPlugins = [ "nvim-dap-vscode-js" ];
 
       vim.debugger.configs = enabledDebuggerConfigs;
       vim.debugger.adapters = enabledDebuggerAdapters;

@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 with builtins;
 let
@@ -6,7 +11,7 @@ let
 
   defaultServer = "ocamllsp";
   servers = {
-    ocamllsp= {
+    ocamllsp = {
       package = pkgs.ocamlPackages.ocaml-lsp;
       internalFormatter = true;
       lspConfig = ''

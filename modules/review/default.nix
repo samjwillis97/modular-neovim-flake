@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 with builtins;
 let
@@ -17,7 +22,12 @@ in
 
     tokenPath = mkOption {
       description = "Path to a file containting github PAT, if not provided assumption is made that `gh` is on path and authenticated.";
-      type = with types; nullOr (oneOf [ path string ]);
+      type =
+        with types;
+        nullOr (oneOf [
+          path
+          string
+        ]);
       default = null;
     };
   };
@@ -33,10 +43,9 @@ in
     vim.luaConfigRC.octo = nvim.dag.entryAnywhere ''
       require("octo").setup({
         ${
-          if (isNull cfg.tokenPath)
-          then
+          if (isNull cfg.tokenPath) then
             "gh_cmd = \"gh\""
-          else 
+          else
             "gh_cmd = \"${ghCliWithPAT}/bin/ghCliWithPAT\""
         }
       })

@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 with builtins;
 let
@@ -65,8 +70,7 @@ in
       package = nvim.types.mkGrammarOption pkgs "html";
 
       autotagHtml = mkOption {
-        description =
-          "Enable autoclose/autorename of html tags (nvim-ts-autotag)";
+        description = "Enable autoclose/autorename of html tags (nvim-ts-autotag)";
         type = types.bool;
         default = true;
       };
@@ -116,10 +120,11 @@ in
 
       vim.startPlugins = optional cfg.treesitter.autotagHtml "nvim-ts-autotag";
 
-      vim.luaConfigRC.html-autotag = mkIf cfg.treesitter.autotagHtml
-        (nvim.dag.entryAnywhere ''
+      vim.luaConfigRC.html-autotag = mkIf cfg.treesitter.autotagHtml (
+        nvim.dag.entryAnywhere ''
           require('nvim-ts-autotag').setup()
-        '');
+        ''
+      );
     })
 
     (mkIf cfg.lsp.enable {

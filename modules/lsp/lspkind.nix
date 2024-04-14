@@ -11,7 +11,14 @@ in
 
       mode = mkOption {
         description = "Defines how annotations are shown";
-        type = with types; enum [ "text" "text_symbol" "symbol_text" "symbol" ];
+        type =
+          with types;
+          enum [
+            "text"
+            "text_symbol"
+            "symbol_text"
+            "symbol"
+          ];
         default = "symbol_text";
       };
     };

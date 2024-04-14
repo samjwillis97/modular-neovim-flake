@@ -1,27 +1,41 @@
 { lib, config, ... }:
 with lib;
 with builtins;
-let cfg = config.vim;
-in {
+let
+  cfg = config.vim;
+in
+{
   options.vim = {
     # TODO: Validate space binding
     leaderKey = mkOption {
-      type = types.enum [ "space" "backslash" ];
+      type = types.enum [
+        "space"
+        "backslash"
+      ];
       default = "backslash";
       description = "Key to bind to leader";
     };
 
     errorBell = mkOption {
-      type = types.enum [ "visual" "sound" "both" "none" ];
+      type = types.enum [
+        "visual"
+        "sound"
+        "both"
+        "none"
+      ];
       default = "none";
       description = "How to notify of errors messages";
     };
 
     lineNumberMode = mkOption {
-      type = types.enum [ "relative" "number" "relNumber" "none" ];
+      type = types.enum [
+        "relative"
+        "number"
+        "relNumber"
+        "none"
+      ];
       default = "relNumber";
-      description =
-        "How line numbers are displayed. none, relative, number, relNumber";
+      description = "How line numbers are displayed. none, relative, number, relNumber";
     };
 
     colourTerm = mkOption {
@@ -37,7 +51,11 @@ in {
     };
 
     signColumnMode = mkOption {
-      type = types.enum [ "always" "never" "auto" ];
+      type = types.enum [
+        "always"
+        "never"
+        "auto"
+      ];
       default = "always";
       description = "How to display the sign column";
     };
@@ -51,8 +69,7 @@ in {
     scrollOffsetLines = mkOption {
       type = types.int;
       default = 8;
-      description =
-        "The minimum amount of lines to be above or below the cursor line";
+      description = "The minimum amount of lines to be above or below the cursor line";
     };
 
     enableSwapFile = mkOption {
@@ -97,8 +114,7 @@ in {
     autoIndent = mkOption {
       type = types.bool;
       default = true;
-      description =
-        "Attempts to automatically indent correctly when starting new lines";
+      description = "Attempts to automatically indent correctly when starting new lines";
     };
 
     folding = {
@@ -111,8 +127,7 @@ in {
       defaultFoldNumber = mkOption {
         type = types.int;
         default = 5;
-        description =
-          "When opening a file it will close folds greater than this level";
+        description = "When opening a file it will close folds greater than this level";
       };
 
       maxNumber = mkOption {
@@ -122,7 +137,10 @@ in {
       };
 
       mode = mkOption {
-        type = types.enum [ "indent" "syntax" ];
+        type = types.enum [
+          "indent"
+          "syntax"
+        ];
         default = "indent";
         description = "The kind of folding to be used";
       };
@@ -172,31 +190,51 @@ in {
   };
 
   config = {
-    vim.startPlugins = [ "plenary-nvim" "commentary" "surround" ];
+    vim.startPlugins = [
+      "plenary-nvim"
+      "commentary"
+      "surround"
+    ];
     vim.inoremap = mkIf cfg.escapeWithJK { "jk" = "<Esc>"; };
     vim.nnoremap =
       (if (cfg.leaderKey == "space") then { "<space>" = "<nop>"; } else { })
-      // (if (cfg.easierSplitNavigation) then {
-        "<C-J>" = "<C-W><C-J>";
-        "<C-K>" = "<C-W><C-K>";
-        "<C-L>" = "<C-W><C-L>";
-        "<C-H>" = "<C-W><C-H>";
-      } else
-        { }) // (if (cfg.centerAfterJump) then {
-        "<C-u>" = "<C-u>zz";
-        "<C-d>" = "<C-d>zz";
-        "<C-i>" = "<C-i>zz";
-        "<C-o>" = "<C-o>zz";
-        "n" = "nzz";
-        "N" = "Nzz";
-        "GG" = "GGzz";
-      } else
-        { }) // (if (cfg.moveByVisualLine) then {
-        "j" = "gj";
-        "k" = "gk";
-      } else
-        { });
-    vim.nmap = { "<leader><space>" = ":nohlsearch<CR>"; };
+      // (
+        if (cfg.easierSplitNavigation) then
+          {
+            "<C-J>" = "<C-W><C-J>";
+            "<C-K>" = "<C-W><C-K>";
+            "<C-L>" = "<C-W><C-L>";
+            "<C-H>" = "<C-W><C-H>";
+          }
+        else
+          { }
+      )
+      // (
+        if (cfg.centerAfterJump) then
+          {
+            "<C-u>" = "<C-u>zz";
+            "<C-d>" = "<C-d>zz";
+            "<C-i>" = "<C-i>zz";
+            "<C-o>" = "<C-o>zz";
+            "n" = "nzz";
+            "N" = "Nzz";
+            "GG" = "GGzz";
+          }
+        else
+          { }
+      )
+      // (
+        if (cfg.moveByVisualLine) then
+          {
+            "j" = "gj";
+            "k" = "gk";
+          }
+        else
+          { }
+      );
+    vim.nmap = {
+      "<leader><space>" = ":nohlsearch<CR>";
+    };
 
     vim.luaConfigRC.base = nvim.dag.entryAfter [ "globalsScript" ] ''
       -- Settings that are set for everything
@@ -238,12 +276,10 @@ in {
         vim.opt.undofile = true
         vim.opt.undodir = ${cfg.undoFiles.directory}
       ''}
-      ${optionalString
-      (cfg.lineNumberMode == "number" || cfg.lineNumberMode == "relNumber") ''
+      ${optionalString (cfg.lineNumberMode == "number" || cfg.lineNumberMode == "relNumber") ''
         vim.opt.number = true
       ''}
-      ${optionalString
-      (cfg.lineNumberMode == "relative" || cfg.lineNumberMode == "relNumber") ''
+      ${optionalString (cfg.lineNumberMode == "relative" || cfg.lineNumberMode == "relNumber") ''
         vim.opt.relativenumber = true
       ''}
       ${optionalString (cfg.showCursorLine) ''

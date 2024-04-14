@@ -1,6 +1,12 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-with builtins; let
+with builtins;
+let
   cfg = config.vim.languages.csharp;
 
   defaultServer = "omnisharp";
@@ -37,7 +43,6 @@ with builtins; let
       '';
     };
   };
-
 in
 {
   options.vim.languages.csharp = {

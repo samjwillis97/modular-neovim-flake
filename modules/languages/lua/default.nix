@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 with builtins;
 let
@@ -20,7 +25,7 @@ let
   };
 in
 {
-  options.vim.languages.lua= {
+  options.vim.languages.lua = {
     enable = mkOption {
       type = types.bool;
       default = config.vim.languages.enableAll;

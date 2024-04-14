@@ -1,1 +1,7 @@
-{ config, lib, ... }: { imports = [ ./theme.nix ./supported_themes.nix ]; }
+{ config, lib, ... }:
+{
+  imports = [
+    ./theme.nix
+    ./supported_themes.nix
+  ];
+}

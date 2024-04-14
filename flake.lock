@@ -58,11 +58,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1704194953,
-        "narHash": "sha256-RtDKd8Mynhe5CFnVT8s0/0yqtWFMM9LmCzXv/YKxnq4=",
+        "lastModified": 1712963716,
+        "narHash": "sha256-WKm9CvgCldeIVvRz87iOMi8CFVB1apJlkUT4GGvA0iM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bd645e8668ec6612439a9ee7e71f7eac4099d4f6",
+        "rev": "cfd6b5fc90b15709b780a5a1619695a88505a176",
         "type": "github"
       },
       "original": {
@@ -197,6 +197,22 @@
       "original": {
         "owner": "saadparwaiz1",
         "repo": "cmp_luasnip",
+        "type": "github"
+      }
+    },
+    "plugin-codesnap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1713107956,
+        "narHash": "sha256-HUS2Y582OMIgwZLONdMhlxICIme3foR5Pku0MpyNtus=",
+        "owner": "mistricky",
+        "repo": "codesnap.nvim",
+        "rev": "727584b1095b381304c6aedf57e3c9331a4e43d2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mistricky",
+        "repo": "codesnap.nvim",
         "type": "github"
       }
     },
@@ -844,6 +860,7 @@
         "plugin-cmp-path": "plugin-cmp-path",
         "plugin-cmp-treesitter": "plugin-cmp-treesitter",
         "plugin-cmp_luasnip": "plugin-cmp_luasnip",
+        "plugin-codesnap": "plugin-codesnap",
         "plugin-colorizer": "plugin-colorizer",
         "plugin-commentary": "plugin-commentary",
         "plugin-copilot": "plugin-copilot",

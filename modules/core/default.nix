@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 with builtins;
 let
@@ -10,11 +15,15 @@ let
     EOF
   '';
 
-  mkMappingOption = it:
-    mkOption ({
-      default = { };
-      type = with types; attrsOf (nullOr str);
-    } // it);
+  mkMappingOption =
+    it:
+    mkOption (
+      {
+        default = { };
+        type = with types; attrsOf (nullOr str);
+      }
+      // it
+    );
 in
 {
   options.vim = {
@@ -48,56 +57,37 @@ in
       type = types.attrs;
     };
 
-    nnoremap =
-      mkMappingOption { description = "Defines 'Normal mode' mappings"; };
+    nnoremap = mkMappingOption { description = "Defines 'Normal mode' mappings"; };
 
-    inoremap = mkMappingOption {
-      description = "Defines 'Insert and Replace mode' mappings";
-    };
+    inoremap = mkMappingOption { description = "Defines 'Insert and Replace mode' mappings"; };
 
-    vnoremap = mkMappingOption {
-      description = "Defines 'Visual and Select mode' mappings";
-    };
+    vnoremap = mkMappingOption { description = "Defines 'Visual and Select mode' mappings"; };
 
-    xnoremap =
-      mkMappingOption { description = "Defines 'Visual mode' mappings"; };
+    xnoremap = mkMappingOption { description = "Defines 'Visual mode' mappings"; };
 
-    snoremap =
-      mkMappingOption { description = "Defines 'Select mode' mappings"; };
+    snoremap = mkMappingOption { description = "Defines 'Select mode' mappings"; };
 
-    cnoremap =
-      mkMappingOption { description = "Defines 'Command-line mode' mappings"; };
+    cnoremap = mkMappingOption { description = "Defines 'Command-line mode' mappings"; };
 
-    onoremap = mkMappingOption {
-      description = "Defines 'Operator pending mode' mappings";
-    };
+    onoremap = mkMappingOption { description = "Defines 'Operator pending mode' mappings"; };
 
-    tnoremap =
-      mkMappingOption { description = "Defines 'Terminal mode' mappings"; };
+    tnoremap = mkMappingOption { description = "Defines 'Terminal mode' mappings"; };
 
     nmap = mkMappingOption { description = "Defines 'Normal mode' mappings"; };
 
-    imap = mkMappingOption {
-      description = "Defines 'Insert and Replace mode' mappings";
-    };
+    imap = mkMappingOption { description = "Defines 'Insert and Replace mode' mappings"; };
 
-    vmap = mkMappingOption {
-      description = "Defines 'Visual and Select mode' mappings";
-    };
+    vmap = mkMappingOption { description = "Defines 'Visual and Select mode' mappings"; };
 
     xmap = mkMappingOption { description = "Defines 'Visual mode' mappings"; };
 
     smap = mkMappingOption { description = "Defines 'Select mode' mappings"; };
 
-    cmap =
-      mkMappingOption { description = "Defines 'Command-line mode' mappings"; };
+    cmap = mkMappingOption { description = "Defines 'Command-line mode' mappings"; };
 
-    omap = mkMappingOption {
-      description = "Defines 'Operator pending mode' mappings";
-    };
+    omap = mkMappingOption { description = "Defines 'Operator pending mode' mappings"; };
 
-    tmap =
-      mkMappingOption { description = "Defines 'Terminal mode' mappings"; };
+    tmap = mkMappingOption { description = "Defines 'Terminal mode' mappings"; };
 
     imapexpr = mkMappingOption {
       description = "Defines 'Insert and Replace mode' mappings that are expressions";
@@ -108,38 +98,35 @@ in
   config =
     let
       mkVimBool = val: if val then "true" else "false";
-      valToVim = val:
+      valToVim =
+        val:
         if (isInt val) then
           (builtins.toString val)
         else
           (if (isBool val) then (mkVimBool val) else (toJSON val));
 
       filterNonNull = mappings: filterAttrs (name: value: value != null) mappings;
-      globalsScript =
-        mapAttrsFlatten (name: value: "let g:${name}=${valToVim value}")
-          (filterNonNull cfg.globals);
+      globalsScript = mapAttrsFlatten (name: value: "let g:${name}=${valToVim value}") (
+        filterNonNull cfg.globals
+      );
 
       matchCtrl = it: match "Ctrl-(.)(.*)" it;
-      mapKeyBinding = it:
-        let groups = matchCtrl it;
-        in if groups == null then
-          it
-        else
-          "<C-${toUpper (head groups)}>${head (tail groups)}";
+      mapKeyBinding =
+        it:
+        let
+          groups = matchCtrl it;
+        in
+        if groups == null then it else "<C-${toUpper (head groups)}>${head (tail groups)}";
 
-      mapVimBinding = prefix: remap: expr: silent: mappings:
-        mapAttrsFlatten
-          (name: value:
-            ''
-              vim.api.nvim_set_keymap("${prefix}", "${
-                mapKeyBinding name
-              }", "${value}", { 
-                expr = ${if expr then "true" else "false"},
-                silent = ${if silent then "true" else "false"},
-                noremap = ${if remap then "true" else "false"},
-              }
-              )'')
-          (filterNonNull mappings);
+      mapVimBinding =
+        prefix: remap: expr: silent: mappings:
+        mapAttrsFlatten (name: value: ''
+          vim.api.nvim_set_keymap("${prefix}", "${mapKeyBinding name}", "${value}", { 
+            expr = ${if expr then "true" else "false"},
+            silent = ${if silent then "true" else "false"},
+            noremap = ${if remap then "true" else "false"},
+          }
+          )'') (filterNonNull mappings);
 
       nmap = mapVimBinding "n" false false false config.vim.nmap;
       imap = mapVimBinding "i" false false false config.vim.imap;
@@ -164,8 +151,7 @@ in
     {
       vim = {
         configRC = {
-          globalsScript =
-            nvim.dag.entryAnywhere (concatStringsSep "\n" globalsScript);
+          globalsScript = nvim.dag.entryAnywhere (concatStringsSep "\n" globalsScript);
 
           luaScript =
             let
@@ -173,8 +159,7 @@ in
                 -- SECTION: ${r.name}
                 ${r.data}
               '';
-              mapResult = r:
-                (wrapLuaConfig (concatStringsSep "\n" (map mkSection r)));
+              mapResult = r: (wrapLuaConfig (concatStringsSep "\n" (map mkSection r)));
               luaConfig = nvim.dag.resolveDag {
                 name = "lua config script";
                 dag = cfg.luaConfigRC;
@@ -204,8 +189,7 @@ in
                 tnoremap
                 imapexpr
               ];
-              mapConfig = (wrapLuaConfig
-                (concatStringsSep "\n" (map (v: concatStringsSep "\n" v) maps)));
+              mapConfig = (wrapLuaConfig (concatStringsSep "\n" (map (v: concatStringsSep "\n" v) maps)));
             in
             nvim.dag.entryAfter [ "luaScript" ] mapConfig;
         };

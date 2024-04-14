@@ -38,7 +38,14 @@ in
         }
         require('onedark').load()
       '';
-      styles = [ "dark" "darker" "cool" "deep" "warm" "warmer" ];
+      styles = [
+        "dark"
+        "darker"
+        "cool"
+        "deep"
+        "warm"
+        "warmer"
+      ];
       defaultStyle = "dark";
     };
 
@@ -48,7 +55,12 @@ in
         vim.g.tokyonight_style = '${cfg.style}'
         vim.cmd[[colorscheme tokyonight]]
       '';
-      styles = [ "day" "night" "storm" "moon" ];
+      styles = [
+        "day"
+        "night"
+        "storm"
+        "moon"
+      ];
       defaultStyle = "moon";
     };
 
@@ -61,7 +73,12 @@ in
         -- setup must be called before loading
         vim.cmd.colorscheme "catppuccin"
       '';
-      styles = [ "latte" "frappe" "macchiato" "mocha" ];
+      styles = [
+        "latte"
+        "frappe"
+        "macchiato"
+        "mocha"
+      ];
       defaultStyle = "mocha";
     };
 
@@ -86,7 +103,10 @@ in
         }
         require('gruvbox').load()
       '';
-      styles = [ "dark" "light" ];
+      styles = [
+        "dark"
+        "light"
+      ];
       defaultStyle = "dark";
     };
   };

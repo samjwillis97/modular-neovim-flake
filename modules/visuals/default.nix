@@ -10,7 +10,11 @@ in
     enable = mkEnableOption "visual enhancements";
 
     borderType = mkOption {
-      type = types.enum [ "rounded" "normal" "none" ];
+      type = types.enum [
+        "rounded"
+        "normal"
+        "none"
+      ];
       default = "none";
       description = "Border styling on dialogs";
     };
@@ -88,20 +92,20 @@ in
         ''}
 
         ${optionalString (cfg.indentations.highlightScope) ''
-        -- FIXME: Remove hard codes
-        -- FIXME: Also do the cmp hl groups when doing that
-        local hooks = require("ibl.hooks")
-        -- create the highlight groups in the highlight setup hook, so they are reset
-        -- every time the colorscheme changes
-        hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-            vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-            vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-            vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-            vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-            vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-            vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-            vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-        end)
+          -- FIXME: Remove hard codes
+          -- FIXME: Also do the cmp hl groups when doing that
+          local hooks = require("ibl.hooks")
+          -- create the highlight groups in the highlight setup hook, so they are reset
+          -- every time the colorscheme changes
+          hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+              vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+              vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+              vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+              vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+              vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+              vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+              vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+          end)
         ''}
 
         require("ibl").setup({
@@ -110,16 +114,14 @@ in
           },
           scope = {
             -- TODO: Fix up the nix config above
-            enabled = ${
-              boolToString cfg.indentations.highlightScope
-            },
+            enabled = ${boolToString cfg.indentations.highlightScope},
             ${optionalString (cfg.indentations.highlightScope) ''
-            show_exact_scope = true,
-            show_start = false,
-            show_end = false,
-            highlight = {
-              "RainbowViolet",
-            },
+              show_exact_scope = true,
+              show_start = false,
+              show_end = false,
+              highlight = {
+                "RainbowViolet",
+              },
             ''}
           },
         })
@@ -130,9 +132,9 @@ in
       vim.luaConfigRC.fidget = nvim.dag.entryAnywhere ''
         require("fidget").setup({
           ${optionalString (cfg.transparentBackground) ''
-          window = {
-            blend = 0,
-          },
+            window = {
+              blend = 0,
+            },
           ''}
         })
       '';

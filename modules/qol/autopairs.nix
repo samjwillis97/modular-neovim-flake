@@ -1,8 +1,10 @@
 { lib, config, ... }:
 with lib;
 with builtins;
-let cfg = config.vim.qol;
-in {
+let
+  cfg = config.vim.qol;
+in
+{
   options.vim.qol.autopairs = {
     enable = mkOption {
       type = types.bool;
@@ -13,9 +15,8 @@ in {
 
   config = mkIf (cfg.enable && cfg.autopairs.enable) {
     vim.startPlugins = [ "autopairs" ];
-    vim.luaConfigRC.autopairs =
-      nvim.dag.entryAnywhere ''
-        require('nvim-autopairs').setup()
-      '';
+    vim.luaConfigRC.autopairs = nvim.dag.entryAnywhere ''
+      require('nvim-autopairs').setup()
+    '';
   };
 }

@@ -1,4 +1,10 @@
-{ modules ? [ ], pkgs, lib ? pkgs.lib, check ? true, extraSpecialArgs ? { }, }:
+{
+  modules ? [ ],
+  pkgs,
+  lib ? pkgs.lib,
+  check ? true,
+  extraSpecialArgs ? { },
+}:
 # TODO: Have a look at extended lib from jordanisaacs 
 let
   extendedLib = import ./lib/stdlib-extended.nix lib;
@@ -15,4 +21,5 @@ let
       currentModules = modules;
     } // extraSpecialArgs;
   };
-in module.config.built.package
+in
+module.config.built.package

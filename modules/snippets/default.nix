@@ -1,14 +1,19 @@
 { lib, config, ... }:
 with lib;
 with builtins;
-let cfg = config.vim.snippets;
-in {
+let
+  cfg = config.vim.snippets;
+in
+{
   options.vim.snippets = {
     enable = mkEnableOption "snippets";
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = [ "luasnip" "friendly-snippets" ];
+    vim.startPlugins = [
+      "luasnip"
+      "friendly-snippets"
+    ];
 
     vim.luaConfigRC.snippets = nvim.dag.entryAnywhere ''
       local ls = require("luasnip")
@@ -27,6 +32,5 @@ in {
         end
       end, {silent = true})
     '';
-
   };
 }

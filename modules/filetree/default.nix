@@ -10,7 +10,11 @@ in
     enable = mkEnableOption "filetree";
 
     location = mkOption {
-      type = types.enum [ "left" "right" "center" ];
+      type = types.enum [
+        "left"
+        "right"
+        "center"
+      ];
       default = "left";
       description = "Where the tree will appear";
     };
@@ -18,14 +22,18 @@ in
     width = mkOption {
       type = types.int;
       default = 35;
-      description = ''
-        Width of the file tree in columns when location is "left" or "right", and the ratio to full screen when "center"'';
+      description = ''Width of the file tree in columns when location is "left" or "right", and the ratio to full screen when "center"'';
     };
 
     filters = {
       custom = mkOption {
         type = with types; listOf str;
-        default = [ "^.git$" "node_modules" ".devenv" ".direnv" ];
+        default = [
+          "^.git$"
+          "node_modules"
+          ".devenv"
+          ".direnv"
+        ];
         description = "Files and directories to hide in the tree by default";
       };
       gitIgnore = mkOption {
@@ -97,9 +105,7 @@ in
                     open_win_config = function()
                         local screen_w = vim.opt.columns:get()
                         local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
-                        local window_w = screen_w * ${
-                          toString ((cfg.width + 0.0) / 100)
-                        }
+                        local window_w = screen_w * ${toString ((cfg.width + 0.0) / 100)}
                         local window_h = screen_h * 0.75 
                         local window_w_int = math.floor(window_w)
                         local window_h_int = math.floor(window_h)
@@ -107,7 +113,9 @@ in
                         local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
                         return {
                             ${optionalString (!visualCfg.enable) ''border = "none",''}
-                            ${optionalString (visualCfg.enable && visualCfg.borderType == "rounded") ''border = "rounded",''}
+                            ${
+                              optionalString (visualCfg.enable && visualCfg.borderType == "rounded") ''border = "rounded",''
+                            }
                             relative = "editor",
                             row = center_y,
                             col = center_x,
@@ -117,9 +125,7 @@ in
                     end,
                 },
                 width = function()
-                    return math.floor(vim.opt.columns:get() * ${
-                      toString ((cfg.width + 0.0) / 100)
-                    })
+                    return math.floor(vim.opt.columns:get() * ${toString ((cfg.width + 0.0) / 100)})
                 end,
               ''
             }
@@ -142,8 +148,7 @@ in
               dotfiles = ${boolToString cfg.filters.dotFiles},
               custom = {
                   ${
-                    builtins.concatStringsSep "\n"
-                    (builtins.map (s: ''"'' + s + ''",'') cfg.filters.custom)
+                    builtins.concatStringsSep "\n" (builtins.map (s: ''"'' + s + ''",'') cfg.filters.custom)
                   }
               },
           },

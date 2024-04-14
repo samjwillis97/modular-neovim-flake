@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 with builtins;
 let
@@ -25,7 +30,7 @@ in
 
     workspaceFolders = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = ''
         A list of paths to workspace folders that Copilot should use to improve quality
       '';
@@ -37,7 +42,9 @@ in
 
     vim.luaConfigRC.copilot = nvim.dag.entryAnywhere ''
       vim.g.copilot_node_command = "${cfg.nodeCommand}"
-      vim.g.copilot_workspace_folders = {${lib.concatStrings (map (v: "\n\"${v}\",") cfg.workspaceFolders)}
+      vim.g.copilot_workspace_folders = {${
+        lib.concatStrings (map (v: "\n\"${v}\",") cfg.workspaceFolders)
+      }
       }
     '';
   };

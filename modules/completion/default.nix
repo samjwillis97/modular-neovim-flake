@@ -4,27 +4,19 @@ with builtins;
 let
   cfg = config.vim.autocomplete;
 
-  builtSources =
-    concatMapStringsSep
-      "\n"
-      (n: "{ name = '${n}'},")
-      (attrNames cfg.sources);
+  builtSources = concatMapStringsSep "\n" (n: "{ name = '${n}'},") (attrNames cfg.sources);
 
-  builtMaps =
-    concatStringsSep
-      "\n"
-      (mapAttrsToList
-        (n: v:
-          if v == null
-          then ""
-          else "${n} = '${v}',")
-        cfg.sources);
+  builtMaps = concatStringsSep "\n" (
+    mapAttrsToList (n: v: if v == null then "" else "${n} = '${v}',") cfg.sources
+  );
 
-  dagPlacement =
-    nvim.dag.entryAfter [ "lspkind" "snippets" ];
+  dagPlacement = nvim.dag.entryAfter [
+    "lspkind"
+    "snippets"
+  ];
 in
 {
-    options.vim.autocomplete = {
+  options.vim.autocomplete = {
     enable = mkEnableOption "autocomplete";
 
     sources = mkOption {

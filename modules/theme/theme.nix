@@ -2,8 +2,10 @@
 with lib;
 with lib.attrsets;
 with builtins;
-let cfg = config.vim.theme;
-in {
+let
+  cfg = config.vim.theme;
+in
+{
   options.vim.theme = {
     enable = mkEnableOption "themes";
 
@@ -28,8 +30,7 @@ in {
 
   config = mkIf cfg.enable {
     vim.startPlugins = [ cfg.name ];
-    vim.luaConfigRC.themeSetup =
-      nvim.dag.entryBefore [ "theme" ] cfg.extraConfig;
+    vim.luaConfigRC.themeSetup = nvim.dag.entryBefore [ "theme" ] cfg.extraConfig;
     vim.luaConfigRC.theme = cfg.supportedThemes.${cfg.name}.setup;
   };
 }

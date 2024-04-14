@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 with builtins;
 let
@@ -65,7 +70,6 @@ in
       package = nvim.types.mkGrammarOption pkgs "svelte";
     };
 
-
     lsp = {
       enable = mkOption {
         description = "Enable Svelte LSP support";
@@ -111,8 +115,7 @@ in
 
     (mkIf cfg.lsp.enable {
       vim.lsp.lspconfig.enable = true;
-      vim.lsp.lspconfig.sources.svelte-lsp =
-        servers.${cfg.lsp.server}.lspConfig;
+      vim.lsp.lspconfig.sources.svelte-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
 
     (mkIf cfg.format.enable {

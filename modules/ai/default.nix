@@ -1,5 +1,1 @@
-{
-  imports = [
-    ./copilot
-  ];
-}
+{ imports = [ ./copilot ]; }
