@@ -5,6 +5,10 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
+    nixpkgs-bash-fix = {
+      url = "github:NixOS/nixpkgs/91a7822b04fe5e15f1604f9ca0fb81eff61b4143";
+    };
+
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
@@ -136,6 +140,10 @@
     };
     plugin-dap = {
       url = "github:mfussenegger/nvim-dap";
+      flake = false;
+    };
+    plugin-nio = {
+      url = "github:nvim-neotest/nvim-nio";
       flake = false;
     };
     plugin-dap-ui = {
@@ -296,11 +304,6 @@
             enableAll = true;
           };
         };
-        sharing = {
-          codesnap = {
-            enable = true;
-          };
-        };
         nmap = {
           "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>";
         };
@@ -323,6 +326,11 @@
             neovim-bare = buildPkg final [ { config.vim = bareConfig; } ];
             neovim-base = buildPkg final [ { config.vim = baseConfig; } ];
             neovim-full = buildPkg final [ { config.vim = fullConfig; } ];
+          })
+          # This shoudl be able to be removed soon, current bug
+          (prev: final: {
+            bash-language-server = 
+              inputs.nixpkgs-bash-fix.legacyPackages.${prev.system}.nodePackages.bash-language-server;
           })
         ];
         pkgs = import nixpkgs { inherit system overlays; };

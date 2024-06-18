@@ -26,6 +26,7 @@ in
       vim.startPlugins = [
         "dap"
         "dap-ui"
+        "nio"
       ];
 
       vim.nnoremap = {

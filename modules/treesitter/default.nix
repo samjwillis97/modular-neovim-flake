@@ -45,6 +45,13 @@ in
       ''
     );
 
+    vim.configRC.treesitter-context = mkIf cfg.context (
+      nvim.dag.entryAnywhere ''
+        hi TreesitterContextBottom gui=NONE
+      ''
+    );
+
+
     vim.luaConfigRC.treesitter = nvim.dag.entryAnywhere ''
       ${optionalString cfg.context "require('treesitter-context').setup()"}
       require'nvim-treesitter.configs'.setup {
