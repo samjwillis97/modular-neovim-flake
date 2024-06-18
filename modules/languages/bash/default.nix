@@ -12,7 +12,7 @@ let
   defaultServer = "bash-language-server";
   servers = {
     bash-language-server = {
-      package = pkgs.nodePackages.bash-language-server;
+      package = pkgs.bash-language-server;
       lspConfig = ''
         lspconfig.bashls.setup{
           capabilities = capabilities;
