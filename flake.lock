@@ -730,6 +730,22 @@
         "type": "github"
       }
     },
+    "plugin-rhubarb": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680085333,
+        "narHash": "sha256-8zeQMLzNBWmXZ5daCOmsHkw6MIwWislArYF5zDdrwOg=",
+        "owner": "tpope",
+        "repo": "vim-rhubarb",
+        "rev": "ee69335de176d9325267b0fd2597a22901d927b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tpope",
+        "repo": "vim-rhubarb",
+        "type": "github"
+      }
+    },
     "plugin-surround": {
       "flake": false,
       "locked": {
@@ -925,6 +941,7 @@
         "plugin-octo": "plugin-octo",
         "plugin-onedark": "plugin-onedark",
         "plugin-plenary-nvim": "plugin-plenary-nvim",
+        "plugin-rhubarb": "plugin-rhubarb",
         "plugin-surround": "plugin-surround",
         "plugin-telescope": "plugin-telescope",
         "plugin-tmux-navigator": "plugin-tmux-navigator",

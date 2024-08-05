@@ -30,7 +30,8 @@ in
   config = mkIf cfg.enable {
     vim.startPlugins =
       (if (cfg.gitInterface != "none") then [ cfg.gitInterface ] else [ ])
-      ++ (if (cfg.gutterSigns) then [ "gitsigns" ] else [ ]);
+      ++ (if (cfg.gutterSigns) then [ "gitsigns" ] else [ ])
+      ++ (if (cfg.gitInterface == "fugitive") then [ "rhubarb" ] else [ ]);
 
     vim.nnoremap =
       (

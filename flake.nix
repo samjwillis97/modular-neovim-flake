@@ -174,6 +174,10 @@
       url = "github:mistricky/codesnap.nvim";
       flake = false;
     };
+    plugin-rhubarb = {
+      url = "github:tpope/vim-rhubarb";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -329,7 +333,7 @@
           })
           # This shoudl be able to be removed soon, current bug
           (prev: final: {
-            bash-language-server = 
+            bash-language-server =
               inputs.nixpkgs-bash-fix.legacyPackages.${prev.system}.nodePackages.bash-language-server;
           })
         ];
