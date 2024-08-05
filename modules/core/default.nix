@@ -106,7 +106,7 @@ in
           (if (isBool val) then (mkVimBool val) else (toJSON val));
 
       filterNonNull = mappings: filterAttrs (name: value: value != null) mappings;
-      globalsScript = mapAttrsFlatten (name: value: "let g:${name}=${valToVim value}") (
+      globalsScript = lib.attrsets.mapAttrsToList (name: value: "let g:${name}=${valToVim value}") (
         filterNonNull cfg.globals
       );
 
@@ -120,7 +120,7 @@ in
 
       mapVimBinding =
         prefix: remap: expr: silent: mappings:
-        mapAttrsFlatten (name: value: ''
+        lib.attrsets.mapAttrsToList (name: value: ''
           vim.api.nvim_set_keymap("${prefix}", "${mapKeyBinding name}", "${value}", { 
             expr = ${if expr then "true" else "false"},
             silent = ${if silent then "true" else "false"},
