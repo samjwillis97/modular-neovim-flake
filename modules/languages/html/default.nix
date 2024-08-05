@@ -12,12 +12,12 @@ let
   defaultServer = "vscode-language-server";
   servers = {
     vscode-language-server = {
-      package = pkgs.nodePackages.vscode-html-languageserver-bin;
+      package = pkgs.nodePackages.vscode-langservers-extracted;
       lspConfig = ''
         lspconfig.html.setup{
           capabilities = capabilities;
           on_attach = default_on_attach;
-          cmd = {"${cfg.lsp.package}/bin/html-languageserver", "--stdio"}
+          cmd = {"${cfg.lsp.package}/bin/vscode-html-language-server", "--stdio"}
         }
       '';
     };
