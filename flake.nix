@@ -139,7 +139,8 @@
       flake = false;
     };
     plugin-dap = {
-      url = "github:mfussenegger/nvim-dap";
+      url = "github:mfussenegger/nvim-dap?ref=0.8.0";
+      # ref = "regs/tags/0.8.0";
       flake = false;
     };
     plugin-nio = {
@@ -221,10 +222,10 @@
       flake = false;
     };
 
-    vscode-js-debug = {
-      url = "github:samjwillis97/vscode-js-debug.nix";
-      flake = true;
-    };
+    # vscode-js-debug = {
+    #   url = "github:samjwillis97/vscode-js-debug.nix";
+    #   flake = true;
+    # };
   };
 
   outputs =
@@ -349,7 +350,7 @@
       system:
       let
         overlays = [
-          (prev: final: { vscode-js-debug = inputs.vscode-js-debug.packages.${system}.latest; })
+          # (prev: final: { vscode-js-debug = inputs.vscode-js-debug.packages.${system}.latest; })
           (prev: final: {
             inherit mkNeovimConfiguration;
             neovim-bare = buildPkg final [ { config.vim = bareConfig; } ];

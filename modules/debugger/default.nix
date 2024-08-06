@@ -47,6 +47,9 @@ in
         local dap = require("dap")
         local dapui = require("dapui")
 
+        -- require('dap.ext.vscode').load_launchjs(nil, {
+        -- })
+
         dapui.setup({
           mappings = {
             open = { "zo" },
