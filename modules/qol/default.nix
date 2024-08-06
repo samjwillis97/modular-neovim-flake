@@ -12,6 +12,7 @@ in
     ./undotree.nix
     ./harpoon.nix
     ./tmux-navigator.nix
+    ./sneak.nix
   ];
   options.vim.qol = {
     enable = mkEnableOption "qol";

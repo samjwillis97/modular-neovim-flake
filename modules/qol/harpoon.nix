@@ -16,7 +16,7 @@ in
   config = mkIf (cfg.enable && cfg.harpoon.enable) {
     vim.startPlugins = [ "harpoon" ];
     vim.nnoremap = {
-      "<leader>hf" = ":lua require('harpoon.mark').add_file()<CR>";
+      "<leader>ha" = ":lua require('harpoon.mark').add_file()<CR>";
       "<leader>hh" = ":lua require('harpoon.ui').toggle_quick_menu()<CR>";
       "<leader>h1" = ":lua require('harpoon.ui').nav_file(1)<CR>";
       "<leader>h2" = ":lua require('harpoon.ui').nav_file(2)<CR>";

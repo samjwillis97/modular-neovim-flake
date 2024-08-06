@@ -858,6 +858,22 @@
         "type": "github"
       }
     },
+    "plugin-vim-sneak": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1708545039,
+        "narHash": "sha256-ndWhnV0fgCcqCGwVyM07GfmUB3CitBZbOWvZtsB1tBk=",
+        "owner": "justinmk",
+        "repo": "vim-sneak",
+        "rev": "c13d0497139b8796ff9c44ddb9bc0dc9770ad2dd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "justinmk",
+        "repo": "vim-sneak",
+        "type": "github"
+      }
+    },
     "purescript-overlay": {
       "inputs": {
         "nixpkgs": [
@@ -949,6 +965,7 @@
         "plugin-transparent": "plugin-transparent",
         "plugin-treesitter-context": "plugin-treesitter-context",
         "plugin-undotree": "plugin-undotree",
+        "plugin-vim-sneak": "plugin-vim-sneak",
         "vscode-js-debug": "vscode-js-debug"
       }
     },
