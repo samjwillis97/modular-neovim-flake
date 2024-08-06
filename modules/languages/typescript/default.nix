@@ -82,31 +82,31 @@ let
   );
 
   # FIXME: this is broken, even using my fork 😔
-  defaultDebuggers = [ ];
-  # defaultDebuggers = ["vscode-js-debug-node"];
+  # defaultDebuggers = [ ];
+  defaultDebuggers = ["vscode-js-debug-node"];
   debuggers = {
     vscode-js-debug-node = {
       package = pkgs.vscode-js-debug;
       dapAdapter = ''
-        -- require("dap-vscode-js").setup({
-        --   -- node_path = "${pkgs.nodejs_18}/bin/node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-        --   -- debugger_path = "${enabledDebuggerPackages.vscode-js-debug-node}/src", -- Path to vscode-js-debug installation.
-        --   debugger_cmd = { "${pkgs.nodejs_18}/bin/node", "${enabledDebuggerPackages.vscode-js-debug-node}/src/dapDebugServer.js" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
-        --   adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
-        --   -- log_file_path = "~/dap-log", -- Path for file logging
-        --   -- log_file_level = true, -- Logging level for output to file. Set to false to disable file logging.
-        --   -- log_console_level = vim.log.levels.DEBUG, -- Logging level for output to console. Set to false to disable console output.
-        -- })
+        require("dap-vscode-js").setup({
+          -- node_path = "${pkgs.nodejs_18}/bin/node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+          -- debugger_path = "${enabledDebuggerPackages.vscode-js-debug-node}", -- Path to vscode-js-debug installation.
+          debugger_cmd = { "${enabledDebuggerPackages.vscode-js-debug-node}/bin/js-debug" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+          adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+          -- log_file_path = "/tmp/dap-log", -- Path for file logging
+          log_file_level = vim.log.levels.DEBUG, -- Logging level for output to file. Set to false to disable file logging.
+          log_console_level = vim.log.levels.DEBUG, -- Logging level for output to console. Set to false to disable console output.
+        })
 
-        require("dap").adapters["pwa-node"] = {
-          type = "server",
-          host = "localhost",
-          port = "''${port}",
-          executable = {
-            command = "${pkgs.nodejs_18}/bin/node ${enabledDebuggerPackages.vscode-js-debug-node}/src/dapDebugServer.js", -- As I'm using mason, this will be in the path
-            args = { "''${port}" },
-          }
-        }
+        -- require("dap").adapters["pwa-node"] = {
+        --   type = "server",
+        --   host = "localhost",
+        --   port = "''${port}",
+        --   executable = {
+        --     command = "${enabledDebuggerPackages.vscode-js-debug-node}/bin/js-debug",
+        --     args = { "''${port}" },
+        --   }
+        -- }
       '';
 
       dapConfig = ''
@@ -114,14 +114,9 @@ let
           {
             type = "pwa-node",
             request = "attach",
-            name = "Attach to Node",
-            -- processId = require("dap.utils").pick_process,
-            -- processId = getNodeProcesses,
+            name = "Attach to NodeJS",
             processId = function() return require("dap.utils").pick_process({ filter = "node " }) end,
-            -- processId = require("dap.utils").pick_process({ filter = "node" }),
             cwd = "''${workspaceFolder}",
-            -- port = 8123,
-            -- port = "''${port}",
           },
         }
       '';
@@ -305,7 +300,7 @@ in
     (mkIf cfg.debugger.enable {
       vim.debugger.enable = true;
 
-      vim.startPlugins = [ "nvim-dap-vscode-js" ];
+      # vim.startPlugins = [ "nvim-dap-vscode-js" ];
 
       vim.debugger.configs = enabledDebuggerConfigs;
       vim.debugger.adapters = enabledDebuggerAdapters;
