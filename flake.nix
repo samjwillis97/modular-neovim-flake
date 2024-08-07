@@ -287,7 +287,10 @@
         formatter.enable = true;
         treesitter = {
           enable = true;
-          fold = true;
+        };
+        folding = {
+          enable = true;
+          mode = "treesitter";
         };
         lsp = {
           enable = true;
