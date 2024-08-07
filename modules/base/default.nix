@@ -3,7 +3,6 @@ with lib;
 with builtins;
 let
   cfg = config.vim;
-  lspEnabled = config.vim.lsp.enable;
 in
 {
   options.vim = {

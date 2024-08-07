@@ -309,6 +309,10 @@
           enableFormat = false;
           enableAll = true;
         };
+        folding = {
+          enable = true;
+          mode = "ufo";
+        };
         visuals = {
           enable = true;
           borderType = "none";
