@@ -182,6 +182,14 @@
       url = "github:justinmk/vim-sneak";
       flake = false;
     };
+    plugin-nvim-ufo = {
+      url = "github:kevinhwang91/nvim-ufo";
+      flake = false;
+    };
+    plugin-promise-async = {
+      url = "github:kevinhwang91/promise-async";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {

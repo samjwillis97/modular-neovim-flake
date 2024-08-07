@@ -140,6 +140,7 @@ in
         type = types.enum [
           "indent"
           "syntax"
+          "ufo"
         ];
         default = "indent";
         description = "The kind of folding to be used";
@@ -194,7 +195,7 @@ in
       "plenary-nvim"
       "commentary"
       "surround"
-    ];
+    ] ++ (if (cfg.folding.mode == "ufo") then [ "nvim-ufo" "promise-async"] else []);
     vim.inoremap = mkIf cfg.escapeWithJK { "jk" = "<Esc>"; };
     vim.nnoremap =
       (if (cfg.leaderKey == "space") then { "<space>" = "<nop>"; } else { })
@@ -300,7 +301,7 @@ in
       ${optionalString (cfg.syntaxHighlighting) ''
         vim.opt.syntax = "on"
       ''}
-      ${optionalString (cfg.folding.enable) ''
+      ${optionalString (cfg.folding.enable && (cfg.folding.mode != "ufo")) ''
         vim.opt.foldenable = true
         vim.opt.foldlevelstart = ${toString cfg.folding.defaultFoldNumber}
         vim.opt.foldnestmax = ${toString cfg.folding.maxNumber}
