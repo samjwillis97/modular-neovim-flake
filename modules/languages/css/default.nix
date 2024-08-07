@@ -36,7 +36,7 @@ let
         )
       '';
       formatterHandler = ''
-        typescript = {
+        css = {
           function()
             return {
               exe = "${cfg.format.package}/bin/prettier",

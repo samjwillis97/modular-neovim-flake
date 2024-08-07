@@ -135,8 +135,14 @@ let
       formatterHandler = ''
         javascript = {
           function()
+            local cwd = vim.fn.getcwd()
+            local prettierScript = cwd .. '/node_modules/prettier/bin/prettier.cjs'
+            local prettierExists = vim.loop.fs_stat(prettierScript) ~= nil
+            if prettierExists ~= true then
+              prettierScript = "${cfg.format.package}/bin/prettier"
+            end
             return {
-              exe = "${cfg.format.package}/bin/prettier",
+              exe = prettierScript,
               args = {
                 "--stdin-filepath",
                 util.escape_path(util.get_current_buffer_file_path()),
@@ -148,8 +154,14 @@ let
         },
         typescript = {
           function()
+            local cwd = vim.fn.getcwd()
+            local prettierScript = cwd .. '/node_modules/prettier/bin/prettier.cjs'
+            local prettierExists = vim.loop.fs_stat(prettierScript) ~= nil
+            if prettierExists ~= true then
+              prettierScript = "${cfg.format.package}/bin/prettier"
+            end
             return {
-              exe = "${cfg.format.package}/bin/prettier",
+              exe = prettierScript,
               args = {
                 "--stdin-filepath",
                 util.escape_path(util.get_current_buffer_file_path()),
@@ -161,8 +173,14 @@ let
         },
         typescriptreact = {
           function()
+            local cwd = vim.fn.getcwd()
+            local prettierScript = cwd .. '/node_modules/prettier/bin/prettier.cjs'
+            local prettierExists = vim.loop.fs_stat(prettierScript) ~= nil
+            if prettierExists ~= true then
+              prettierScript = "${cfg.format.package}/bin/prettier"
+            end
             return {
-              exe = "${cfg.format.package}/bin/prettier",
+              exe = prettierScript,
               args = {
                 "--stdin-filepath",
                 util.escape_path(util.get_current_buffer_file_path()),
