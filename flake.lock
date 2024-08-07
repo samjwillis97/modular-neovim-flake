@@ -666,6 +666,22 @@
         "type": "github"
       }
     },
+    "plugin-nvim-ufo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722876880,
+        "narHash": "sha256-gPU2wr263fw3PqUzrwXLh+6CQnReiiLx/XzP+a6J6bY=",
+        "owner": "kevinhwang91",
+        "repo": "nvim-ufo",
+        "rev": "7dcb8fea3e7b3ccdb50f2c3ae7c248cdf6fe1ae1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kevinhwang91",
+        "repo": "nvim-ufo",
+        "type": "github"
+      }
+    },
     "plugin-nvim-web-devicons": {
       "flake": false,
       "locked": {
@@ -727,6 +743,22 @@
       "original": {
         "owner": "nvim-lua",
         "repo": "plenary.nvim",
+        "type": "github"
+      }
+    },
+    "plugin-promise-async": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722813441,
+        "narHash": "sha256-9eM66brPjiFlY64vmBetRYrKnpDyN7+/URMm4GsGimA=",
+        "owner": "kevinhwang91",
+        "repo": "promise-async",
+        "rev": "119e8961014c9bfaf1487bf3c2a393d254f337e2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kevinhwang91",
+        "repo": "promise-async",
         "type": "github"
       }
     },
@@ -953,10 +985,12 @@
         "plugin-nvim-lastplace": "plugin-nvim-lastplace",
         "plugin-nvim-tree-lua": "plugin-nvim-tree-lua",
         "plugin-nvim-ts-autotag": "plugin-nvim-ts-autotag",
+        "plugin-nvim-ufo": "plugin-nvim-ufo",
         "plugin-nvim-web-devicons": "plugin-nvim-web-devicons",
         "plugin-octo": "plugin-octo",
         "plugin-onedark": "plugin-onedark",
         "plugin-plenary-nvim": "plugin-plenary-nvim",
+        "plugin-promise-async": "plugin-promise-async",
         "plugin-rhubarb": "plugin-rhubarb",
         "plugin-surround": "plugin-surround",
         "plugin-telescope": "plugin-telescope",

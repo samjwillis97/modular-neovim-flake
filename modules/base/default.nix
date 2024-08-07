@@ -191,11 +191,21 @@ in
   };
 
   config = {
-    vim.startPlugins = [
-      "plenary-nvim"
-      "commentary"
-      "surround"
-    ] ++ (if (cfg.folding.mode == "ufo") then [ "nvim-ufo" "promise-async"] else []);
+    vim.startPlugins =
+      [
+        "plenary-nvim"
+        "commentary"
+        "surround"
+      ]
+      ++ (
+        if (cfg.folding.mode == "ufo") then
+          [
+            "nvim-ufo"
+            "promise-async"
+          ]
+        else
+          [ ]
+      );
     vim.inoremap = mkIf cfg.escapeWithJK { "jk" = "<Esc>"; };
     vim.nnoremap =
       (if (cfg.leaderKey == "space") then { "<space>" = "<nop>"; } else { })

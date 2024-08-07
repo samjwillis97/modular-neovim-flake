@@ -178,7 +178,7 @@
       url = "github:tpope/vim-rhubarb";
       flake = false;
     };
-    plugin-vim-sneak= {
+    plugin-vim-sneak = {
       url = "github:justinmk/vim-sneak";
       flake = false;
     };
