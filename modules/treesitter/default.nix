@@ -5,6 +5,7 @@ let
   cfg = config.vim.treesitter;
   usingLsp = config.vim.lsp.enable;
   usingNvimCmp = config.vim.autocomplete.enable;
+  foldMode = config.vim.folding.mode;
 in
 {
   options.vim.treesitter = {
@@ -37,7 +38,7 @@ in
     vim.autocomplete.sources = if usingLsp then { } else { "treesitter" = "[Treesitter]"; };
 
     # For some reason treesitter highlighting does not work on start if this is set before syntax on
-    vim.configRC.treesitter-fold = mkIf cfg.fold (
+    vim.configRC.treesitter-fold = mkIf (foldMode == "treesitter") (
       nvim.dag.entryBefore [ "base" ] ''
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()

@@ -4,6 +4,7 @@ with builtins;
 let
   cfg = config.vim.lsp;
   usingNvimCmp = config.vim.autocomplete.enable;
+  ufoFoldEnabled = config.vim.folding.mode == "ufo";
 in
 {
   imports = [
@@ -75,6 +76,13 @@ in
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       ${optionalString usingNvimCmp "capabilities = require('cmp_nvim_lsp').default_capabilities()"}
+
+      ${optionalString ufoFoldEnabled ''
+        capabilities.textDocument.foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true
+        }
+      ''}
     '';
   };
 }

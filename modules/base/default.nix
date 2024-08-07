@@ -140,10 +140,14 @@ in
         type = types.enum [
           "indent"
           "syntax"
+          "ufo"
+          "treesitter"
         ];
         default = "indent";
         description = "The kind of folding to be used";
       };
+
+      showFoldColumn = mkEnableOption "display fold column";
     };
 
     syntaxHighlighting = mkOption {
@@ -190,11 +194,28 @@ in
   };
 
   config = {
-    vim.startPlugins = [
-      "plenary-nvim"
-      "commentary"
-      "surround"
-    ];
+    # assertions = [
+    #   {
+    #     assertion = cfg.folding.mode == "ufo" && lspEnabled;
+    #     message = "For UFO folding method, LSP must be enabled";
+    #   }
+    # ];
+
+    vim.startPlugins =
+      [
+        "plenary-nvim"
+        "commentary"
+        "surround"
+      ]
+      ++ (
+        if (cfg.folding.mode == "ufo") then
+          [
+            "nvim-ufo"
+            "promise-async"
+          ]
+        else
+          [ ]
+      );
     vim.inoremap = mkIf cfg.escapeWithJK { "jk" = "<Esc>"; };
     vim.nnoremap =
       (if (cfg.leaderKey == "space") then { "<space>" = "<nop>"; } else { })
@@ -302,9 +323,15 @@ in
       ''}
       ${optionalString (cfg.folding.enable) ''
         vim.opt.foldenable = true
+        ${optionalString (cfg.folding.mode == "indent" && cfg.folding.mode == "syntax")''
+          vim.opt.foldlevel = 99
+        ''}
         vim.opt.foldlevelstart = ${toString cfg.folding.defaultFoldNumber}
-        vim.opt.foldnestmax = ${toString cfg.folding.maxNumber}
-        ${optionalString (!cfg.treesitter.enable || !cfg.treesitter.fold) ''
+        ${optionalString (cfg.folding.mode == "indent" || cfg.folding.mode == "syntax")''
+          vim.opt.foldnestmax = ${toString cfg.folding.maxNumber}
+        ''}
+        vim.opt.foldcolumn = ${if (cfg.folding.showFoldColumn) then "'1'" else "'0'"}
+        ${optionalString (cfg.folding.mode != "ufo" && cfg.folding.mode != "treesitter") ''
           vim.opt.foldmethod = "${cfg.folding.mode}"
         ''}
       ''}

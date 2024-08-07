@@ -178,8 +178,16 @@
       url = "github:tpope/vim-rhubarb";
       flake = false;
     };
-    plugin-vim-sneak= {
+    plugin-vim-sneak = {
       url = "github:justinmk/vim-sneak";
+      flake = false;
+    };
+    plugin-nvim-ufo = {
+      url = "github:kevinhwang91/nvim-ufo";
+      flake = false;
+    };
+    plugin-promise-async = {
+      url = "github:kevinhwang91/promise-async";
       flake = false;
     };
 
@@ -279,7 +287,10 @@
         formatter.enable = true;
         treesitter = {
           enable = true;
-          fold = true;
+        };
+        folding = {
+          enable = true;
+          mode = "treesitter";
         };
         lsp = {
           enable = true;
@@ -297,6 +308,10 @@
           enableDebugger = true;
           enableFormat = false;
           enableAll = true;
+        };
+        folding = {
+          enable = true;
+          mode = "ufo";
         };
         visuals = {
           enable = true;

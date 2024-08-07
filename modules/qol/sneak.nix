@@ -5,7 +5,7 @@ let
   cfg = config.vim.qol;
 in
 {
-  options.vim.qol.sneak= {
+  options.vim.qol.sneak = {
     enable = mkOption {
       type = types.bool;
       default = true;
@@ -13,22 +13,22 @@ in
     };
 
     # keys = {
-      # forwardSneak = mkOption {
-      #   default = "s";
-      #   type = types.str;
-      # };
-      # backwardSneak = mkOption {
-      #   default = "S";
-      #   type = types.str;
-      # };
-      # nextMatch = mkOption {
-      #   default = ";";
-      #   type = types.str;
-      # };
-      # previousMatch = mkOption {
-      #   default = ",";
-      #   type = types.str;
-      # };
+    # forwardSneak = mkOption {
+    #   default = "s";
+    #   type = types.str;
+    # };
+    # backwardSneak = mkOption {
+    #   default = "S";
+    #   type = types.str;
+    # };
+    # nextMatch = mkOption {
+    #   default = ";";
+    #   type = types.str;
+    # };
+    # previousMatch = mkOption {
+    #   default = ",";
+    #   type = types.str;
+    # };
     # };
   };
 

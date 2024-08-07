@@ -4,6 +4,7 @@ with builtins;
 let
   cfg = config.vim.lsp;
   visualCfg = config.vim.visuals;
+  ufoFoldEnabled = config.vim.folding.mode == "ufo";
 in
 {
   options.vim.lsp.lspconfig = {
@@ -58,6 +59,11 @@ in
     }
     {
       vim.luaConfigRC = mapAttrs (_: v: (nvim.dag.entryAfter [ "lspconfig" ] v)) cfg.lspconfig.sources;
+    }
+    {
+      vim.luaConfigRC.ufo-lspconfig = mkIf ufoFoldEnabled (nvim.dag.entryAfter [ "lspconfig" ] ''
+        require('ufo').setup()
+      '');
     }
   ]);
 }
