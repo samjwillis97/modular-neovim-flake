@@ -634,6 +634,22 @@
         "type": "github"
       }
     },
+    "plugin-nvim-lint": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723112211,
+        "narHash": "sha256-WrAeQeNIutiQJXFJWe4o8gU5iSgGS6TuTDN+cR8IBRU=",
+        "owner": "mfussenegger",
+        "repo": "nvim-lint",
+        "rev": "9f0ce1dbdcc30ad4f39bee65e435ec752018ac2d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfussenegger",
+        "repo": "nvim-lint",
+        "type": "github"
+      }
+    },
     "plugin-nvim-tree-lua": {
       "flake": false,
       "locked": {
@@ -983,6 +999,7 @@
         "plugin-nvim-code-action-menu": "plugin-nvim-code-action-menu",
         "plugin-nvim-dap-vscode-js": "plugin-nvim-dap-vscode-js",
         "plugin-nvim-lastplace": "plugin-nvim-lastplace",
+        "plugin-nvim-lint": "plugin-nvim-lint",
         "plugin-nvim-tree-lua": "plugin-nvim-tree-lua",
         "plugin-nvim-ts-autotag": "plugin-nvim-ts-autotag",
         "plugin-nvim-ufo": "plugin-nvim-ufo",

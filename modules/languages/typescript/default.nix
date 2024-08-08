@@ -24,7 +24,6 @@ let
 
   defaultServers = [
     "tsserver"
-    "eslint"
   ];
   servers = {
     tsserver = {
@@ -269,6 +268,19 @@ in
         default = formats.${cfg.format.type}.package;
       };
     };
+
+    linting = {
+      enable = mkOption {
+        description = "Enable Typescript linter";
+        type = types.bool;
+        default = config.vim.languages.enableLinting;
+      };
+      linters = mkOption {
+        description = "Typescript linters to use";
+        type = with types; listOf str;
+        default = [ "eslint" ];
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -335,6 +347,11 @@ in
     (mkIf cfg.format.enable {
       vim.formatter.enable = true;
       vim.formatter.fileTypes.typescript = formats.${cfg.format.type}.formatterHandler;
+    })
+
+    (mkIf cfg.linting.enable {
+      vim.linting.enable = true;
+      vim.linting.fileTypes.typescript = "typescript = {${builtins.concatStringsSep "," cfg.linting.linters}},";
     })
   ]);
 }
