@@ -136,10 +136,11 @@ let
         javascript = {
           function()
             local cwd = vim.fn.getcwd()
-            local prettierScript = cwd .. '/node_modules/prettier/bin/prettier.cjs'
-            local prettierExists = vim.loop.fs_stat(prettierScript) ~= nil
-            if prettierExists ~= true then
+            local prettierExists = vim.fn.executable('prettier') == 1
+            if prettierExists == true then
               prettierScript = "${cfg.format.package}/bin/prettier"
+            else
+              prettierScript = "prettier"
             end
             return {
               exe = prettierScript,
@@ -155,10 +156,11 @@ let
         typescript = {
           function()
             local cwd = vim.fn.getcwd()
-            local prettierScript = cwd .. '/node_modules/prettier/bin/prettier.cjs'
-            local prettierExists = vim.loop.fs_stat(prettierScript) ~= nil
-            if prettierExists ~= true then
+            local prettierExists = vim.fn.executable('prettier') == 1
+            if prettierExists == true then
               prettierScript = "${cfg.format.package}/bin/prettier"
+            else
+              prettierScript = "prettier"
             end
             return {
               exe = prettierScript,
@@ -174,10 +176,11 @@ let
         typescriptreact = {
           function()
             local cwd = vim.fn.getcwd()
-            local prettierScript = cwd .. '/node_modules/prettier/bin/prettier.cjs'
-            local prettierExists = vim.loop.fs_stat(prettierScript) ~= nil
-            if prettierExists ~= true then
+            local prettierExists = vim.fn.executable('prettier') == 1
+            if prettierExists == true then
               prettierScript = "${cfg.format.package}/bin/prettier"
+            else
+              prettierScript = "prettier"
             end
             return {
               exe = prettierScript,
