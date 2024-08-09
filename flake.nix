@@ -190,6 +190,10 @@
       url = "github:kevinhwang91/promise-async";
       flake = false;
     };
+    plugin-nvim-lint = {
+      url = "github:mfussenegger/nvim-lint";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -306,12 +310,14 @@
           enableTreesitter = true;
           enableLSP = true;
           enableDebugger = true;
-          enableFormat = false;
+          enableFormat = true;
+          enableLinting = true;
           enableAll = true;
         };
         folding = {
           enable = true;
           mode = "ufo";
+          defaultFoldNumber = 99;
         };
         visuals = {
           enable = true;

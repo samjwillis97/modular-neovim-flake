@@ -22,10 +22,7 @@ let
     }) cfg.lsp.servers
   );
 
-  defaultServers = [
-    "tsserver"
-    "eslint"
-  ];
+  defaultServers = [ "tsserver" ];
   servers = {
     tsserver = {
       package = pkgs.nodePackages.typescript-language-server;
@@ -34,16 +31,6 @@ let
           capabilities = capabilities;
           on_attach = attach_keymaps,
           cmd = { "${enabledServerPackages.tsserver}/bin/typescript-language-server", "--stdio" }
-        }
-      '';
-    };
-    eslint = {
-      package = pkgs.nodePackages.vscode-langservers-extracted;
-      lspConfig = ''
-        lspconfig.eslint.setup {
-          capabilities = capabilities;
-          on_attach = attach_keymaps,
-          cmd = { "${enabledServerPackages.eslint}/bin/vscode-eslint-language-server", "--stdio" }
         }
       '';
     };
@@ -135,8 +122,15 @@ let
       formatterHandler = ''
         javascript = {
           function()
+            local cwd = vim.fn.getcwd()
+            local prettierExists = vim.fn.executable('prettier') == 1
+            if prettierExists == true then
+              prettierScript = "${cfg.format.package}/bin/prettier"
+            else
+              prettierScript = "prettier"
+            end
             return {
-              exe = "${cfg.format.package}/bin/prettier",
+              exe = prettierScript,
               args = {
                 "--stdin-filepath",
                 util.escape_path(util.get_current_buffer_file_path()),
@@ -148,8 +142,15 @@ let
         },
         typescript = {
           function()
+            local cwd = vim.fn.getcwd()
+            local prettierExists = vim.fn.executable('prettier') == 1
+            if prettierExists == true then
+              prettierScript = "${cfg.format.package}/bin/prettier"
+            else
+              prettierScript = "prettier"
+            end
             return {
-              exe = "${cfg.format.package}/bin/prettier",
+              exe = prettierScript,
               args = {
                 "--stdin-filepath",
                 util.escape_path(util.get_current_buffer_file_path()),
@@ -161,8 +162,15 @@ let
         },
         typescriptreact = {
           function()
+            local cwd = vim.fn.getcwd()
+            local prettierExists = vim.fn.executable('prettier') == 1
+            if prettierExists == true then
+              prettierScript = "${cfg.format.package}/bin/prettier"
+            else
+              prettierScript = "prettier"
+            end
             return {
-              exe = "${cfg.format.package}/bin/prettier",
+              exe = prettierScript,
               args = {
                 "--stdin-filepath",
                 util.escape_path(util.get_current_buffer_file_path()),
@@ -248,6 +256,19 @@ in
         default = formats.${cfg.format.type}.package;
       };
     };
+
+    linting = {
+      enable = mkOption {
+        description = "Enable Typescript linter";
+        type = types.bool;
+        default = config.vim.languages.enableLinting;
+      };
+      linters = mkOption {
+        description = "Typescript linters to use";
+        type = with types; listOf str;
+        default = [ "eslint" ];
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -314,6 +335,13 @@ in
     (mkIf cfg.format.enable {
       vim.formatter.enable = true;
       vim.formatter.fileTypes.typescript = formats.${cfg.format.type}.formatterHandler;
+    })
+
+    (mkIf cfg.linting.enable {
+      vim.linting.enable = true;
+      vim.linting.fileTypes.typescript = "typescript = {${
+        builtins.concatStringsSep "," (builtins.map (v: "'${v}'") cfg.linting.linters)
+      }},";
     })
   ]);
 }

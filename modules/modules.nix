@@ -22,6 +22,7 @@ let
     ./ai
     ./debugger
     ./review
+    ./lint
     ./core
     ./build
   ];

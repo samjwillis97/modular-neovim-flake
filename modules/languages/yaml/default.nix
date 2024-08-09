@@ -36,7 +36,7 @@ let
         )
       '';
       formatterHandler = ''
-        typescript = {
+        yaml = {
           function()
             return {
               exe = "${cfg.format.package}/bin/prettier",
