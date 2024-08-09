@@ -280,6 +280,22 @@
         "type": "github"
       }
     },
+    "plugin-conform-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723141896,
+        "narHash": "sha256-f+y6ouBMrKrI4cZs0yBWcXJ0AJcv//KTAxaKoQG/VMA=",
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "rev": "0f4f299dfea09d2adfd7a1da05149a0844ac8eee",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "type": "github"
+      }
+    },
     "plugin-copilot": {
       "flake": false,
       "locked": {
@@ -391,22 +407,6 @@
         "owner": "j-hui",
         "ref": "legacy",
         "repo": "fidget.nvim",
-        "type": "github"
-      }
-    },
-    "plugin-formatter-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1710786051,
-        "narHash": "sha256-pNKa8vPP2cmyGhdoW/S5XoboL4ErVAwiP8YkDGq/TGI=",
-        "owner": "mhartington",
-        "repo": "formatter.nvim",
-        "rev": "ad246d34ce7a32f752071ed81b09b94e6b127fad",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mhartington",
-        "repo": "formatter.nvim",
         "type": "github"
       }
     },
@@ -993,6 +993,7 @@
         "plugin-codesnap": "plugin-codesnap",
         "plugin-colorizer": "plugin-colorizer",
         "plugin-commentary": "plugin-commentary",
+        "plugin-conform-nvim": "plugin-conform-nvim",
         "plugin-copilot": "plugin-copilot",
         "plugin-copilot-chat": "plugin-copilot-chat",
         "plugin-dap": "plugin-dap",
@@ -1000,7 +1001,6 @@
         "plugin-dracula": "plugin-dracula",
         "plugin-dracula-nvim": "plugin-dracula-nvim",
         "plugin-fidget": "plugin-fidget",
-        "plugin-formatter-nvim": "plugin-formatter-nvim",
         "plugin-friendly-snippets": "plugin-friendly-snippets",
         "plugin-fugitive": "plugin-fugitive",
         "plugin-gitsigns": "plugin-gitsigns",

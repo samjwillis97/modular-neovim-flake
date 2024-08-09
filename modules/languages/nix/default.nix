@@ -24,49 +24,6 @@ let
       '';
     };
   };
-
-  defaultFormat = "nixfmt";
-  formats = {
-    alejandra = {
-      package = pkgs.alejandra;
-      nullConfig = ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.formatting.alejandra.with({
-            command = "${cfg.format.package}/bin/alejandra"
-          })
-        )
-      '';
-    };
-    nixpkgs-fmt = {
-      package = pkgs.nixpkgs-fmt;
-      formatterHandler = ''
-        nix = {
-          function()
-            return {
-              exe = "${cfg.format.package}/bin/nixpkgs-fmt",
-              stdin = true,
-              args = {},
-            }
-          end,
-        },
-      '';
-    };
-    nixfmt = {
-      package = pkgs.nixfmt-rfc-style;
-      formatterHandler = ''
-        nix = {
-          function()
-            return {
-              exe = "${cfg.format.package}/bin/nixfmt",
-              stdin = true,
-              args = {},
-            }
-          end,
-        },
-      '';
-    };
-  };
 in
 {
   options.vim.languages.nix = {
@@ -105,19 +62,14 @@ in
 
     format = {
       enable = mkOption {
-        description = "Enable Nix formatting";
+        description = "Enable formatting";
         type = types.bool;
         default = config.vim.languages.enableFormat;
       };
-      type = mkOption {
-        description = "Nix formatter to use";
-        type = with types; enum (attrNames formats);
-        default = defaultFormat;
-      };
-      package = mkOption {
-        description = "Nix formatter package";
-        type = types.package;
-        default = formats.${cfg.format.type}.package;
+      types = mkOption {
+        description = "Formatters to use";
+        type = with types; listOf str;
+        default = [ "nixfmt" ];
       };
     };
 
@@ -168,7 +120,9 @@ in
 
     (mkIf cfg.format.enable {
       vim.formatter.enable = true;
-      vim.formatter.fileTypes.nix = formats.${cfg.format.type}.formatterHandler;
+      vim.formatter.perFileType = {
+        nix = cfg.format.types;
+      };
     })
 
     (mkIf cfg.linting.enable {

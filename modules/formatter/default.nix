@@ -1,8 +1,33 @@
-{ lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 with builtins;
 let
   cfg = config.vim.formatter;
+  requiredFormatterSetups = lib.unique (builtins.concatLists (builtins.attrValues cfg.perFileType));
+  availableFormatters = {
+    prettier = ''
+      function(bufnr)
+        local cwd = vim.fn.getcwd()
+        local prettierExists = vim.fn.executable('prettier') == 1
+        if prettierExists == true then
+          prettierScript = "${pkgs.nodePackages.prettier}/bin/prettier"
+        else
+          prettierScript = "prettier"
+        end
+        return {
+          command = prettierScript,
+        }
+      end'';
+    nixfmt = ''
+      {
+        command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt",
+      }'';
+  };
 in
 {
   options.vim.formatter = {
@@ -14,36 +39,58 @@ in
       description = "Format files on save";
     };
 
-    fileTypes = mkOption {
-      description = "formatter fileType handlers";
-      type = with types; attrsOf str;
+    perFileType = mkOption {
+      description = "formatter handler per fileType";
+      type = with types; attrsOf (listOf str);
       default = { };
     };
   };
 
   config = mkIf cfg.enable (mkMerge [
     {
-      vim.startPlugins = [ "formatter-nvim" ];
+      vim.startPlugins = [ "conform-nvim" ];
 
-      vim.luaConfigRC.formatter = ''
-        local util = require("formatter.util")
+      vim.luaConfigRC.formatter-setup-start = nvim.dag.entryAfter [ "formatter" ] ''
+        require("conform").setup({
+          formatters_by_ft = {
+            ${
+              concatLines (
+                mapAttrsToList (
+                  name: value:
+                  "${name} = { ${
+                    builtins.concatStringsSep "," (builtins.map (v: "'${v}'") value)
+                  }, stop_after_first = true },"
+                ) cfg.perFileType
+              )
+            }
+          },
+          formatters = {
+            ${
+              concatLines (
+                builtins.map (
+                  v:
+                  if ((lib.hasAttr v availableFormatters) == true) then
+                    ''
+                      ${v} = ${availableFormatters.${v}},
+                    ''
+                  else
+                    ""
+                ) requiredFormatterSetups
+              )
+            }
+          },
+        })
 
         ${optionalString cfg.formatOnSave ''
           local formatAutoGroup = vim.api.nvim_create_augroup("FormatAutogroup", { clear = true })
-          vim.api.nvim_create_autocmd("BufWritePost", {
-            command = "FormatWrite",
+          vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = "*",
-            group = formatAutogroup
+            group = formatAutogroup,
+            callback = function(args)
+              require("conform").format({ bufnr = args.buf })
+            end,
           })
         ''}
-      '';
-
-      vim.luaConfigRC.formatter-setup-start = nvim.dag.entryAfter [ "formatter" ] ''
-        require("formatter").setup({
-          filetype = {
-          ${concatLines (mapAttrsToList (_: v: v) cfg.fileTypes)}
-          }
-        })
       '';
     }
   ]);

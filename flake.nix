@@ -130,10 +130,6 @@
       url = "github:windwp/nvim-ts-autotag";
       flake = false;
     };
-    plugin-formatter-nvim = {
-      url = "github:mhartington/formatter.nvim";
-      flake = false;
-    };
     plugin-dap = {
       url = "github:mfussenegger/nvim-dap";
       flake = false;
@@ -196,6 +192,10 @@
     };
     plugin-actions-preview = {
       url = "github:aznhe21/actions-preview.nvim";
+      flake = false;
+    };
+    plugin-conform-nvim = {
+      url = "github:stevearc/conform.nvim";
       flake = false;
     };
 

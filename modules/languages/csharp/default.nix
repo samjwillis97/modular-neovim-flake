@@ -103,9 +103,9 @@ in
       vim.lsp.lspconfig.sources.csharp-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
 
-    (mkIf cfg.format.enable {
-      vim.formatter.enable = true;
-      vim.formatter.fileTypes.csharp = formats.${cfg.format.type}.formatterHandler;
-    })
+    # (mkIf cfg.format.enable {
+    #   vim.formatter.enable = true;
+    #   vim.formatter.fileTypes.csharp = formats.${cfg.format.type}.formatterHandler;
+    # })
   ]);
 }
