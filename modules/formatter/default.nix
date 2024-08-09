@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 with builtins;
 let
@@ -17,8 +22,11 @@ let
         return {
           command = prettierScript,
         }
-      end
-    '';
+      end'';
+    nixfmt = ''
+      {
+        command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt",
+      }'';
   };
 in
 {
@@ -45,15 +53,31 @@ in
       vim.luaConfigRC.formatter-setup-start = nvim.dag.entryAfter [ "formatter" ] ''
         require("conform").setup({
           formatters_by_ft = {
-            ${concatLines (mapAttrsToList (name: value: "${name} = { ${
-              builtins.concatStringsSep "," (builtins.map (v: "'${v}'") value)
-              }, stop_after_first = true },") cfg.perFileType)}
+            ${
+              concatLines (
+                mapAttrsToList (
+                  name: value:
+                  "${name} = { ${
+                    builtins.concatStringsSep "," (builtins.map (v: "'${v}'") value)
+                  }, stop_after_first = true },"
+                ) cfg.perFileType
+              )
+            }
           },
           formatters = {
-            ${concatLines (builtins.map (v: 
-            if ((lib.hasAttr v availableFormatters) == true) then ''
-              ${v} = ${availableFormatters.${v}},
-            '' else "") requiredFormatterSetups)}
+            ${
+              concatLines (
+                builtins.map (
+                  v:
+                  if ((lib.hasAttr v availableFormatters) == true) then
+                    ''
+                      ${v} = ${availableFormatters.${v}},
+                    ''
+                  else
+                    ""
+                ) requiredFormatterSetups
+              )
+            }
           },
         })
 

@@ -1,7 +1,8 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 with builtins;
@@ -9,20 +10,16 @@ let
   cfg = config.vim.languages.typescript;
 
   enabledServerConfigs = listToAttrs (
-    map
-      (v: {
-        name = v;
-        value = servers.${v}.lspConfig;
-      })
-      cfg.lsp.servers
+    map (v: {
+      name = v;
+      value = servers.${v}.lspConfig;
+    }) cfg.lsp.servers
   );
   enabledServerPackages = listToAttrs (
-    map
-      (v: {
-        name = v;
-        value = servers.${v}.package;
-      })
-      cfg.lsp.servers
+    map (v: {
+      name = v;
+      value = servers.${v}.package;
+    }) cfg.lsp.servers
   );
 
   defaultServers = [ "typescript-tools" ];
@@ -63,28 +60,22 @@ let
   };
 
   enabledDebuggerPackages = listToAttrs (
-    map
-      (v: {
-        name = v;
-        value = debuggers.${v}.package;
-      })
-      cfg.debugger.debuggers
+    map (v: {
+      name = v;
+      value = debuggers.${v}.package;
+    }) cfg.debugger.debuggers
   );
   enabledDebuggerConfigs = listToAttrs (
-    map
-      (v: {
-        name = "${v}-config";
-        value = debuggers.${v}.dapConfig;
-      })
-      cfg.debugger.debuggers
+    map (v: {
+      name = "${v}-config";
+      value = debuggers.${v}.dapConfig;
+    }) cfg.debugger.debuggers
   );
   enabledDebuggerAdapters = listToAttrs (
-    map
-      (v: {
-        name = "${v}-adapter";
-        value = debuggers.${v}.dapAdapter;
-      })
-      cfg.debugger.debuggers
+    map (v: {
+      name = "${v}-adapter";
+      value = debuggers.${v}.dapAdapter;
+    }) cfg.debugger.debuggers
   );
 
   # FIXME: this is broken, even using my fork 😔
@@ -284,13 +275,12 @@ in
 
     (mkIf cfg.format.enable {
       vim.formatter.enable = true;
-      vim.formatter.perFileType =
-        {
-          typescript = cfg.format.types;
-          javascript = cfg.format.types;
-          javascriptreact = cfg.format.types;
-          typescriptreact = cfg.format.types;
-        };
+      vim.formatter.perFileType = {
+        typescript = cfg.format.types;
+        javascript = cfg.format.types;
+        javascriptreact = cfg.format.types;
+        typescriptreact = cfg.format.types;
+      };
     })
 
     (mkIf cfg.linting.enable {

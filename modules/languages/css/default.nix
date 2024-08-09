@@ -1,7 +1,8 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 with builtins;
@@ -84,10 +85,9 @@ in
 
     (mkIf cfg.format.enable {
       vim.formatter.enable = true;
-      vim.formatter.perFileType =
-        {
-          css = cfg.format.types;
-        };
+      vim.formatter.perFileType = {
+        css = cfg.format.types;
+      };
     })
   ]);
 }
