@@ -257,6 +257,11 @@ in
       "<leader><space>" = ":nohlsearch<CR>";
     };
 
+    vim.luaConfigRC.ufo-fold = mkIf (cfg.folding.mode == "ufo") ''
+      vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+      vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+    '';
+
     vim.luaConfigRC.base = nvim.dag.entryAfter [ "globalsScript" ] ''
       -- Settings that are set for everything
       vim.opt.scrolloff = ${toString cfg.scrollOffsetLines}
