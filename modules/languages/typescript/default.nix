@@ -36,16 +36,6 @@ let
         }
       '';
     };
-    eslint = {
-      package = pkgs.nodePackages.vscode-langservers-extracted;
-      lspConfig = ''
-        lspconfig.eslint.setup {
-          capabilities = capabilities;
-          on_attach = attach_keymaps,
-          cmd = { "${enabledServerPackages.eslint}/bin/vscode-eslint-language-server", "--stdio" }
-        }
-      '';
-    };
     # FIXME: This doesn't actually exist - trying to add it though, cannot execute see: 
     # https://github.com/angular/vscode-ng-language-service/issues/1899
     # okay this is fucking me
@@ -351,7 +341,7 @@ in
 
     (mkIf cfg.linting.enable {
       vim.linting.enable = true;
-      vim.linting.fileTypes.typescript = "typescript = {${builtins.concatStringsSep "," cfg.linting.linters}},";
+      vim.linting.fileTypes.typescript = "typescript = {${builtins.concatStringsSep "," (builtins.map (v: "'${v}'") cfg.linting.linters)}},";
     })
   ]);
 }
