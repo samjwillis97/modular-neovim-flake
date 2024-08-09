@@ -38,8 +38,15 @@ let
       formatterHandler = ''
         html = {
           function()
+            local cwd = vim.fn.getcwd()
+            local prettierExists = vim.fn.executable('prettier') == 1
+            if prettierExists == true then
+              prettierScript = "${cfg.format.package}/bin/prettier"
+            else
+              prettierScript = "prettier"
+            end
             return {
-              exe = "${cfg.format.package}/bin/prettier",
+              exe = prettierScript,
               args = {
                 "--stdin-filepath",
                 util.escape_path(util.get_current_buffer_file_path()),
