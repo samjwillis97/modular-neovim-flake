@@ -25,7 +25,7 @@ let
     };
   };
 
-  defaultFormat = "nixpkgs-fmt";
+  defaultFormat = "nixfmt";
   formats = {
     alejandra = {
       package = pkgs.alejandra;
@@ -41,15 +41,29 @@ let
     nixpkgs-fmt = {
       package = pkgs.nixpkgs-fmt;
       formatterHandler = ''
-                nix = {
-        	  function()
-                    return {
-                      exe = "${cfg.format.package}/bin/nixpkgs-fmt",
-                      stdin = true,
-                      args = {},
-                    }
-        	  end,
-                },
+        nix = {
+          function()
+            return {
+              exe = "${cfg.format.package}/bin/nixpkgs-fmt",
+              stdin = true,
+              args = {},
+            }
+          end,
+        },
+      '';
+    };
+    nixfmt = {
+      package = pkgs.nixfmt-rfc-style;
+      formatterHandler = ''
+        nix = {
+          function()
+            return {
+              exe = "${cfg.format.package}/bin/nixfmt",
+              stdin = true,
+              args = {},
+            }
+          end,
+        },
       '';
     };
   };
