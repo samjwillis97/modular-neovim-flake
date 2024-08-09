@@ -3,7 +3,7 @@ with lib;
 with builtins;
 let
   cfg = config.vim.linting;
-in 
+in
 {
   options.vim.linting = {
     enable = mkEnableOption "linting";
@@ -19,16 +19,18 @@ in
     {
       vim.startPlugins = [ "nvim-lint" ];
 
-      vim.luaConfigRC.lintStart= nvim.dag.entryAnywhere ''
+      vim.luaConfigRC.lintStart = nvim.dag.entryAnywhere ''
         local lint = require('lint')
         lint.linters_by_ft = {
       '';
     }
     {
-      vim.luaConfigRC = mapAttrs (_: v: (nvim.dag.entryBetween [ "lintEnd" ] [ "lintStart" ] v)) cfg.fileTypes;
+      vim.luaConfigRC = mapAttrs (
+        _: v: (nvim.dag.entryBetween [ "lintEnd" ] [ "lintStart" ] v)
+      ) cfg.fileTypes;
     }
     {
-      vim.luaConfigRC.lintEnd= nvim.dag.entryAfter [ "lintStart" ] ''
+      vim.luaConfigRC.lintEnd = nvim.dag.entryAfter [ "lintStart" ] ''
         }
 
         local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })

@@ -328,11 +328,11 @@ in
       ''}
       ${optionalString (cfg.folding.enable) ''
         vim.opt.foldenable = true
-        ${optionalString (cfg.folding.mode == "indent" && cfg.folding.mode == "syntax")''
+        ${optionalString (cfg.folding.mode == "indent" && cfg.folding.mode == "syntax") ''
           vim.opt.foldlevel = 99
         ''}
         vim.opt.foldlevelstart = ${toString cfg.folding.defaultFoldNumber}
-        ${optionalString (cfg.folding.mode == "indent" || cfg.folding.mode == "syntax")''
+        ${optionalString (cfg.folding.mode == "indent" || cfg.folding.mode == "syntax") ''
           vim.opt.foldnestmax = ${toString cfg.folding.maxNumber}
         ''}
         vim.opt.foldcolumn = ${if (cfg.folding.showFoldColumn) then "'1'" else "'0'"}

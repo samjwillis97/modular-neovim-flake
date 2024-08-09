@@ -22,9 +22,7 @@ let
     }) cfg.lsp.servers
   );
 
-  defaultServers = [
-    "tsserver"
-  ];
+  defaultServers = [ "tsserver" ];
   servers = {
     tsserver = {
       package = pkgs.nodePackages.typescript-language-server;
@@ -341,7 +339,9 @@ in
 
     (mkIf cfg.linting.enable {
       vim.linting.enable = true;
-      vim.linting.fileTypes.typescript = "typescript = {${builtins.concatStringsSep "," (builtins.map (v: "'${v}'") cfg.linting.linters)}},";
+      vim.linting.fileTypes.typescript = "typescript = {${
+        builtins.concatStringsSep "," (builtins.map (v: "'${v}'") cfg.linting.linters)
+      }},";
     })
   ]);
 }

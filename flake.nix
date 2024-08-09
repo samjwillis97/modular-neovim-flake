@@ -317,6 +317,7 @@
         folding = {
           enable = true;
           mode = "ufo";
+          defaultFoldNumber = 99;
         };
         visuals = {
           enable = true;

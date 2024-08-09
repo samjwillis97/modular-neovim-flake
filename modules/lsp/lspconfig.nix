@@ -61,9 +61,11 @@ in
       vim.luaConfigRC = mapAttrs (_: v: (nvim.dag.entryAfter [ "lspconfig" ] v)) cfg.lspconfig.sources;
     }
     {
-      vim.luaConfigRC.ufo-lspconfig = mkIf ufoFoldEnabled (nvim.dag.entryAfter [ "lspconfig" ] ''
-        require('ufo').setup()
-      '');
+      vim.luaConfigRC.ufo-lspconfig = mkIf ufoFoldEnabled (
+        nvim.dag.entryAfter [ "lspconfig" ] ''
+          require('ufo').setup()
+        ''
+      );
     }
   ]);
 }
