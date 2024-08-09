@@ -10,10 +10,14 @@ in
   };
 
   config = mkIf (cfg.enable && cfg.codeActionMenu.enable) {
-    vim.startPlugins = [ "nvim-code-action-menu" ];
+    vim.startPlugins = [ "actions-preview" ];
+
+    vim.luaConfigRC.code-actions = nvim.dag.entryAnywhere ''
+      require("actions-preview").setup {}
+    '';
 
     vim.nnoremap = {
-      "<leader>ca" = ":CodeActionMenu<CR>";
+      "<leader>ca" = ":lua require('actions-preview').code_actions()<CR>";
     };
   };
 }

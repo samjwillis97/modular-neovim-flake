@@ -102,10 +102,6 @@
       url = "github:j-hui/fidget.nvim?ref=legacy";
       flake = false;
     };
-    plugin-nvim-code-action-menu = {
-      url = "github:weilbith/nvim-code-action-menu";
-      flake = false;
-    };
     plugin-colorizer = {
       url = "github:norcalli/nvim-colorizer.lua";
       flake = false;
@@ -196,6 +192,10 @@
     };
     plugin-typescript-tools = {
       url = "github:pmizio/typescript-tools.nvim";
+      flake = false;
+    };
+    plugin-actions-preview = {
+      url = "github:aznhe21/actions-preview.nvim";
       flake = false;
     };
 

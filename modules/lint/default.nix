@@ -22,15 +22,7 @@ in
       vim.luaConfigRC.lintStart = nvim.dag.entryAnywhere ''
         local lint = require('lint')
         lint.linters_by_ft = {
-      '';
-    }
-    {
-      vim.luaConfigRC = mapAttrs (
-        _: v: (nvim.dag.entryBetween [ "lintEnd" ] [ "lintStart" ] v)
-      ) cfg.fileTypes;
-    }
-    {
-      vim.luaConfigRC.lintEnd = nvim.dag.entryAfter [ "lintStart" ] ''
+          ${builtins.concatStringsSep "\n" (builtins.attrValues cfg.fileTypes)}
         }
 
         local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
