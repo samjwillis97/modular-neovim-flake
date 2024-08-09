@@ -104,6 +104,22 @@
         "type": "github"
       }
     },
+    "plugin-actions-preview": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1718540350,
+        "narHash": "sha256-lYjsv8y1fMuTGpBF/iG7cm/a7tLdh748vJhVsSp/Iz8=",
+        "owner": "aznhe21",
+        "repo": "actions-preview.nvim",
+        "rev": "9f52a01c374318e91337697ebed51c6fae57f8a4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aznhe21",
+        "repo": "actions-preview.nvim",
+        "type": "github"
+      }
+    },
     "plugin-autopairs": {
       "flake": false,
       "locked": {
@@ -586,22 +602,6 @@
         "type": "github"
       }
     },
-    "plugin-nvim-code-action-menu": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1702287297,
-        "narHash": "sha256-pY+aP9iBuJhvDZzVEsOHZmnfaq3vUP7TfKEEQrj+Mo8=",
-        "owner": "weilbith",
-        "repo": "nvim-code-action-menu",
-        "rev": "8c7672a4b04d3cc4edd2c484d05b660a9cb34a1b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "weilbith",
-        "repo": "nvim-code-action-menu",
-        "type": "github"
-      }
-    },
     "plugin-nvim-dap-vscode-js": {
       "flake": false,
       "locked": {
@@ -890,6 +890,22 @@
         "type": "github"
       }
     },
+    "plugin-typescript-tools": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721281922,
+        "narHash": "sha256-8WH/eCff1liDVaezZFvu6RqCtXU4Uwq80BlWiH+tQME=",
+        "owner": "pmizio",
+        "repo": "typescript-tools.nvim",
+        "rev": "f8c2e0b36b651c85f52ad5c5373ff8b07adc15a7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pmizio",
+        "repo": "typescript-tools.nvim",
+        "type": "github"
+      }
+    },
     "plugin-undotree": {
       "flake": false,
       "locked": {
@@ -966,6 +982,7 @@
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
         "nixpkgs-bash-fix": "nixpkgs-bash-fix",
+        "plugin-actions-preview": "plugin-actions-preview",
         "plugin-autopairs": "plugin-autopairs",
         "plugin-catppuccin": "plugin-catppuccin",
         "plugin-cmp-buffer": "plugin-cmp-buffer",
@@ -996,7 +1013,6 @@
         "plugin-luasnip": "plugin-luasnip",
         "plugin-nio": "plugin-nio",
         "plugin-nvim-cmp": "plugin-nvim-cmp",
-        "plugin-nvim-code-action-menu": "plugin-nvim-code-action-menu",
         "plugin-nvim-dap-vscode-js": "plugin-nvim-dap-vscode-js",
         "plugin-nvim-lastplace": "plugin-nvim-lastplace",
         "plugin-nvim-lint": "plugin-nvim-lint",
@@ -1015,6 +1031,7 @@
         "plugin-tokyonight": "plugin-tokyonight",
         "plugin-transparent": "plugin-transparent",
         "plugin-treesitter-context": "plugin-treesitter-context",
+        "plugin-typescript-tools": "plugin-typescript-tools",
         "plugin-undotree": "plugin-undotree",
         "plugin-vim-sneak": "plugin-vim-sneak",
         "vscode-js-debug": "vscode-js-debug"

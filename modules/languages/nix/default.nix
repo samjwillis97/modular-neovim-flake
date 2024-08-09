@@ -25,7 +25,7 @@ let
     };
   };
 
-  defaultFormat = "nixpkgs-fmt";
+  defaultFormat = "nixfmt";
   formats = {
     alejandra = {
       package = pkgs.alejandra;
@@ -41,15 +41,29 @@ let
     nixpkgs-fmt = {
       package = pkgs.nixpkgs-fmt;
       formatterHandler = ''
-                nix = {
-        	  function()
-                    return {
-                      exe = "${cfg.format.package}/bin/nixpkgs-fmt",
-                      stdin = true,
-                      args = {},
-                    }
-        	  end,
-                },
+        nix = {
+          function()
+            return {
+              exe = "${cfg.format.package}/bin/nixpkgs-fmt",
+              stdin = true,
+              args = {},
+            }
+          end,
+        },
+      '';
+    };
+    nixfmt = {
+      package = pkgs.nixfmt-rfc-style;
+      formatterHandler = ''
+        nix = {
+          function()
+            return {
+              exe = "${cfg.format.package}/bin/nixfmt",
+              stdin = true,
+              args = {},
+            }
+          end,
+        },
       '';
     };
   };
@@ -106,6 +120,19 @@ in
         default = formats.${cfg.format.type}.package;
       };
     };
+
+    linting = {
+      enable = mkOption {
+        description = "Enable linter";
+        type = types.bool;
+        default = config.vim.languages.enableLinting;
+      };
+      linters = mkOption {
+        description = "Linters to use";
+        type = with types; listOf str;
+        default = [ "nix" ];
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -142,6 +169,13 @@ in
     (mkIf cfg.format.enable {
       vim.formatter.enable = true;
       vim.formatter.fileTypes.nix = formats.${cfg.format.type}.formatterHandler;
+    })
+
+    (mkIf cfg.linting.enable {
+      vim.linting.enable = true;
+      vim.linting.fileTypes.nix = "nix = {${
+        builtins.concatStringsSep "," (builtins.map (v: "'${v}'") cfg.linting.linters)
+      }},";
     })
   ]);
 }
