@@ -1,6 +1,5 @@
 # TODO
 
 - Get debugger working for typescript
-- Sort out prettier integration
-- Have a look at better copy buffers from kickstart
+- Looking at the `\ca` box, likes to error alot
 - Check copilot mode is correct
