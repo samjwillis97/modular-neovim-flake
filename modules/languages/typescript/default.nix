@@ -22,7 +22,7 @@ let
     }) cfg.lsp.servers
   );
 
-  defaultServers = [ "tsserver" ];
+  defaultServers = [ "typescript-tools" ];
   servers = {
     tsserver = {
       package = pkgs.nodePackages.typescript-language-server;
@@ -31,6 +31,16 @@ let
           capabilities = capabilities;
           on_attach = attach_keymaps,
           cmd = { "${enabledServerPackages.tsserver}/bin/typescript-language-server", "--stdio" }
+        }
+      '';
+    };
+    typescript-tools = {
+      package = pkgs.typescript;
+      lspConfig = ''
+        require("typescript-tools").setup {
+          settings = {
+            tsserver_path = "${enabledServerPackages.typescript-tools}/lib/node_modules/tsserver.js",
+          },
         }
       '';
     };
@@ -321,6 +331,10 @@ in
       vim.lsp.lspconfig.enable = true;
 
       vim.lsp.lspconfig.sources = enabledServerConfigs;
+    })
+
+    (mkIf (builtins.elem "typescript-tools" cfg.lsp.servers == true) {
+      vim.startPlugins = [ "typescript-tools" ];
     })
 
     (mkIf cfg.debugger.enable {

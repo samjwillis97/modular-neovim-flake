@@ -194,6 +194,10 @@
       url = "github:mfussenegger/nvim-lint";
       flake = false;
     };
+    plugin-typescript-tools = {
+      url = "github:pmizio/typescript-tools.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
