@@ -134,28 +134,6 @@ let
     };
   };
 
-  enabledFormat = formats.${cfg.format.type};
-  defaultFormat = "prettier";
-  formats = {
-    prettier = {
-      name = "prettier";
-      fileTypes = [ "typescript" "javascript" "javascriptreact" "typescriptreact" ];
-      setup = ''
-        function(bufnr)
-          local cwd = vim.fn.getcwd()
-          local prettierExists = vim.fn.executable('prettier') == 1
-          if prettierExists == true then
-            prettierScript = "${pkgs.nodePackages.prettier}/bin/prettier"
-          else
-            prettierScript = "prettier"
-          end
-          return {
-            command = prettierScript,
-          }
-        end
-      '';
-    };
-  };
 in
 {
   options.vim.languages.typescript = {
@@ -214,14 +192,14 @@ in
 
     format = {
       enable = mkOption {
-        description = "Enable Typescript formatting";
+        description = "Enable formatting";
         type = types.bool;
         default = config.vim.languages.enableFormat;
       };
-      type = mkOption {
-        description = "Typescript formatter to use";
-        type = with types; enum (attrNames formats);
-        default = defaultFormat;
+      types = mkOption {
+        description = "Formatters to use";
+        type = with types; listOf str;
+        default = [ "prettier" ];
       };
     };
 
@@ -306,12 +284,13 @@ in
 
     (mkIf cfg.format.enable {
       vim.formatter.enable = true;
-      vim.formatter.fileTypes.typescript = ''
-        ${builtins.concatStringsSep "\n" (builtins.map (v: "${v} = { '${enabledFormat.name}' },") enabledFormat.fileTypes)}
-      '';
-      vim.formatter.setups.prettier = ''
-        ${enabledFormat.name} = ${enabledFormat.setup}
-      '';
+      vim.formatter.perFileType =
+        {
+          typescript = cfg.format.types;
+          javascript = cfg.format.types;
+          javascriptreact = cfg.format.types;
+          typescriptreact = cfg.format.types;
+        };
     })
 
     (mkIf cfg.linting.enable {

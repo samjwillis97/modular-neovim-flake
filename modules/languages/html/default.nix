@@ -21,43 +21,6 @@ let
       '';
     };
   };
-
-  defaultFormat = "prettier";
-  formats = {
-    prettier = {
-      package = pkgs.nodePackages.prettier;
-      nullConfig = ''
-        table.insert(
-          ls_sources,
-          null_ls.builtins.formatting.prettier.with({
-            command = "${cfg.format.package}/bin/prettier",
-          })
-        )
-      '';
-      formatterHandler = ''
-        html = {
-          function()
-            local cwd = vim.fn.getcwd()
-            local prettierExists = vim.fn.executable('prettier') == 1
-            if prettierExists == true then
-              prettierScript = "${cfg.format.package}/bin/prettier"
-            else
-              prettierScript = "prettier"
-            end
-            return {
-              exe = prettierScript,
-              args = {
-                "--stdin-filepath",
-                util.escape_path(util.get_current_buffer_file_path()),
-              },
-              stdin = true,
-              try_node_modules = true,
-            }
-          end,
-        },
-      '';
-    };
-  };
 in
 {
   options.vim.languages.html = {
@@ -102,19 +65,14 @@ in
 
     format = {
       enable = mkOption {
-        description = "Enable HTML formatting";
+        description = "Enable formatting";
         type = types.bool;
         default = config.vim.languages.enableFormat;
       };
-      type = mkOption {
-        description = "HTML formatter to use";
-        type = with types; enum (attrNames formats);
-        default = defaultFormat;
-      };
-      package = mkOption {
-        description = "HTML formatter package";
-        type = types.package;
-        default = formats.${cfg.format.type}.package;
+      types = mkOption {
+        description = "Formatters to use";
+        type = with types; listOf str;
+        default = [ "prettier" ];
       };
     };
   };
@@ -138,9 +96,12 @@ in
       vim.lsp.lspconfig.sources.html-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
 
-    # (mkIf cfg.format.enable {
-    #   vim.formatter.enable = true;
-    #   vim.formatter.fileTypes.html = formats.${cfg.format.type}.formatterHandler;
-    # })
+    (mkIf cfg.format.enable {
+      vim.formatter.enable = true;
+      vim.formatter.perFileType =
+        {
+          html = cfg.format.types;
+        };
+    })
   ]);
 }

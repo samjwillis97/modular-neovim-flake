@@ -1,8 +1,25 @@
-{ lib, config, ... }:
+{ pkgs, lib, config, ... }:
 with lib;
 with builtins;
 let
   cfg = config.vim.formatter;
+  requiredFormatterSetups = lib.unique (builtins.concatLists (builtins.attrValues cfg.perFileType));
+  availableFormatters = {
+    prettier = ''
+      function(bufnr)
+        local cwd = vim.fn.getcwd()
+        local prettierExists = vim.fn.executable('prettier') == 1
+        if prettierExists == true then
+          prettierScript = "${pkgs.nodePackages.prettier}/bin/prettier"
+        else
+          prettierScript = "prettier"
+        end
+        return {
+          command = prettierScript,
+        }
+      end
+    '';
+  };
 in
 {
   options.vim.formatter = {
@@ -14,15 +31,9 @@ in
       description = "Format files on save";
     };
 
-    fileTypes = mkOption {
-      description = "formatter fileType handlers";
-      type = with types; attrsOf str;
-      default = { };
-    };
-
-    setups = mkOption {
-      description = "formatter setups";
-      type = with types; attrsOf str;
+    perFileType = mkOption {
+      description = "formatter handler per fileType";
+      type = with types; attrsOf (listOf str);
       default = { };
     };
   };
@@ -34,10 +45,15 @@ in
       vim.luaConfigRC.formatter-setup-start = nvim.dag.entryAfter [ "formatter" ] ''
         require("conform").setup({
           formatters_by_ft = {
-            ${concatLines (mapAttrsToList (_: v: v) cfg.fileTypes)}
+            ${concatLines (mapAttrsToList (name: value: "${name} = { ${
+              builtins.concatStringsSep "," (builtins.map (v: "'${v}'") value)
+              }, stop_after_first = true },") cfg.perFileType)}
           },
           formatters = {
-            ${concatLines (mapAttrsToList (_: v: v) cfg.setups)}
+            ${concatLines (builtins.map (v: 
+            if ((lib.hasAttr v availableFormatters) == true) then ''
+              ${v} = ${availableFormatters.${v}},
+            '' else "") requiredFormatterSetups)}
           },
         })
 
