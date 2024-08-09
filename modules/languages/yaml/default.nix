@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins;
@@ -125,9 +124,9 @@ in
       vim.lsp.lspconfig.sources.yaml-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
 
-    (mkIf cfg.format.enable {
-      vim.formatter.enable = true;
-      vim.formatter.fileTypes.yaml = formats.${cfg.format.type}.formatterHandler;
-    })
+    # (mkIf cfg.format.enable {
+    #   vim.formatter.enable = true;
+    #   vim.formatter.fileTypes.yaml = formats.${cfg.format.type}.formatterHandler;
+    # })
   ]);
 }

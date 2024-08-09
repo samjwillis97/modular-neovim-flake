@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins;
@@ -113,9 +112,9 @@ in
       vim.lsp.lspconfig.sources.python-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
 
-    (mkIf cfg.format.enable {
-      vim.formatter.enable = true;
-      vim.formatter.fileTypes.python = formats.${cfg.format.type}.formatterHandler;
-    })
+    # (mkIf cfg.format.enable {
+    #   vim.formatter.enable = true;
+    #   vim.formatter.fileTypes.python = formats.${cfg.format.type}.formatterHandler;
+    # })
   ]);
 }

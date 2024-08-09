@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins;
@@ -166,10 +165,10 @@ in
       vim.lsp.lspconfig.sources.nix-lsp = servers.${cfg.lsp.server}.lspConfig;
     })
 
-    (mkIf cfg.format.enable {
-      vim.formatter.enable = true;
-      vim.formatter.fileTypes.nix = formats.${cfg.format.type}.formatterHandler;
-    })
+    # (mkIf cfg.format.enable {
+    #   vim.formatter.enable = true;
+    #   vim.formatter.fileTypes.nix = formats.${cfg.format.type}.formatterHandler;
+    # })
 
     (mkIf cfg.linting.enable {
       vim.linting.enable = true;

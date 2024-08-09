@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }:
 with lib;
 with builtins;
@@ -10,16 +9,20 @@ let
   cfg = config.vim.languages.typescript;
 
   enabledServerConfigs = listToAttrs (
-    map (v: {
-      name = v;
-      value = servers.${v}.lspConfig;
-    }) cfg.lsp.servers
+    map
+      (v: {
+        name = v;
+        value = servers.${v}.lspConfig;
+      })
+      cfg.lsp.servers
   );
   enabledServerPackages = listToAttrs (
-    map (v: {
-      name = v;
-      value = servers.${v}.package;
-    }) cfg.lsp.servers
+    map
+      (v: {
+        name = v;
+        value = servers.${v}.package;
+      })
+      cfg.lsp.servers
   );
 
   defaultServers = [ "typescript-tools" ];
@@ -60,22 +63,28 @@ let
   };
 
   enabledDebuggerPackages = listToAttrs (
-    map (v: {
-      name = v;
-      value = debuggers.${v}.package;
-    }) cfg.debugger.debuggers
+    map
+      (v: {
+        name = v;
+        value = debuggers.${v}.package;
+      })
+      cfg.debugger.debuggers
   );
   enabledDebuggerConfigs = listToAttrs (
-    map (v: {
-      name = "${v}-config";
-      value = debuggers.${v}.dapConfig;
-    }) cfg.debugger.debuggers
+    map
+      (v: {
+        name = "${v}-config";
+        value = debuggers.${v}.dapConfig;
+      })
+      cfg.debugger.debuggers
   );
   enabledDebuggerAdapters = listToAttrs (
-    map (v: {
-      name = "${v}-adapter";
-      value = debuggers.${v}.dapAdapter;
-    }) cfg.debugger.debuggers
+    map
+      (v: {
+        name = "${v}-adapter";
+        value = debuggers.${v}.dapAdapter;
+      })
+      cfg.debugger.debuggers
   );
 
   # FIXME: this is broken, even using my fork 😔
@@ -125,71 +134,25 @@ let
     };
   };
 
+  enabledFormat = formats.${cfg.format.type};
   defaultFormat = "prettier";
   formats = {
     prettier = {
-      package = pkgs.nodePackages.prettier;
-      formatterHandler = ''
-        javascript = {
-          function()
-            local cwd = vim.fn.getcwd()
-            local prettierExists = vim.fn.executable('prettier') == 1
-            if prettierExists == true then
-              prettierScript = "${cfg.format.package}/bin/prettier"
-            else
-              prettierScript = "prettier"
-            end
-            return {
-              exe = prettierScript,
-              args = {
-                "--stdin-filepath",
-                util.escape_path(util.get_current_buffer_file_path()),
-              },
-              stdin = true,
-              try_node_modules = true,
-            }
-          end,
-        },
-        typescript = {
-          function()
-            local cwd = vim.fn.getcwd()
-            local prettierExists = vim.fn.executable('prettier') == 1
-            if prettierExists == true then
-              prettierScript = "${cfg.format.package}/bin/prettier"
-            else
-              prettierScript = "prettier"
-            end
-            return {
-              exe = prettierScript,
-              args = {
-                "--stdin-filepath",
-                util.escape_path(util.get_current_buffer_file_path()),
-              },
-              stdin = true,
-              try_node_modules = true,
-            }
-          end,
-        },
-        typescriptreact = {
-          function()
-            local cwd = vim.fn.getcwd()
-            local prettierExists = vim.fn.executable('prettier') == 1
-            if prettierExists == true then
-              prettierScript = "${cfg.format.package}/bin/prettier"
-            else
-              prettierScript = "prettier"
-            end
-            return {
-              exe = prettierScript,
-              args = {
-                "--stdin-filepath",
-                util.escape_path(util.get_current_buffer_file_path()),
-              },
-              stdin = true,
-              try_node_modules = true,
-            }
-          end,
-        },
+      name = "prettier";
+      fileTypes = [ "typescript" "javascript" "javascriptreact" "typescriptreact" ];
+      setup = ''
+        function(bufnr)
+          local cwd = vim.fn.getcwd()
+          local prettierExists = vim.fn.executable('prettier') == 1
+          if prettierExists == true then
+            prettierScript = "${pkgs.nodePackages.prettier}/bin/prettier"
+          else
+            prettierScript = "prettier"
+          end
+          return {
+            command = prettierScript,
+          }
+        end
       '';
     };
   };
@@ -259,11 +222,6 @@ in
         description = "Typescript formatter to use";
         type = with types; enum (attrNames formats);
         default = defaultFormat;
-      };
-      package = mkOption {
-        description = "Typescript formatter package";
-        type = types.package;
-        default = formats.${cfg.format.type}.package;
       };
     };
 
@@ -348,7 +306,12 @@ in
 
     (mkIf cfg.format.enable {
       vim.formatter.enable = true;
-      vim.formatter.fileTypes.typescript = formats.${cfg.format.type}.formatterHandler;
+      vim.formatter.fileTypes.typescript = ''
+        ${builtins.concatStringsSep "\n" (builtins.map (v: "${v} = { '${enabledFormat.name}' },") enabledFormat.fileTypes)}
+      '';
+      vim.formatter.setups.prettier = ''
+        ${enabledFormat.name} = ${enabledFormat.setup}
+      '';
     })
 
     (mkIf cfg.linting.enable {

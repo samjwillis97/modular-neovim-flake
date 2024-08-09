@@ -19,31 +19,38 @@ in
       type = with types; attrsOf str;
       default = { };
     };
+
+    setups = mkOption {
+      description = "formatter setups";
+      type = with types; attrsOf str;
+      default = { };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
     {
-      vim.startPlugins = [ "formatter-nvim" ];
+      vim.startPlugins = [ "conform-nvim" ];
 
-      vim.luaConfigRC.formatter = ''
-        local util = require("formatter.util")
+      vim.luaConfigRC.formatter-setup-start = nvim.dag.entryAfter [ "formatter" ] ''
+        require("conform").setup({
+          formatters_by_ft = {
+            ${concatLines (mapAttrsToList (_: v: v) cfg.fileTypes)}
+          },
+          formatters = {
+            ${concatLines (mapAttrsToList (_: v: v) cfg.setups)}
+          },
+        })
 
         ${optionalString cfg.formatOnSave ''
           local formatAutoGroup = vim.api.nvim_create_augroup("FormatAutogroup", { clear = true })
-          vim.api.nvim_create_autocmd("BufWritePost", {
-            command = "FormatWrite",
+          vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = "*",
-            group = formatAutogroup
+            group = formatAutogroup,
+            callback = function(args)
+              require("conform").format({ bufnr = args.buf })
+            end,
           })
         ''}
-      '';
-
-      vim.luaConfigRC.formatter-setup-start = nvim.dag.entryAfter [ "formatter" ] ''
-        require("formatter").setup({
-          filetype = {
-          ${concatLines (mapAttrsToList (_: v: v) cfg.fileTypes)}
-          }
-        })
       '';
     }
   ]);

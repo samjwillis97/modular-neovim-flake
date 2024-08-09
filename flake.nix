@@ -130,10 +130,6 @@
       url = "github:windwp/nvim-ts-autotag";
       flake = false;
     };
-    plugin-formatter-nvim = {
-      url = "github:mhartington/formatter.nvim";
-      flake = false;
-    };
     plugin-dap = {
       url = "github:mfussenegger/nvim-dap";
       flake = false;
@@ -198,6 +194,10 @@
       url = "github:aznhe21/actions-preview.nvim";
       flake = false;
     };
+    plugin-conform-nvim = {
+      url = "github:stevearc/conform.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -232,11 +232,10 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-      ...
+    { self
+    , nixpkgs
+    , flake-utils
+    , ...
     }@inputs:
     let
       nvimLib = (import ./modules/lib/stdlib-extended.nix nixpkgs.lib).nvim;
@@ -343,8 +342,8 @@
       };
     in
     #         # TODO: tailwind (tailwindcss-language-server)
-    #         # TODO: angular (angularls)
-    #         # TODO: rust lsp
+      #         # TODO: angular (angularls)
+      #         # TODO: rust lsp
     {
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda
@@ -356,9 +355,9 @@
           (prev: final: { vscode-js-debug = inputs.vscode-js-debug.packages.${system}.latest; })
           (prev: final: {
             inherit mkNeovimConfiguration;
-            neovim-bare = buildPkg final [ { config.vim = bareConfig; } ];
-            neovim-base = buildPkg final [ { config.vim = baseConfig; } ];
-            neovim-full = buildPkg final [ { config.vim = fullConfig; } ];
+            neovim-bare = buildPkg final [{ config.vim = bareConfig; }];
+            neovim-base = buildPkg final [{ config.vim = baseConfig; }];
+            neovim-full = buildPkg final [{ config.vim = fullConfig; }];
           })
           # This shoudl be able to be removed soon, current bug
           (prev: final: {
