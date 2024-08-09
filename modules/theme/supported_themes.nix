@@ -19,7 +19,6 @@ let
   };
 
   cfg = config.vim.theme;
-  isTransparentBackground = config.vim.visuals.transparentBackground;
 in
 {
   options.vim.theme = {
