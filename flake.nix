@@ -106,10 +106,6 @@
       url = "github:norcalli/nvim-colorizer.lua";
       flake = false;
     };
-    plugin-undotree = {
-      url = "github:mbbill/undotree";
-      flake = false;
-    };
     plugin-harpoon = {
       url = "github:ThePrimeagen/harpoon";
       flake = false;
@@ -200,6 +196,10 @@
     };
     plugin-telescope-frecency = {
       url = "github:nvim-telescope/telescope-frecency.nvim";
+      flake = false;
+    };
+    plugin-telescope-undo = {
+      url = "github:debugloop/telescope-undo.nvim";
       flake = false;
     };
 

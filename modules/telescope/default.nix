@@ -17,12 +17,16 @@ in
       enable = mkEnableOption "frecency";
     };
 
+    undo = {
+      enable = mkEnableOption "undo";
+    };
   };
 
   config = mkIf (cfg.enable) {
-    vim.startPlugins = [
-      "telescope"
-    ] ++ (if cfg.frecency.enable then [ "telescope-frecency" ] else [ ]);
+    vim.startPlugins =
+      [ "telescope" ]
+      ++ (if cfg.frecency.enable then [ "telescope-frecency" ] else [ ])
+      ++ (if cfg.undo.enable then [ "telescope-undo" ] else [ ]);
 
     vim.nnoremap =
       {
@@ -75,6 +79,10 @@ in
           hide_current_buffer = true,
           show_filter_column = false,
         }
+      ''}
+
+      ${optionalString cfg.undo.enable ''
+        require("telescope").load_extension "undo"
       ''}
     '';
   };

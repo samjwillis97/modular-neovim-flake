@@ -842,6 +842,22 @@
         "type": "github"
       }
     },
+    "plugin-telescope-undo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719759846,
+        "narHash": "sha256-VVkyD4VBpyBKzYbRxKhGWAwuPvmfzd8BPTuHKxlz4vc=",
+        "owner": "debugloop",
+        "repo": "telescope-undo.nvim",
+        "rev": "51be9ae7c42fc27c0b05505e3a0162e0f05fbb6a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "debugloop",
+        "repo": "telescope-undo.nvim",
+        "type": "github"
+      }
+    },
     "plugin-tmux-navigator": {
       "flake": false,
       "locked": {
@@ -919,22 +935,6 @@
       "original": {
         "owner": "pmizio",
         "repo": "typescript-tools.nvim",
-        "type": "github"
-      }
-    },
-    "plugin-undotree": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1713305700,
-        "narHash": "sha256-UIroW89ALMRdxSkNGU2VPeuXJxR+25wJ+AakRcjwx/s=",
-        "owner": "mbbill",
-        "repo": "undotree",
-        "rev": "56c684a805fe948936cda0d1b19505b84ad7e065",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mbbill",
-        "repo": "undotree",
         "type": "github"
       }
     },
@@ -1044,12 +1044,12 @@
         "plugin-surround": "plugin-surround",
         "plugin-telescope": "plugin-telescope",
         "plugin-telescope-frecency": "plugin-telescope-frecency",
+        "plugin-telescope-undo": "plugin-telescope-undo",
         "plugin-tmux-navigator": "plugin-tmux-navigator",
         "plugin-tokyonight": "plugin-tokyonight",
         "plugin-transparent": "plugin-transparent",
         "plugin-treesitter-context": "plugin-treesitter-context",
         "plugin-typescript-tools": "plugin-typescript-tools",
-        "plugin-undotree": "plugin-undotree",
         "plugin-vim-sneak": "plugin-vim-sneak",
         "vscode-js-debug": "vscode-js-debug"
       }
