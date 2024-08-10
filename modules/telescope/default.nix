@@ -12,14 +12,22 @@ in
 {
   options.vim.telescope = {
     enable = mkEnableOption "telescope";
+
+    frecency = {
+      enable = mkEnableOption "frecency";
+    };
+
   };
 
   config = mkIf (cfg.enable) {
-    vim.startPlugins = [ "telescope" ];
+    vim.startPlugins = [
+      "telescope"
+    ] ++ (if cfg.frecency.enable then [ "telescope-frecency" ] else [ ]);
 
     vim.nnoremap =
       {
-        "<leader>ff" = ":Telescope git_files<CR>";
+        "<leader>ff" =
+          if cfg.frecency.enable then ":Telescope frecency<CR>" else ":Telescope git_files<CR>";
         "<leader>fb" = ":Telescope buffers<CR>";
         "<leader>sf" = ":Telescope live_grep<CR>";
         "<leader>sw" = ":Telescope grep_string<CR>";
@@ -57,6 +65,17 @@ in
           },
         }
       })
+
+      ${optionalString cfg.frecency.enable ''
+        require("telescope").load_extension "frecency"
+
+        require("frecency.config").setup {
+          default_workspace = "CWD",
+          matcher = "fuzzy",
+          hide_current_buffer = true,
+          show_filter_column = false,
+        }
+      ''}
     '';
   };
 }

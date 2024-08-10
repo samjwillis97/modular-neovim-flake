@@ -826,6 +826,22 @@
         "type": "github"
       }
     },
+    "plugin-telescope-frecency": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722590441,
+        "narHash": "sha256-frrc6p+LldRJERXaMZfXIg220JkNuvEZyXrCiD6RiQU=",
+        "owner": "nvim-telescope",
+        "repo": "telescope-frecency.nvim",
+        "rev": "25d01edae8a2d74bcaa706c003b2712bce1e3301",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-telescope",
+        "repo": "telescope-frecency.nvim",
+        "type": "github"
+      }
+    },
     "plugin-tmux-navigator": {
       "flake": false,
       "locked": {
@@ -1027,6 +1043,7 @@
         "plugin-rhubarb": "plugin-rhubarb",
         "plugin-surround": "plugin-surround",
         "plugin-telescope": "plugin-telescope",
+        "plugin-telescope-frecency": "plugin-telescope-frecency",
         "plugin-tmux-navigator": "plugin-tmux-navigator",
         "plugin-tokyonight": "plugin-tokyonight",
         "plugin-transparent": "plugin-transparent",

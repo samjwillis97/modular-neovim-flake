@@ -198,6 +198,10 @@
       url = "github:stevearc/conform.nvim";
       flake = false;
     };
+    plugin-telescope-frecency = {
+      url = "github:nvim-telescope/telescope-frecency.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -336,6 +340,10 @@
           copilot = {
             enableAll = true;
           };
+        };
+        telescope = {
+          enable = true;
+          frecency.enable = true;
         };
         nmap = {
           "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>";
