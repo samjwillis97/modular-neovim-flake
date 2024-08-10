@@ -393,6 +393,22 @@
         "type": "github"
       }
     },
+    "plugin-dressing": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1718760361,
+        "narHash": "sha256-LlcE/1/IT6QW/o5gks80BFnrIdBd4GjW4M9o+84/j1c=",
+        "owner": "stevearc",
+        "repo": "dressing.nvim",
+        "rev": "6741f1062d3dc6e4755367a7e9b347b553623f04",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "dressing.nvim",
+        "type": "github"
+      }
+    },
     "plugin-fidget": {
       "flake": false,
       "locked": {
@@ -1016,6 +1032,7 @@
         "plugin-dap-ui": "plugin-dap-ui",
         "plugin-dracula": "plugin-dracula",
         "plugin-dracula-nvim": "plugin-dracula-nvim",
+        "plugin-dressing": "plugin-dressing",
         "plugin-fidget": "plugin-fidget",
         "plugin-friendly-snippets": "plugin-friendly-snippets",
         "plugin-fugitive": "plugin-fugitive",

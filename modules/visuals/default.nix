@@ -19,6 +19,8 @@ in
       description = "Border styling on dialogs";
     };
 
+    improveVimInterfaces = mkEnableOption "Improve vim interfaces";
+
     betterIcons = mkOption {
       type = types.bool;
       default = true;
@@ -136,6 +138,14 @@ in
               blend = 0,
             },
           ''}
+        })
+      '';
+    })
+    (mkIf cfg.improveVimInterfaces {
+      vim.startPlugins = [ "dressing" ];
+      vim.luaConfigRC.dressing = nvim.dag.entryAnywhere ''
+        require("dressing").setup({
+          border = "rounded",
         })
       '';
     })

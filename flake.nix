@@ -202,6 +202,10 @@
       url = "github:debugloop/telescope-undo.nvim";
       flake = false;
     };
+    plugin-dressing = {
+      url = "github:stevearc/dressing.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -329,8 +333,9 @@
         };
         visuals = {
           enable = true;
-          borderType = "none";
+          borderType = "rounded";
           transparentBackground = true;
+          improveVimInterfaces = true;
         };
         debugger.enable = true;
         autocomplete = {
