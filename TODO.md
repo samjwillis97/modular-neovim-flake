@@ -5,3 +5,4 @@
 - grab completion stuff from kickstart
 - try freeze.nvim again
 - git hunk navigation
+- evalute neotree OR try and change hl group of nvim-tree so its not so dark
