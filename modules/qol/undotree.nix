@@ -15,6 +15,8 @@ in
 
   config = mkIf (cfg.enable && cfg.undotree.enable) {
     vim.undoFiles.enable = true;
-    vim.startPlugins = [ "undotree" ];
+
+    vim.telescope.enable = true;
+    vim.telescope.undo.enable = true;
   };
 }

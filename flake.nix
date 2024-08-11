@@ -18,10 +18,6 @@
       url = "github:nvim-lua/plenary.nvim";
       flake = false;
     };
-    plugin-nvim-tree-lua = {
-      url = "github:kyazdani42/nvim-tree.lua";
-      flake = false;
-    };
     plugin-telescope = {
       url = "github:nvim-telescope/telescope.nvim";
       flake = false;
@@ -104,10 +100,6 @@
     };
     plugin-colorizer = {
       url = "github:norcalli/nvim-colorizer.lua";
-      flake = false;
-    };
-    plugin-undotree = {
-      url = "github:mbbill/undotree";
       flake = false;
     };
     plugin-harpoon = {
@@ -198,6 +190,30 @@
       url = "github:stevearc/conform.nvim";
       flake = false;
     };
+    plugin-telescope-frecency = {
+      url = "github:nvim-telescope/telescope-frecency.nvim";
+      flake = false;
+    };
+    plugin-telescope-undo = {
+      url = "github:debugloop/telescope-undo.nvim";
+      flake = false;
+    };
+    plugin-dressing = {
+      url = "github:stevearc/dressing.nvim";
+      flake = false;
+    };
+    plugin-neotree = {
+      url = "github:nvim-neo-tree/neo-tree.nvim";
+      flake = false;
+    };
+    plugin-nui = {
+      url = "github:MunifTanjim/nui.nvim";
+      flake = false;
+    };
+    plugin-window-picker = {
+      url = "github:s1n7ax/nvim-window-picker";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -267,9 +283,6 @@
           location = "center";
         };
         qol.enable = true;
-        #       # TODO: TODO comments
-        #       # TODO: outline
-        #       # TODO: which-key
         statusline.enable = true;
         telescope.enable = true;
         visuals = {
@@ -287,8 +300,6 @@
           enableLSP = false;
           enableFormat = false;
         };
-        #       # TODO: Finish Borders/No Borders
-        #       # TODO: Dashboard
       };
 
       lspBase = baseConfig // {
@@ -325,8 +336,9 @@
         };
         visuals = {
           enable = true;
-          borderType = "none";
+          borderType = "rounded";
           transparentBackground = true;
+          improveVimInterfaces = true;
         };
         debugger.enable = true;
         autocomplete = {
@@ -337,14 +349,15 @@
             enableAll = true;
           };
         };
+        telescope = {
+          enable = true;
+          frecency.enable = true;
+        };
         nmap = {
           "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>";
         };
       };
     in
-    #         # TODO: tailwind (tailwindcss-language-server)
-    #         # TODO: angular (angularls)
-    #         # TODO: rust lsp
     {
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda
