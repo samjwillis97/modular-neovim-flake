@@ -202,7 +202,7 @@
       url = "github:stevearc/dressing.nvim";
       flake = false;
     };
-    plugin-neotree= {
+    plugin-neotree = {
       url = "github:nvim-neo-tree/neo-tree.nvim";
       flake = false;
     };
@@ -283,9 +283,6 @@
           location = "center";
         };
         qol.enable = true;
-        #       # TODO: TODO comments
-        #       # TODO: outline
-        #       # TODO: which-key
         statusline.enable = true;
         telescope.enable = true;
         visuals = {
@@ -303,8 +300,6 @@
           enableLSP = false;
           enableFormat = false;
         };
-        #       # TODO: Finish Borders/No Borders
-        #       # TODO: Dashboard
       };
 
       lspBase = baseConfig // {
@@ -363,9 +358,6 @@
         };
       };
     in
-    #         # TODO: tailwind (tailwindcss-language-server)
-    #         # TODO: angular (angularls)
-    #         # TODO: rust lsp
     {
 
       # // Updates the left attribute set with the right, { ...left, ...right } in JS kinda

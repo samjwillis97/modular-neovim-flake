@@ -12,3 +12,8 @@
 - fix cyling through sources in neotree
 - use better neotree icons
 - look at fixing up color for lualine
+- TODO comments
+- outline plugin???
+- which-key plugin
+- fixup the rest of the borders
+- tailwind CSS
