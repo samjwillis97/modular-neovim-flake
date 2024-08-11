@@ -68,6 +68,7 @@ in
         -- Catppuccin theme
         require('catppuccin').setup {
           flavour = "${cfg.style}",
+          transparent_background = ${lib.trivial.boolToString config.vim.visuals.transparentBackground},
         }
         -- setup must be called before loading
         vim.cmd.colorscheme "catppuccin"

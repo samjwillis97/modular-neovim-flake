@@ -112,7 +112,7 @@ in
       -- handle borderTypes (halfway)
       -- better icons
       -- fix colors of the fuckin select bar
-      -- transparent background
+      -- todo fix cycling through sources
 
       require("neo-tree").setup({
         sources = {

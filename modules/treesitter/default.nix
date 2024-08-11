@@ -6,6 +6,7 @@ let
   usingLsp = config.vim.lsp.enable;
   usingNvimCmp = config.vim.autocomplete.enable;
   foldMode = config.vim.folding.mode;
+  transparentBackground = config.vim.visuals.transparentBackground;
 in
 {
   options.vim.treesitter = {
@@ -46,7 +47,7 @@ in
       ''
     );
 
-    vim.configRC.treesitter-context = mkIf cfg.context (
+    vim.configRC.treesitter-context = mkIf (cfg.context && !transparentBackground) (
       nvim.dag.entryAnywhere ''
         hi TreesitterContextBottom gui=NONE
       ''
