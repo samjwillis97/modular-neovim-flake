@@ -108,12 +108,6 @@ in
     };
 
     vim.luaConfigRC.filetree = nvim.dag.entryAnywhere ''
-      -- TODO:
-      -- handle borderTypes (halfway)
-      -- better icons
-      -- fix colors of the fuckin select bar
-      -- todo fix cycling through sources
-
       require("neo-tree").setup({
         sources = {
           "filesystem",
