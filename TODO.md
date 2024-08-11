@@ -7,7 +7,6 @@
 - try freeze.nvim again
 - git hunk navigation
 - handle all borderTypes in neotree
-- fix background on treesitter context
 - fix colors of window-picker
 - fix cyling through sources in neotree
 - use better neotree icons

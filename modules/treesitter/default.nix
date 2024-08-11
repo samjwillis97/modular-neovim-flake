@@ -47,9 +47,9 @@ in
       ''
     );
 
-    vim.configRC.treesitter-context = mkIf (cfg.context && !transparentBackground) (
+    vim.configRC.treesitter-context = mkIf (cfg.context) (
       nvim.dag.entryAnywhere ''
-        hi TreesitterContextBottom gui=NONE
+        hi TreesitterContextBottom gui=NONE ${optionalString config.vim.visuals.transparentBackground "guibg=#202328"}
       ''
     );
 
