@@ -586,6 +586,22 @@
         "type": "github"
       }
     },
+    "plugin-neotree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1718074188,
+        "narHash": "sha256-eNGuQEjAKsPuRDGaw95kCVOmP64ZDnUuFBppqtcrhZ4=",
+        "owner": "nvim-neo-tree",
+        "repo": "neo-tree.nvim",
+        "rev": "206241e451c12f78969ff5ae53af45616ffc9b72",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-neo-tree",
+        "repo": "neo-tree.nvim",
+        "type": "github"
+      }
+    },
     "plugin-nio": {
       "flake": false,
       "locked": {
@@ -599,6 +615,22 @@
       "original": {
         "owner": "nvim-neotest",
         "repo": "nvim-nio",
+        "type": "github"
+      }
+    },
+    "plugin-nui": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719375254,
+        "narHash": "sha256-o2iNktcWxL0oCtCkbARMiWnTlZA8QWQHy2qeOanBlO4=",
+        "owner": "MunifTanjim",
+        "repo": "nui.nvim",
+        "rev": "61574ce6e60c815b0a0c4b5655b8486ba58089a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MunifTanjim",
+        "repo": "nui.nvim",
         "type": "github"
       }
     },
@@ -663,22 +695,6 @@
       "original": {
         "owner": "mfussenegger",
         "repo": "nvim-lint",
-        "type": "github"
-      }
-    },
-    "plugin-nvim-tree-lua": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1722137182,
-        "narHash": "sha256-cGBGvguDYyWfTkalBCMQTiQALKDCckUpXgfZZpJpqcg=",
-        "owner": "kyazdani42",
-        "repo": "nvim-tree.lua",
-        "rev": "48d0e82f9434691cc50d970898142a8c084a49d6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kyazdani42",
-        "repo": "nvim-tree.lua",
         "type": "github"
       }
     },
@@ -970,6 +986,22 @@
         "type": "github"
       }
     },
+    "plugin-window-picker": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1702792768,
+        "narHash": "sha256-D5ikm5Fw0N/AjDL71cuATp1OCONuxPZNfEHuh0vXkq0=",
+        "owner": "s1n7ax",
+        "repo": "nvim-window-picker",
+        "rev": "41cfaa428577c53552200a404ae9b3a0b5719706",
+        "type": "github"
+      },
+      "original": {
+        "owner": "s1n7ax",
+        "repo": "nvim-window-picker",
+        "type": "github"
+      }
+    },
     "purescript-overlay": {
       "inputs": {
         "nixpkgs": [
@@ -1044,12 +1076,13 @@
         "plugin-lspkind": "plugin-lspkind",
         "plugin-lualine": "plugin-lualine",
         "plugin-luasnip": "plugin-luasnip",
+        "plugin-neotree": "plugin-neotree",
         "plugin-nio": "plugin-nio",
+        "plugin-nui": "plugin-nui",
         "plugin-nvim-cmp": "plugin-nvim-cmp",
         "plugin-nvim-dap-vscode-js": "plugin-nvim-dap-vscode-js",
         "plugin-nvim-lastplace": "plugin-nvim-lastplace",
         "plugin-nvim-lint": "plugin-nvim-lint",
-        "plugin-nvim-tree-lua": "plugin-nvim-tree-lua",
         "plugin-nvim-ts-autotag": "plugin-nvim-ts-autotag",
         "plugin-nvim-ufo": "plugin-nvim-ufo",
         "plugin-nvim-web-devicons": "plugin-nvim-web-devicons",
@@ -1068,6 +1101,7 @@
         "plugin-treesitter-context": "plugin-treesitter-context",
         "plugin-typescript-tools": "plugin-typescript-tools",
         "plugin-vim-sneak": "plugin-vim-sneak",
+        "plugin-window-picker": "plugin-window-picker",
         "vscode-js-debug": "vscode-js-debug"
       }
     },

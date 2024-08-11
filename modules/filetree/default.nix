@@ -3,7 +3,21 @@ with lib;
 with builtins;
 let
   cfg = config.vim.filetree;
-  visualCfg = config.vim.visuals;
+  gitEnabled = config.vim.git.enable;
+  cfgBorderType = config.vim.visuals.borderType;
+  borderTypeMap = {
+    "rounded" = "rounded";
+    "normal" = "single";
+  };
+  borderType =
+    if (builtins.hasAttr cfgBorderType borderTypeMap) then borderTypeMap.${cfgBorderType} else null;
+
+  locationMap = {
+    "left" = "left";
+    "right" = "right";
+    "center" = "float";
+  };
+  location = locationMap.${cfg.location};
 in
 {
   options.vim.filetree = {
@@ -29,7 +43,7 @@ in
       custom = mkOption {
         type = with types; listOf str;
         default = [
-          "^.git$"
+          ".git"
           "node_modules"
           ".devenv"
           ".direnv"
@@ -71,91 +85,105 @@ in
       default = true;
       description = "Automatically closes tree if it is the last window left";
     };
+
+    followCurrentFile = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Follow the current file";
+    };
   };
 
   config = mkIf cfg.enable {
-    vim.startPlugins = [ "nvim-tree-lua" ];
+    vim.visuals.betterIcons = true;
+
+    vim.startPlugins = [
+      "neotree"
+      "nui"
+      "window-picker"
+    ];
 
     vim.nnoremap = {
-      "<C-n>" = ":NvimTreeToggle<CR>";
-      ",n" = ":NvimTreeFindFile<CR>";
+      "<C-n>" = ":Neotree toggle<CR>";
+      ",n" = ":Neotree reveal<CR>";
     };
 
     vim.luaConfigRC.filetree = nvim.dag.entryAnywhere ''
+      -- TODO:
+      -- handle borderTypes (halfway)
+      -- better icons
+      -- fix colors of the fuckin select bar
+      -- transparent background
+
+      require("neo-tree").setup({
+        sources = {
+          "filesystem",
+          "buffers",
+          "git_status",
+          "document_symbols",
+        },
+        -- source_selector = {
+        --   { source = "filesystem" },
+        --   { source = "buffers" },
+        --   { source = "git_status" },
+        --   { source = "document_symbols" },
+        -- },
+        close_if_last_window = ${lib.trivial.boolToString cfg.autoCloseOnLastWindow},
+        enable_diagnostics = true,
+        window = {
+          position = "${location}",
+          ${optionalString (cfg.location != "center") ''width = ${toString cfg.width},''}
+          popup = {
+            size = {
+              ${optionalString (cfg.location == "center") ''width = "${toString cfg.width}%",''}
+            },
+          },
+          mappings = {
+            ["o"] = "open_with_window_picker",
+            ["oc"] = "none",
+            ["od"] = "none",
+            ["og"] = "none",
+            ["om"] = "none",
+            ["on"] = "none",
+            ["os"] = "none",
+            ["ot"] = "none",
+            ["O"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "O" } },
+            ["Oc"] = "order_by_created",
+            ["Od"] = "order_by_diagnostics",
+            ["Og"] = "order_by_git_status",
+            ["Om"] = "order_by_modified",
+            ["On"] = "order_by_name",
+            ["Os"] = "order_by_size",
+            ["Ot"] = "order_by_type",
+          },
+        },
+        filesystem = {
+          follow_current_file = {
+            enabled = ${lib.trivial.boolToString cfg.followCurrentFile},
+          },
+          use_libuv_file_watcher = true,
+          filtered_items = {
+            hide_dotfiles = ${lib.trivial.boolToString cfg.filters.dotFiles},
+            hide_gitignored = ${lib.trivial.boolToString cfg.filters.gitIgnore},
+            hide_by_pattern = {
+              ${builtins.concatStringsSep "\n" (builtins.map (v: "\"${v}\",") cfg.filters.custom)}
+            },
+          },
+          group_empty_dirs = ${lib.trivial.boolToString cfg.groupEmptyDirectories},
+        },
+        default_component_configs = {
+          name = {
+            trailing_slash = ${lib.trivial.boolToString cfg.addTrailingSlash},
+          },
+        },
+        ${optionalString (borderType != null) ''popup_border_style = "${borderType}",''}
+        ${optionalString gitEnabled ''enable_git_status = true,''}
+      })
+
       ${optionalString (cfg.openOnLaunch) ''
-        local function open_nvim_tree()
-          require("nvim-tree.api").tree.open()
-        end
-
-        vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
-      ''}
-
-      ${optionalString (cfg.autoCloseOnLastWindow) ''
-        vim.api.nvim_create_autocmd({"QuitPre"}, {
-          callback = function() vim.cmd("NvimTreeClose") end,
+        vim.api.nvim_create_autocmd({ "VimEnter" }, { 
+          callback = function vim.cmd([[:Neotree focus]]) end,
         })
       ''}
-        
-      require("nvim-tree").setup({
-          view = {
-            ${
-              optionalString (cfg.location == "center") ''
-                float = {
-                    enable = true,
-                    open_win_config = function()
-                        local screen_w = vim.opt.columns:get()
-                        local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
-                        local window_w = screen_w * ${toString ((cfg.width + 0.0) / 100)}
-                        local window_h = screen_h * 0.75 
-                        local window_w_int = math.floor(window_w)
-                        local window_h_int = math.floor(window_h)
-                        local center_x = (screen_w - window_w) / 2
-                        local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
-                        return {
-                            ${optionalString (!visualCfg.enable) ''border = "none",''}
-                            ${
-                              optionalString (visualCfg.enable && visualCfg.borderType == "rounded") ''border = "rounded",''
-                            }
-                            relative = "editor",
-                            row = center_y,
-                            col = center_x,
-                            width = window_w_int,
-                            height = window_h_int,
-                        }
-                    end,
-                },
-                width = function()
-                    return math.floor(vim.opt.columns:get() * ${toString ((cfg.width + 0.0) / 100)})
-                end,
-              ''
-            }
-            ${
-              optionalString (cfg.location != "center") ''
-                width = ${toString cfg.width},
-                side = "${cfg.location}",
-              ''
-            }
-          },
-          renderer = {
-              add_trailing = ${boolToString cfg.addTrailingSlash},
-              group_empty = ${boolToString cfg.groupEmptyDirectories},
-          },
-          git = {
-              enable = true,
-              ignore = ${boolToString cfg.filters.gitIgnore},
-          },
-          filters = {
-              dotfiles = ${boolToString cfg.filters.dotFiles},
-              custom = {
-                  ${
-                    builtins.concatStringsSep "\n" (builtins.map (s: ''"'' + s + ''",'') cfg.filters.custom)
-                  }
-              },
-          },
-          filesystem_watchers = {
-            enable = true,
-          },
-      })
     '';
   };
 }

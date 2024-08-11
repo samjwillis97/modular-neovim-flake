@@ -18,10 +18,6 @@
       url = "github:nvim-lua/plenary.nvim";
       flake = false;
     };
-    plugin-nvim-tree-lua = {
-      url = "github:kyazdani42/nvim-tree.lua";
-      flake = false;
-    };
     plugin-telescope = {
       url = "github:nvim-telescope/telescope.nvim";
       flake = false;
@@ -204,6 +200,18 @@
     };
     plugin-dressing = {
       url = "github:stevearc/dressing.nvim";
+      flake = false;
+    };
+    plugin-neotree= {
+      url = "github:nvim-neo-tree/neo-tree.nvim";
+      flake = false;
+    };
+    plugin-nui = {
+      url = "github:MunifTanjim/nui.nvim";
+      flake = false;
+    };
+    plugin-window-picker = {
+      url = "github:s1n7ax/nvim-window-picker";
       flake = false;
     };
 
