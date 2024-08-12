@@ -30,13 +30,13 @@ in
 
     vim.nnoremap =
       {
-        "<leader>ff" =
-          if cfg.frecency.enable then ":Telescope frecency<CR>" else ":Telescope git_files<CR>";
+        "<leader>ff" = ":Telescope git_files<CR>";
         "<leader>fb" = ":Telescope buffers<CR>";
         "<leader>sf" = ":Telescope live_grep<CR>";
         "<leader>sw" = ":Telescope grep_string<CR>";
         "<leader>sb" = ":Telescope current_buffer_fuzzy_find<CR>";
       }
+      // (if cfg.frecency.enable then { "<leader>fF" = ":Telescope frecency<CR>"; } else { })
       // (if config.vim.treesitter.enable then { "<leader>fs" = ":Telescope treesitter<CR>"; } else { })
       // (
         if config.vim.lsp.enable then
