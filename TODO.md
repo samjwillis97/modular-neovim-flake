@@ -16,3 +16,5 @@
 - which-key plugin
 - fixup the rest of the borders
 - tailwind CSS
+- search resume in telescope
+- search diagnostics in telescope
