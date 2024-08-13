@@ -151,7 +151,17 @@ in
       (mkIf (cfg.borderType == "rounded") {
         vim.luaConfigRC.diagnostic-border = nvim.dag.entryAnywhere ''
           vim.diagnostic.config {
+            underline = true,
+            virtual_text = false,
             float = { border = "rounded" },
+            signs = { 
+              text = { 
+                [vim.diagnostic.severity.ERROR] = '', 
+                [vim.diagnostic.severity.WARN] = '', 
+                [vim.diagnostic.severity.INFO] = '', 
+                [vim.diagnostic.severity.HINT] = '', 
+              },
+            },
           }
         '';
       })
