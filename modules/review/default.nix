@@ -35,7 +35,6 @@ in
   config = mkIf (cfg.enable) {
     vim.telescope.enable = true;
     vim.visuals = {
-      enable = true;
       betterIcons = true;
     };
 

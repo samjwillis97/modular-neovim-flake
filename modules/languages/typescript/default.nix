@@ -22,12 +22,13 @@ let
     }) cfg.lsp.servers
   );
 
-  defaultServers = [ "typescript-tools" ];
+  defaultServers = [ "tsserver" ];
   servers = {
     tsserver = {
       package = pkgs.nodePackages.typescript-language-server;
       lspConfig = ''
         lspconfig.tsserver.setup {
+          handlers = handlers,
           capabilities = capabilities;
           on_attach = attach_keymaps,
           cmd = { "${enabledServerPackages.tsserver}/bin/typescript-language-server", "--stdio" }

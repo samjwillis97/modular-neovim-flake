@@ -264,7 +264,6 @@
         filetree.enable = true;
         theme.enable = false;
         git.enable = false;
-        visuals.enable = false;
         qol.enable = false;
         statusline.enable = false;
         treesitter.enable = false;
@@ -286,7 +285,6 @@
         statusline.enable = true;
         telescope.enable = true;
         visuals = {
-          enable = true;
           borderType = "none";
         };
         git.enable = true;
@@ -335,7 +333,6 @@
           defaultFoldNumber = 99;
         };
         visuals = {
-          enable = true;
           borderType = "rounded";
           transparentBackground = true;
           improveVimInterfaces = true;

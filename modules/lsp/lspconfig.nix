@@ -5,6 +5,16 @@ let
   cfg = config.vim.lsp;
   visualCfg = config.vim.visuals;
   ufoFoldEnabled = config.vim.folding.mode == "ufo";
+
+  lspBorderMap = {
+    "rounded" = "rounded";
+    "normal" = "single";
+  };
+  border =
+    if (builtins.hasAttr visualCfg.borderType lspBorderMap) then
+      lspBorderMap.${visualCfg.borderType}
+    else
+      null;
 in
 {
   options.vim.lsp.lspconfig = {
@@ -21,40 +31,15 @@ in
     {
       vim.startPlugins = [ "lspconfig" ];
       vim.luaConfigRC.lspconfig = nvim.dag.entryAfter [ "lsp-setup" ] ''
-        ${optionalString (visualCfg.enable && visualCfg.borderType == "normal") ''
-          local border = {
-            {"🭽", "FloatBorder"},
-            {"▔", "FloatBorder"},
-            {"🭾", "FloatBorder"},
-            {"▕", "FloatBorder"},
-            {"🭿", "FloatBorder"},
-            {"▁", "FloatBorder"},
-            {"🭼", "FloatBorder"},
-            {"▏", "FloatBorder"},
-          }
-        ''}
-        ${optionalString (visualCfg.enable && visualCfg.borderType == "rounded") ''
-          local border = {
-            { "╭", "FloatBorder" },
-            { "─", "FloatBorder" },
-            { "╮", "FloatBorder" },
-            { "│", "FloatBorder" },
-            { "╯", "FloatBorder" },
-            { "─", "FloatBorder" },
-            { "╰", "FloatBorder" },
-            { "│", "FloatBorder" },
-          }
-        ''}
-
         -- LSP settings (for overriding per client)
         local handlers =  {
-        ${optionalString (visualCfg.enable && visualCfg.borderType != "none") ''
-          ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-          ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+        ${optionalString (border != null) ''
+          ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "${border}" }),
+          ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = "${border}" }),
         ''}
         }
 
-          local lspconfig = require("lspconfig")
+        local lspconfig = require("lspconfig")
       '';
     }
     {
