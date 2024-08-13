@@ -148,6 +148,13 @@ in
           })
         '';
       })
+      (mkIf (cfg.borderType == "rounded") {
+        vim.luaConfigRC.diagnostic-border = nvim.dag.entryAnywhere ''
+          vim.diagnostic.config {
+            float = { border = "rounded" },
+          }
+        '';
+      })
     ]
   );
 }
