@@ -22,7 +22,7 @@ let
     }) cfg.lsp.servers
   );
 
-  defaultServers = [ "typescript-tools" ];
+  defaultServers = [ "tsserver" ];
   servers = {
     tsserver = {
       package = pkgs.nodePackages.typescript-language-server;
