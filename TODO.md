@@ -18,3 +18,5 @@
 - tailwind CSS
 - search resume in telescope
 - search diagnostics in telescope
+- rounded borders on LSP dialogs
+-- hot key for diagnostics in telescope
