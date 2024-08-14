@@ -22,13 +22,13 @@ in
     {
       vim.startPlugins = [ "lspconfig" ];
       vim.luaConfigRC.lspconfig = nvim.dag.entryAfter [ "lsp-setup" ] ''
-        -- LSP settings (for overriding per client)
-        local handlers =  {
-        ${optionalString (borderType != null) ''
-          ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "${borderType}" }),
-          ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = "${borderType}" }),
-        ''}
-        }
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { 
+          ${optionalString (borderType != null) ''border = "${borderType}",''}
+        })
+
+        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { 
+          ${optionalString (borderType != null) ''border = "${borderType}",''}
+        })
 
         local lspconfig = require("lspconfig")
       '';

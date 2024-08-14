@@ -15,7 +15,6 @@ let
       package = pkgs.lua-language-server;
       lspConfig = ''
         lspconfig.lua_ls.setup{
-          handlers = handlers,
           capabilities = capabilities;
           on_attach = default_on_attach;
           cmd = {"${cfg.lsp.package}/bin/lua-language-server"}
