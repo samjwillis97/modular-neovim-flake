@@ -10,10 +10,10 @@ in
     borderType = mkOption {
       type = types.enum [
         "rounded"
-        "normal"
-        "none"
+        "single"
+        null
       ];
-      default = "none";
+      default = null;
       description = "Border styling on dialogs";
     };
 
@@ -148,12 +148,16 @@ in
           })
         '';
       })
-      (mkIf (cfg.borderType == "rounded") {
+      ({
         vim.luaConfigRC.diagnostic-border = nvim.dag.entryAnywhere ''
           vim.diagnostic.config {
             underline = true,
             virtual_text = false,
-            float = { border = "rounded" },
+            ${
+              optionalString (cfg.borderType != null) ''
+                float = { border = "${cfg.borderType}" },
+              ''
+            }
             signs = { 
               text = { 
                 [vim.diagnostic.severity.ERROR] = '', 

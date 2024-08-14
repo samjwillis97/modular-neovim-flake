@@ -4,13 +4,7 @@ with builtins;
 let
   cfg = config.vim.filetree;
   gitEnabled = config.vim.git.enable;
-  cfgBorderType = config.vim.visuals.borderType;
-  borderTypeMap = {
-    "rounded" = "rounded";
-    "normal" = "single";
-  };
-  borderType =
-    if (builtins.hasAttr cfgBorderType borderTypeMap) then borderTypeMap.${cfgBorderType} else null;
+  borderType = config.vim.visuals.borderType;
 
   locationMap = {
     "left" = "left";
