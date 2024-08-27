@@ -5,16 +5,7 @@ let
   cfg = config.vim.lsp;
   visualCfg = config.vim.visuals;
   ufoFoldEnabled = config.vim.folding.mode == "ufo";
-
-  lspBorderMap = {
-    "rounded" = "rounded";
-    "normal" = "single";
-  };
-  border =
-    if (builtins.hasAttr visualCfg.borderType lspBorderMap) then
-      lspBorderMap.${visualCfg.borderType}
-    else
-      null;
+  borderType = visualCfg.borderType;
 in
 {
   options.vim.lsp.lspconfig = {
@@ -31,13 +22,13 @@ in
     {
       vim.startPlugins = [ "lspconfig" ];
       vim.luaConfigRC.lspconfig = nvim.dag.entryAfter [ "lsp-setup" ] ''
-        -- LSP settings (for overriding per client)
-        local handlers =  {
-        ${optionalString (border != null) ''
-          ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "${border}" }),
-          ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = "${border}" }),
-        ''}
-        }
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { 
+          ${optionalString (borderType != null) ''border = "${borderType}",''}
+        })
+
+        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { 
+          ${optionalString (borderType != null) ''border = "${borderType}",''}
+        })
 
         local lspconfig = require("lspconfig")
       '';

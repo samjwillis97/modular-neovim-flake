@@ -16,7 +16,6 @@ let
       internalFormatter = true;
       lspConfig = ''
         lspconfig.nil_ls.setup{
-          handlers = handlers,
           capabilities = capabilities,
           on_attach = default_on_attach,
           cmd = {"${cfg.lsp.package}/bin/nil"},

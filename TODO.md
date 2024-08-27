@@ -4,9 +4,9 @@
 - Check copilot mode is correct
     - might have to look at another plugin instead..
 - grab completion stuff from kickstart
+    - need to rate Fields higher
 - try freeze.nvim again
 - git hunk navigation
-- handle all borderTypes in neotree
 - fix colors of window-picker
 - fix cyling through sources in neotree
 - use better neotree icons
@@ -14,9 +14,7 @@
 - TODO comments
 - outline plugin???
 - which-key plugin
-- fixup the rest of the borders
 - tailwind CSS
 - search resume in telescope
 - search diagnostics in telescope
-- rounded borders on LSP dialogs
--- hot key for diagnostics in telescope
+- hot key for diagnostics in telescope
