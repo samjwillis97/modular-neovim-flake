@@ -46,14 +46,14 @@ in
       // (
         if (cfg.gutterSigns) then
           {
-            "<leader>gp" = ":Gitsigns prev_hunk<CR>";
-            "<leader>gn" = ":Gitsigns next_hunk<CR>";
             "<leader>gs" = ":Gitsigns stage_hunk<CR>";
             "<leader>gu" = ":Gitsigns undo_stage_hunk<CR>";
             "<leader>gr" = ":Gitsigns reset_hunk<CR>";
             "<leader>gS" = ":Gitsigns stage_buffer<CR>";
             "<leader>gU" = ":Gitsigns reset_buffer_index<CR>";
             "<leader>gb" = ":lua require('gitsigns').blame_line{full=true}<CR>";
+            "[g" = ":Gitsigns prev_hunk<CR>";
+            "]g" = ":Gitsigns next_hunk<CR>";
           }
         else
           { }
