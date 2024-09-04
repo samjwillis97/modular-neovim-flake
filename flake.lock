@@ -136,6 +136,22 @@
         "type": "github"
       }
     },
+    "plugin-avante": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1724798833,
+        "narHash": "sha256-+ad4pppk9VMQyzb0TScQlClbZ0hIkkGmDs+j7OlwFfk=",
+        "owner": "yetone",
+        "repo": "avante.nvim",
+        "rev": "03b4cb71157873219f6708cd9d069282044fa030",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yetone",
+        "repo": "avante.nvim",
+        "type": "github"
+      }
+    },
     "plugin-catppuccin": {
       "flake": false,
       "locked": {
@@ -1048,6 +1064,7 @@
         "nixpkgs-bash-fix": "nixpkgs-bash-fix",
         "plugin-actions-preview": "plugin-actions-preview",
         "plugin-autopairs": "plugin-autopairs",
+        "plugin-avante": "plugin-avante",
         "plugin-catppuccin": "plugin-catppuccin",
         "plugin-cmp-buffer": "plugin-cmp-buffer",
         "plugin-cmp-nvim-lsp": "plugin-cmp-nvim-lsp",

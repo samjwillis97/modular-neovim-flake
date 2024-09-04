@@ -1,1 +1,6 @@
-{ imports = [ ./copilot ]; }
+{
+  imports = [
+    ./copilot
+    ./avante
+  ];
+}

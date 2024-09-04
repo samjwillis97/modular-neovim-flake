@@ -214,6 +214,10 @@
       url = "github:s1n7ax/nvim-window-picker";
       flake = false;
     };
+    plugin-avante = {
+      url = "github:yetone/avante.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -345,10 +349,13 @@
           copilot = {
             enableAll = true;
           };
+          avante = {
+            enable = true;
+          };
         };
         telescope = {
           enable = true;
-          frecency.enable = true;
+          frecency.enable = false;
         };
         nmap = {
           "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>";
