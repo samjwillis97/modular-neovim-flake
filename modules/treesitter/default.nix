@@ -59,7 +59,12 @@ in
     (mkIf (cfg.context) {
       vim.startPlugins = [ "treesitter-context" ];
       vim.luaConfigRC.treesitter-context = nvim.dag.entryAnywhere ''
-        require('treesitter-context').setup()
+        require('treesitter-context').setup({
+          enable = true,
+          line_numbers = true,
+          multiline_threshold = 5,
+          max_lines = 10,
+        })
       '';
       vim.configRC.treesitter-context = nvim.dag.entryAnywhere ''
         hi TreesitterContextBottom gui=NONE ${optionalString transparentBackground "guibg=#202328"}
