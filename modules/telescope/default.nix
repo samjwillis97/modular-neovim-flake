@@ -51,6 +51,16 @@ in
 
     # TODO: Evaluate these defaults
     vim.luaConfigRC.telescope = nvim.dag.entryAnywhere ''
+      vim.keymap.set("n", "gvd", function()
+        vim.cmd('vsplit')
+        vim.cmd('Telescope lsp_definitions')
+      end, { noremap = true, silent = true })
+
+      vim.keymap.set("n", "gsd", function()
+        vim.cmd('split')
+        vim.cmd('Telescope lsp_definitions')
+      end, { noremap = true, silent = true })
+
       require("telescope").setup({
         defaults = {
           vimgrep_arguments = {
