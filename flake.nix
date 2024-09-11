@@ -106,10 +106,6 @@
       url = "github:ThePrimeagen/harpoon";
       flake = false;
     };
-    plugin-commentary = {
-      url = "github:tpope/vim-commentary";
-      flake = false;
-    };
     plugin-surround = {
       url = "github:tpope/vim-surround";
       flake = false;
@@ -220,6 +216,10 @@
     };
     plugin-diffview = {
       url = "github:sindrets/diffview.nvim";
+      flake = false;
+    };
+    plugin-ts-comments = {
+      url = "github:folke/ts-comments.nvim";
       flake = false;
     };
 
