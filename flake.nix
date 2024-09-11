@@ -106,10 +106,6 @@
       url = "github:ThePrimeagen/harpoon";
       flake = false;
     };
-    plugin-commentary = {
-      url = "github:tpope/vim-commentary";
-      flake = false;
-    };
     plugin-surround = {
       url = "github:tpope/vim-surround";
       flake = false;
@@ -212,6 +208,18 @@
     };
     plugin-window-picker = {
       url = "github:s1n7ax/nvim-window-picker";
+      flake = false;
+    };
+    plugin-vim-flog = {
+      url = "github:rbong/vim-flog";
+      flake = false;
+    };
+    plugin-diffview = {
+      url = "github:sindrets/diffview.nvim";
+      flake = false;
+    };
+    plugin-ts-comments = {
+      url = "github:folke/ts-comments.nvim";
       flake = false;
     };
 
@@ -319,6 +327,11 @@
       };
 
       fullConfig = lspBase // {
+        git = {
+          enable = true;
+          prettyLog = true;
+          diffview = true;
+        };
         languages = {
           enableTreesitter = true;
           enableLSP = true;

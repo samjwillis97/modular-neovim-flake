@@ -204,7 +204,6 @@ in
     vim.startPlugins =
       [
         "plenary-nvim"
-        "commentary"
         "surround"
       ]
       ++ (

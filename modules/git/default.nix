@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 with builtins;
 let
@@ -24,52 +29,64 @@ in
       description = "Enable a git interface inside neovim";
     };
 
-    # TODO: Look at code actions with null_ls
+    prettyLog = mkEnableOption "Pretty log viewer";
+
+    diffview = mkEnableOption "Better diff viewer";
   };
 
-  config = mkIf cfg.enable {
-    vim.startPlugins =
-      (if (cfg.gitInterface != "none") then [ cfg.gitInterface ] else [ ])
-      ++ (if (cfg.gutterSigns) then [ "gitsigns" ] else [ ])
-      ++ (if (cfg.gitInterface == "fugitive") then [ "rhubarb" ] else [ ]);
+  config = mkIf (cfg.enable) (mkMerge [
+    (mkIf (cfg.gitInterface == "fugit2") { vim.startPlugins = [ "fugit2" ]; })
 
-    vim.nnoremap =
-      (
-        if (cfg.gitInterface == "fugitive") then
-          {
-            "<leader>gg" = ":Git<CR>";
-            "<leader>gB" = ":Git blame<CR>";
-          }
-        else
-          { }
-      )
-      // (
-        if (cfg.gutterSigns) then
-          {
-            "<leader>gs" = ":Gitsigns stage_hunk<CR>";
-            "<leader>gu" = ":Gitsigns undo_stage_hunk<CR>";
-            "<leader>gr" = ":Gitsigns reset_hunk<CR>";
-            "<leader>gS" = ":Gitsigns stage_buffer<CR>";
-            "<leader>gU" = ":Gitsigns reset_buffer_index<CR>";
-            "<leader>gb" = ":lua require('gitsigns').blame_line{full=true}<CR>";
-            "[g" = ":Gitsigns prev_hunk<CR>";
-            "]g" = ":Gitsigns next_hunk<CR>";
-          }
-        else
-          { }
-      );
+    (mkIf (cfg.gitInterface == "fugitive") {
+      vim.startPlugins = [
+        "fugitive"
+        "rhubarb"
+      ];
 
-    vim.vnoremap =
-      if (cfg.gutterSigns) then
-        {
-          "<leader>gs" = ":Gitsigns stage_hunk<CR>";
-          "<leader>gr" = ":Gitsigns reset_hunk<CR>";
-        }
-      else
-        { };
+      vim.nnoremap = {
+        "<leader>gg" = ":Git<CR>";
+        "<leader>gB" = ":Git blame<CR>";
+      };
+    })
 
-    vim.luaConfigRC.git = nvim.dag.entryAnywhere ''
-      ${optionalString cfg.gutterSigns "require('gitsigns').setup()"};
-    '';
-  };
+    (mkIf (cfg.gutterSigns) {
+      vim.startPlugins = [ "gitsigns" ];
+
+      vim.luaConfigRC.gitsigns = nvim.dag.entryAnywhere ''
+        require('gitsigns').setup()
+      '';
+
+      vim.vnoremap = {
+        "<leader>gs" = ":Gitsigns stage_hunk<CR>";
+        "<leader>gr" = ":Gitsigns reset_hunk<CR>";
+      };
+
+      vim.nnoremap = {
+        "<leader>gs" = ":Gitsigns stage_hunk<CR>";
+        "<leader>gu" = ":Gitsigns undo_stage_hunk<CR>";
+        "<leader>gr" = ":Gitsigns reset_hunk<CR>";
+        "<leader>gS" = ":Gitsigns stage_buffer<CR>";
+        "<leader>gU" = ":Gitsigns reset_buffer_index<CR>";
+        "<leader>gb" = ":lua require('gitsigns').blame_line{full=true}<CR>";
+        "[g" = ":Gitsigns prev_hunk<CR>";
+        "]g" = ":Gitsigns next_hunk<CR>";
+      };
+    })
+
+    (mkIf cfg.prettyLog {
+      vim.startPlugins = [
+        "fugitive"
+        "vim-flog"
+      ];
+    })
+
+    (mkIf cfg.diffview {
+      vim.startPlugins = [ "diffview" ];
+      vim.luaConfigRC.diffview = nvim.dag.entryAnywhere ''
+        require('diffview').setup({
+          git_cmd = { "${pkgs.git}/bin/git" }
+        })
+      '';
+    })
+  ]);
 }
