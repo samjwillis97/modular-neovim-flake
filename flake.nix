@@ -218,6 +218,10 @@
       url = "github:rbong/vim-flog";
       flake = false;
     };
+    plugin-diffview = {
+      url = "github:sindrets/diffview.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -326,6 +330,7 @@
         git = {
           enable = true;
           prettyLog = true;
+          diffview = true;
         };
         languages = {
           enableTreesitter = true;

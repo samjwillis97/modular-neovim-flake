@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 with builtins;
 let
@@ -25,6 +30,8 @@ in
     };
 
     prettyLog = mkEnableOption "Pretty log viewer";
+
+    diffview = mkEnableOption "Better diff viewer";
   };
 
   config = mkIf (cfg.enable) (mkMerge [
@@ -45,8 +52,8 @@ in
     (mkIf (cfg.gutterSigns) {
       vim.startPlugins = [ "gitsigns" ];
 
-      vim.luaConfigRC.git = nvim.dag.entryAnywhere ''
-        ${optionalString cfg.gutterSigns "require('gitsigns').setup()"};
+      vim.luaConfigRC.gitsigns = nvim.dag.entryAnywhere ''
+        require('gitsigns').setup()
       '';
 
       vim.vnoremap = {
@@ -71,6 +78,15 @@ in
         "fugitive"
         "vim-flog"
       ];
+    })
+
+    (mkIf cfg.diffview {
+      vim.startPlugins = [ "diffview" ];
+      vim.luaConfigRC.diffview = nvim.dag.entryAnywhere ''
+        require('diffview').setup({
+          git_cmd = { "${pkgs.git}/bin/git" }
+        })
+      '';
     })
   ]);
 }
