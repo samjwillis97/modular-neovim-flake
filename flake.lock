@@ -970,6 +970,22 @@
         "type": "github"
       }
     },
+    "plugin-vim-flog": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1725758399,
+        "narHash": "sha256-NF3d/+OTdnfIMuU3hASavV9WHfkEz7OONViGgKtnn+s=",
+        "owner": "rbong",
+        "repo": "vim-flog",
+        "rev": "03f6e39050c2a32deca6964291005c6c5c4c73cf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rbong",
+        "repo": "vim-flog",
+        "type": "github"
+      }
+    },
     "plugin-vim-sneak": {
       "flake": false,
       "locked": {
@@ -1100,6 +1116,7 @@
         "plugin-transparent": "plugin-transparent",
         "plugin-treesitter-context": "plugin-treesitter-context",
         "plugin-typescript-tools": "plugin-typescript-tools",
+        "plugin-vim-flog": "plugin-vim-flog",
         "plugin-vim-sneak": "plugin-vim-sneak",
         "plugin-window-picker": "plugin-window-picker",
         "vscode-js-debug": "vscode-js-debug"

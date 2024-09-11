@@ -214,6 +214,10 @@
       url = "github:s1n7ax/nvim-window-picker";
       flake = false;
     };
+    plugin-vim-flog = {
+      url = "github:rbong/vim-flog";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -319,6 +323,10 @@
       };
 
       fullConfig = lspBase // {
+        git = {
+          enable = true;
+          prettyLog = true;
+        };
         languages = {
           enableTreesitter = true;
           enableLSP = true;
