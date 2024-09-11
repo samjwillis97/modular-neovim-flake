@@ -30,50 +30,57 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    vim.startPlugins =
-      [ "nvim-treesitter" ]
-      ++ (if cfg.context then [ "treesitter-context" ] else [ ])
-      ++ (if usingNvimCmp && !usingLsp then [ "cmp-treesitter" ] else [ ]);
+  config = mkIf (cfg.enable) (mkMerge [
+    {
+      vim.startPlugins = [ "nvim-treesitter" ];
+      vim.luaConfigRC.treesitter = nvim.dag.entryAnywhere ''
+        require'nvim-treesitter.configs'.setup {
+          highlight = {
+            enable = true,
+            disable = {},
+          },
 
-    vim.autocomplete.sources = if usingLsp then { } else { "treesitter" = "[Treesitter]"; };
+          auto_install = false,
+          ensure_installed = {},
 
-    # For some reason treesitter highlighting does not work on start if this is set before syntax on
-    vim.configRC.treesitter-fold = mkIf (foldMode == "treesitter") (
-      nvim.dag.entryBefore [ "base" ] ''
+          incremental_selection = {
+            enable = true,
+            keymaps = {
+              init_selection = "<CR>",
+              scope_incremental = "<CR>",
+              node_incremental = "<TAB>",
+              node_decremental = "<S-TAB>",
+            },
+          }
+        }
+      '';
+    }
+
+    (mkIf (cfg.context) {
+      vim.startPlugins = [ "treesitter-context" ];
+      vim.luaConfigRC.treesitter-context = nvim.dag.entryAnywhere ''
+        require('treesitter-context').setup()
+      '';
+      vim.configRC.treesitter-context = nvim.dag.entryAnywhere ''
+        hi TreesitterContextBottom gui=NONE ${optionalString transparentBackground "guibg=#202328"}
+      '';
+    })
+
+    (mkIf (usingNvimCmp && !usingLsp) { vim.startPlugins = [ "cmp-treesitter" ]; })
+
+    (mkIf (!usingLsp) {
+      vim.autocomplete.sources = {
+        "treesitter" = "[Treesitter]";
+      };
+    })
+
+    (mkIf (foldMode == "treesitter") {
+      # For some reason treesitter highlighting does not work on start if this is set before syntax on
+      vim.configRC.treesitter-fold = nvim.dag.entryBefore [ "base" ] ''
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
         set nofoldenable
-      ''
-    );
-
-    vim.configRC.treesitter-context = mkIf (cfg.context) (
-      nvim.dag.entryAnywhere ''
-        hi TreesitterContextBottom gui=NONE ${optionalString config.vim.visuals.transparentBackground "guibg=#202328"}
-      ''
-    );
-
-    vim.luaConfigRC.treesitter = nvim.dag.entryAnywhere ''
-      ${optionalString cfg.context "require('treesitter-context').setup()"}
-      require'nvim-treesitter.configs'.setup {
-        highlight = {
-          enable = true,
-          disable = {},
-        },
-
-        auto_install = false,
-        ensure_installed = {},
-
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<CR>",
-            scope_incremental = "<CR>",
-            node_incremental = "<TAB>",
-            node_decremental = "<S-TAB>",
-          },
-        }
-      }
-    '';
-  };
+      '';
+    })
+  ]);
 }
