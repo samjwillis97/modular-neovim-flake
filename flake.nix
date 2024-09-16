@@ -222,6 +222,10 @@
       url = "github:folke/ts-comments.nvim";
       flake = false;
     };
+    plugin-quicker = {
+      url = "github:stevearc/quicker.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -362,6 +366,10 @@
         telescope = {
           enable = true;
           frecency.enable = true;
+        };
+        qol = {
+          enable = true;
+          quickfix.enable = true;
         };
         nmap = {
           "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>";

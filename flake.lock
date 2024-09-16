@@ -810,6 +810,22 @@
         "type": "github"
       }
     },
+    "plugin-quicker": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1726193032,
+        "narHash": "sha256-vhDXkE33NkiCs8PUB2PIzljaL15V3Ac62FRgnEZs06M=",
+        "owner": "stevearc",
+        "repo": "quicker.nvim",
+        "rev": "183041a46d6c908eefb1c23ea02cce9c8f41256e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "quicker.nvim",
+        "type": "github"
+      }
+    },
     "plugin-rhubarb": {
       "flake": false,
       "locked": {
@@ -1122,6 +1138,7 @@
         "plugin-onedark": "plugin-onedark",
         "plugin-plenary-nvim": "plugin-plenary-nvim",
         "plugin-promise-async": "plugin-promise-async",
+        "plugin-quicker": "plugin-quicker",
         "plugin-rhubarb": "plugin-rhubarb",
         "plugin-surround": "plugin-surround",
         "plugin-telescope": "plugin-telescope",

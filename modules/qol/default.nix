@@ -13,6 +13,7 @@ in
     ./harpoon.nix
     ./tmux-navigator.nix
     ./sneak.nix
+    ./quickfix.nix
   ];
   options.vim.qol = {
     enable = mkEnableOption "qol";
