@@ -15,9 +15,9 @@ let
         local cwd = vim.fn.getcwd()
         local prettierExists = vim.fn.executable('prettier') == 1
         if prettierExists == true then
-          prettierScript = "${pkgs.nodePackages.prettier}/bin/prettier"
-        else
           prettierScript = "prettier"
+        else
+          prettierScript = "${pkgs.nodePackages.prettier}/bin/prettier"
         end
         return {
           command = prettierScript,
