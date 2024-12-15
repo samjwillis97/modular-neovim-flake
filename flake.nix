@@ -222,6 +222,10 @@
       url = "github:folke/ts-comments.nvim";
       flake = false;
     };
+    plugin-smear-cursor = {
+      url = "github:sphamba/smear-cursor.nvim";
+      flake = false;
+    };
 
     # Themes
     plugin-tokyonight = {
@@ -283,7 +287,8 @@
       baseConfig = bareConfig // {
         theme = {
           enable = true;
-          name = "catppuccin";
+          name = "onedark";
+          style = "darker";
         };
         filetree = {
           enable = true;
@@ -365,6 +370,14 @@
         };
         nmap = {
           "<C-f>" = "<cmd>silent !tmux neww tmux-sessionizer<CR>";
+        };
+        qol = {
+          enable = true;
+          cursor = {
+            smear = {
+              enable = false;
+            };
+          };
         };
       };
     in
