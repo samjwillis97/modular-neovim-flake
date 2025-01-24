@@ -28,5 +28,8 @@
     foldenable = true;
     foldlevelstart = 5;
     foldcolumn = "0";
+
+    splitbelow = true;
+    splitright = true;
   };
 }

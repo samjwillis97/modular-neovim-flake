@@ -19,6 +19,8 @@ in
     nvim-tree = {
       enable = true;
 
+      hijackCursor = true;
+
       view = {
         width = 35;
         float = {
