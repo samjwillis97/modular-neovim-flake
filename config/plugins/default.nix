@@ -16,5 +16,6 @@
     ./lualine.nix
     ./indent-blankline.nix
     ./avante.nix
+    ./nvim-ufo.nix
   ];
 }
