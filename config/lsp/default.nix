@@ -25,7 +25,14 @@
 
         gopls.enable = true;
 
+        lua_ls.enable = true;
+
         ts_ls.enable = true;
+        eslint.enable = true;
+        svelte.enable = true;
+
+        jsonls.enable = true;
+        yamlls.enable = true;
       };
     };
   };
