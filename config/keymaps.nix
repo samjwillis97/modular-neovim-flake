@@ -5,6 +5,11 @@
       mode = "i";
       action = "<Esc>";
     }
+    {
+      key = "<leader><space>";
+      mode = "n";
+      action = "<CMD>nohlsearch<CR>";
+    }
     # Enable this for <space> as leader
     # {
     #   key = "<space>";

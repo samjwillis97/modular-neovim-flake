@@ -53,7 +53,7 @@ in
       actions = {
         windowPicker = {
           enable = true;
-          chars = "JDKSLA";
+          chars = "FJDKSLA";
         };
       };
     };

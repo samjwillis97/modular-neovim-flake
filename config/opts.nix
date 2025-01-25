@@ -31,5 +31,7 @@
 
     splitbelow = true;
     splitright = true;
+
+    swapfile = false;
   };
 }

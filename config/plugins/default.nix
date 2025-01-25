@@ -10,5 +10,10 @@
     ./autopairs.nix
     ./colorizer.nix
     ./ts-comments.nix
+    ./conform.nix
+    ./telescope.nix
+    ./tmux-navigator.nix
+    ./lualine.nix
+    ./indent-blankline.nix
   ];
 }
