@@ -8,5 +8,6 @@
     ./lsp
     ./plugins
     ./cmp.nix
+    ./debugger.nix
   ];
 }

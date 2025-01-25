@@ -1,6 +1,5 @@
 {
   imports = [
-
     ./fidget.nix
   ];
 
@@ -21,7 +20,11 @@
       servers = {
         nil_ls.enable = true;
         # nixd.enable = true;
+
         bashls.enable = true;
+
+        gopls.enable = true;
+
         ts_ls.enable = true;
       };
     };
