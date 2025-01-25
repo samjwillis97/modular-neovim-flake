@@ -15,5 +15,6 @@
     ./tmux-navigator.nix
     ./lualine.nix
     ./indent-blankline.nix
+    ./avante.nix
   ];
 }

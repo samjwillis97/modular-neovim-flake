@@ -1,5 +1,6 @@
 {
   imports = [
+
     ./fidget.nix
   ];
 
@@ -8,11 +9,13 @@
       enable = true;
 
       keymaps = {
-        # "gD" = "declaration";
-        # "K" = "hover";
-        # "<leader>k" = "signature_help";
-        # "<leader>t" = "type_definition";
-        # "<leader>r" = "rename";
+        lspBuf = {
+          "gD" = "declaration";
+          "K" = "hover";
+          "<leader>k" = "signature_help";
+          "<leader>t" = "type_definition";
+          "<leader>r" = "rename";
+        };
       };
 
       servers = {
