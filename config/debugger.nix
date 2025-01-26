@@ -106,8 +106,28 @@ in
     }
   '';
 
+  highlightOverride = {
+    "DapBreakpoint" = {
+      fg = "#E06C75";
+    };
+    "DapLogPoint" = {
+      fg = "#61afef";
+    };
+    "DapStopped" = {
+      fg = "#98c379";
+    };
+  };
+
   plugins.dap = {
     enable = true;
+
+    signs = {
+      "dapBreakpoint" = { text=""; texthl="DapBreakpoint"; linehl="DapBreakpoint"; numhl="DapBreakpoint"; };
+      "dapBreakpointCondition" = { text=""; texthl="DapBreakpoint"; linehl="DapBreakpoint"; numhl="DapBreakpoint"; };
+      "dapLogPoint" = { text=""; texthl="DapLogPoint"; linehl="DapLogPoint"; numhl="DapLogPoint"; };
+      "dapStopped" = { text=""; texthl="DapStopped"; linehl="DapStopped"; numhl="DapStopped"; };
+      "dapBreakpointRejected" = { text=""; texthl="DapBreakpoint"; linehl="DapBreakpoint"; numhl="DapBreakpoint"; };
+    };
 
     adapters = {
       # servers = {
