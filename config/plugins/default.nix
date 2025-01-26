@@ -17,5 +17,9 @@
     ./indent-blankline.nix
     ./avante.nix
     ./nvim-ufo.nix
+    ./undotree.nix
+    ./surround.nix
+    ./which-key.nix
+    ./diffview.nix
   ];
 }

@@ -1,5 +1,5 @@
 {
-  plugins.undotree = {
+  plugins.diffview = {
     enable = true;
   };
 }

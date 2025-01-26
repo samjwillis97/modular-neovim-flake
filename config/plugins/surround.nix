@@ -1,5 +1,5 @@
 {
-  plugins.undotree = {
+  plugins.vim-surround = {
     enable = true;
   };
 }
