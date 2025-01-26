@@ -3,6 +3,17 @@
     ./fidget.nix
   ];
 
+  keymaps = [
+    {
+      key = "]d";
+      action = "<CMD>lua vim.diagnostic.goto_prev()<CR>";
+    }
+    {
+      key = "[d";
+      action = "<CMD>lua vim.diagnostic.goto_next()<CR>";
+    }
+  ];
+
   plugins = {
     lsp = {
       enable = true;

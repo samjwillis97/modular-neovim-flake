@@ -9,5 +9,6 @@
     ./plugins
     ./cmp.nix
     ./debugger.nix
+    ./diagnostics.nix
   ];
 }

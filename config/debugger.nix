@@ -21,7 +21,9 @@ let
   };
 in
 {
-  extraPlugins = [nvim-dap-vscode-js];
+  extraPlugins = [
+    nvim-dap-vscode-js
+  ];
 
   keymaps = [
     {
@@ -120,9 +122,37 @@ in
     extensions = {
       dap-ui = {
         enable = true;
+
+        layouts = [
+          {
+            elements = [
+              {
+                id = "scopes";
+                size = 0.5;
+              }
+              "breakpoints"
+              "watches"
+              "stacks"
+            ];
+            size = 50; # 50 columns
+            position = "left";
+          }
+          {
+            elements = [
+              "repl"
+              "watches"
+            ];
+            size = 25; # 25%?
+            position = "bottom";
+          }
+        ];
       };
       dap-virtual-text = {
         enable = true;
+      };
+      dap-go = {
+        enable = true;
+        delve.path = "${pkgs.delve}/bin/dlv";
       };
     };
   };

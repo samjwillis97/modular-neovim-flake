@@ -72,7 +72,7 @@ in
       scope = {
         enabled = true;
         show_start = true;
-        show_exact_scope = true;
+        show_exact_scope = false;
         show_end = true;
         highlight = highlightNames;
         # whitespace.highlight = [ "Whitespace" ];
