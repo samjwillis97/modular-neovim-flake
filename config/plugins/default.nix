@@ -21,5 +21,7 @@
     ./surround.nix
     ./which-key.nix
     ./diffview.nix
+    ./lastplace.nix
+    ./actions-preview.nix
   ];
 }
