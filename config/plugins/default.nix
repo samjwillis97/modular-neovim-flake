@@ -23,5 +23,9 @@
     ./diffview.nix
     ./lastplace.nix
     ./actions-preview.nix
+    ./noice.nix
+    ./yazi.nix
+    # ./lightbulb.nix
+    # ./profiler.nix
   ];
 }

@@ -10,5 +10,6 @@
     ./cmp.nix
     ./debugger.nix
     ./diagnostics.nix
+    # ./lazyload.nix
   ];
 }
