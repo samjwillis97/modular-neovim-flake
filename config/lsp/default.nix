@@ -42,6 +42,8 @@
         eslint.enable = true;
         svelte.enable = true;
 
+        pyright.enable = true;
+
         jsonls.enable = true;
         yamlls.enable = true;
       };
