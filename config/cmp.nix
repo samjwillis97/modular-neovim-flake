@@ -10,10 +10,6 @@
       enable = true;
     };
 
-    cmp-emoji = {
-      enable = true;
-    };
-
     cmp-nvim-lsp = {
       enable = true;
     };
@@ -40,15 +36,15 @@
         '';
 
         sources = [
-          { name = "copilot"; }
           { name = "nvim_lsp"; }
+          { name = "copilot"; }
           { name = "luasnip"; }
           {
             name = "buffer";
             option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
           }
-          { name = "nvim_lua"; }
           { name = "path"; }
+          { name = "nvim_lua"; }
         ];
 
         formatting = {

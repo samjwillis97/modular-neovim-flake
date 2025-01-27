@@ -12,6 +12,6 @@
 
     telescope.lazyLoad.settings.cmd = "Telescope";
 
-    lazyLoad.settings.cmd = [ "Yazi" ];
+    yazi.lazyLoad.settings.cmd = [ "Yazi" ];
   };
 }
