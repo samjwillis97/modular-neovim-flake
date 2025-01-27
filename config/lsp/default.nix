@@ -5,11 +5,11 @@
 
   keymaps = [
     {
-      key = "]d";
+      key = "[d";
       action = "<CMD>lua vim.diagnostic.goto_prev()<CR>";
     }
     {
-      key = "[d";
+      key = "]d";
       action = "<CMD>lua vim.diagnostic.goto_next()<CR>";
     }
   ];
