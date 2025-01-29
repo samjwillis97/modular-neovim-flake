@@ -35,6 +35,11 @@
         nixvim' = nixvim.legacyPackages.${system};
         nvim = nixvim'.makeNixvimWithModule {
           inherit pkgs;
+
+          extraSpecialArgs = {
+              inherit inputs;
+          };
+
           module = config;
         };
       in

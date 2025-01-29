@@ -23,7 +23,8 @@
     ./diffview.nix
     ./lastplace.nix
     ./actions-preview.nix
-    ./noice.nix
+    # still a bit rough around the edges for me
+    # ./noice.nix 
     ./yazi.nix
     # ./lightbulb.nix
     # ./profiler.nix

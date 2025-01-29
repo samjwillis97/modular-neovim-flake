@@ -1,9 +1,18 @@
 {
   colorschemes = {
-    dracula = {
-      autoLoad = true;
-      enable = true;
-    };
+    # ayu = {
+    #   autoLoad = true;
+    #   enable = true;
+    #
+    #   settings = {
+    #     mirage = true;
+    #     terminal = false;
+    #   };
+    # };
+    # dracula = {
+    #   autoLoad = true;
+    #   enable = true;
+    # };
     # dracula-nvim = {
     #   autoLoad = true;
     #   enable = true;
@@ -13,13 +22,21 @@
     #   enable = true;
     # };
     # monokai-pro = {
-    #   autoLoad = false;
+    #   autoLoad = true;
     #   enable = true;
     # };
     # one = {
-    #   autoLoad = false;
+    #   autoLoad = true;
     #   enable = true;
     # };
+    onedark = {
+      autoLoad = true;
+      enable = true;
+
+      settings = {
+        style = "dark";
+      };
+    };
     # tokyonight = {
     #   autoLoad = false;
     #   enable = true;
