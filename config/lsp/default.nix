@@ -1,6 +1,6 @@
 {
   imports = [
-    # ./fidget.nix
+    ./fidget.nix
   ];
 
   keymaps = [

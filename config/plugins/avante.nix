@@ -8,6 +8,12 @@
 
     settings = {
       file_types = [ "markdown" "Avante" ];
+
+      code = {
+        above = "▄";
+        below = "▀";
+        style = "normal";
+      };
     };
   };
 

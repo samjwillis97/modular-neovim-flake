@@ -2,7 +2,10 @@
   plugins.lualine = {
     enable = true;
 
-    # settings = {
-    # };
+    settings = {
+      options = {
+        theme = "catppuccin";
+      };
+    };
   };
 }
