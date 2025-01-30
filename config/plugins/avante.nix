@@ -30,6 +30,7 @@
 
       behaviour = {
         auto_suggestions = false;
+        auto_focus_sidebar = false;
       };
     };
   };
