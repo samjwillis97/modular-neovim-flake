@@ -1,28 +1,60 @@
-{pkgs, ...}:
+{pkgs, inputs, lib, ...}:
 let
-  jsConfiguration = [
-    # {
-    #   name = "Launch file";
-    #   type = "pwa-node";
-    #   request = "launch";
-    #   # program = "${file}";
-    #   # cwd = "${workspaceFolder}";
-    # }
-  ];
+  #  vscode-js-debug = pkgs.stdenv.mkDerivation rec {
+  #   pname = "vscode-js-debug";
+  #   version = "v1.85.0";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "microsoft";
+  #     repo = pname;
+  #     rev = version;
+  #     hash = "sha256-mBXH3tqoiu3HIo1oZdQCD7Mq8Tvkt2DXfcoXb7KEgXE=";
+  #   };
+  #
+  #   nativeBuildInputs = with pkgs; [
+  #     python3
+  #     nodejs
+  #     cacert
+  #   ] ++ lib.optionals pkgs.stdenv.isDarwin [
+  #     darwin.cctools
+  #   ];
+  #   makeCacheWritable = true;
+  #   dontNpmBuild = true;
+  #
+  #   configurePhase = ''
+  #     runHook preConfigure
+  #
+  #     export HOME=$(pwd)
+  #     npm install --legacy-peer-deps
+  #
+  #     runHook postConfigure
+  #   '';
+  #
+  #   buildPhase = ''
+  #     runHook preBuild
+  #
+  #     export HOME=$(pwd)
+  #     npx gulp vsDebugServerBundle
+  #     mkdir -p $out/out
+  #     cp -r dist/* $out/out
+  #
+  #     runHook postBuild
+  #   '';
+  # };
+  #
   
-  nvim-dap-vscode-js = pkgs.vimUtils.buildVimPlugin {
-    name = "vim-dap-vscode-js";
-    src = pkgs.fetchFromGitHub {
-      owner = "mxsdev";
-      repo = "nvim-dap-vscode-js";
-      rev = "e7c05495934a658c8aa10afd995dacd796f76091";
-      sha256 = "sha256-lZABpKpztX3NpuN4Y4+E8bvJZVV5ka7h8x9vL4r9Pjk=";
-    };
-  };
+  # nvim-dap-vscode-js = pkgs.vimUtils.buildVimPlugin {
+  #   name = "vim-dap-vscode-js";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "mxsdev";
+  #     repo = "nvim-dap-vscode-js";
+  #     rev = "e7c05495934a658c8aa10afd995dacd796f76091";
+  #     sha256 = "sha256-lZABpKpztX3NpuN4Y4+E8bvJZVV5ka7h8x9vL4r9Pjk=";
+  #   };
+  # };
 in
 {
   extraPlugins = [
-    nvim-dap-vscode-js
+    # nvim-dap-vscode-js
   ];
 
   keymaps = [
@@ -48,63 +80,65 @@ in
     }
   ];
 
-  extraConfigLua = ''
-    local dap, dapui = require("dap"), require("dapui")
-    local dap_vscode_js = require("dap-vscode-js")
+  # extraConfigLua = ''
+    #   -- local dap, dapui = require("dap"), require("dapui")
 
-    -- DEBUG LISTENERS
-    dap.listeners.before.attach.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.launch.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.event_terminated.dapui_config = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited.dapui_config = function()
-      dapui.close()
-    end
+    #   -- -- DEBUG VS CODE
+    #   -- require("dap-vscode-js").setup({
+    #   --   node_path = '${pkgs.nodejs_22}/bin/node',
+    #   --   debugger_path = '${vscode-js-debug}',
+    #   --   -- debugger_cmd = ,
+    #   --   adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
+    #   -- })
 
-    dap.set_log_level('DEBUG')
-
-    -- DEBUG VS CODE
-    dap_vscode_js.setup({
-      adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }
-    })
-
-    -- DEBUG CONFIG TYPESCRIPT
-    dap.configurations.typescript = {
-      {
-        type = "pwa-node",
-        request = "launch",
-        name = "Launch file",
-        program = "''${file}",
-        cwd = "''${workspaceFolder}",
-      },
-      {
-        type = "pwa-node",
-        request = "attach",
-        name = "Attach",
-        processId = require'dap.utils'.pick_process,
-        cwd = "''${workspaceFolder}",
-      },
-      {
-        type = "pwa-node",
-        request = "launch",
-        name = "Run Application",
-        program = "dist/index.js",
-        cwd = "''${workspaceFolder}",
-      },
-      {
-        type = "pwa-node",
-        request = "launch",
-        name = "Run npm test",
-        program = "node_modules/mocha/bin/_mocha",
-        cwd = "''${workspaceFolder}",
-      }
-    }
-  '';
+    #   -- DEBUG LISTENERS
+    #   -- dap.listeners.before.attach.dapui_config = function()
+    #   --   dapui.open()
+    #   -- end
+    #   -- dap.listeners.before.launch.dapui_config = function()
+    #   --   dapui.open()
+    #   -- end
+    #   -- dap.listeners.before.event_terminated.dapui_config = function()
+    #   --   dapui.close()
+    #   -- end
+    #   -- dap.listeners.before.event_exited.dapui_config = function()
+    #   --   dapui.close()
+    #   -- end
+    #   --
+    #   -- dap.set_log_level('DEBUG')
+    #   --
+    #   -- -- DEBUG CONFIG TYPESCRIPT
+    #   -- dap.configurations.typescript = {
+    #   --   {
+    #   --     type = "pwa-node",
+    #   --     request = "launch",
+    #   --     name = "Launch file",
+    #   --     program = "''${file}",
+    #   --     cwd = "''${workspaceFolder}",
+    #   --   },
+    #   --   {
+    #   --     type = "pwa-node",
+    #   --     request = "attach",
+    #   --     name = "Attach",
+    #   --     processId = require'dap.utils'.pick_process,
+    #   --     cwd = "''${workspaceFolder}",
+    #   --   },
+    #   --   {
+    #   --     type = "pwa-node",
+    #   --     request = "launch",
+    #   --     name = "Run Application",
+    #   --     program = "dist/index.js",
+    #   --     cwd = "''${workspaceFolder}",
+    #   --   },
+    #   --   {
+    #   --     type = "pwa-node",
+    #   --     request = "launch",
+    #   --     name = "Run npm test",
+    #   --     program = "node_modules/mocha/bin/_mocha",
+    #   --     cwd = "''${workspaceFolder}",
+    #   --   }
+    #   -- }
+    #''   ;
 
   highlightOverride = {
     "DapBreakpoint" = {

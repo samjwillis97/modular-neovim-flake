@@ -28,5 +28,6 @@
     ./yazi.nix
     # ./lightbulb.nix
     # ./profiler.nix
+    ./neotest.nix
   ];
 }
