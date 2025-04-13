@@ -28,24 +28,44 @@
     }
     {
       key = "<C-J>";
-      action = "<C-W><C-J>";
+      action = "<CMD>NavigatorDown<CR>";
       options.desc = "Move to window below";
     }
     {
       key = "<C-K>";
-      action = "<C-W><C-K>";
+      action = "<CMD>NavigatorUp<CR>";
       options.desc = "Move to window above";
     }
     {
       key = "<C-L>";
-      action = "<C-W><C-L>";
+      action = "<CMD>NavigatorRight<CR>";
       options.desc = "Move to window right";
     }
     {
       key = "<C-H>";
-      action = "<C-W><C-H>";
+      action = "<CMD>NavigatorLeft<CR>";
       options.desc = "Move to window left";
     }
+    # {
+    #   key = "<C-J>";
+    #   action = "<C-W><C-J>";
+    #   options.desc = "Move to window below";
+    # }
+    # {
+    #   key = "<C-K>";
+    #   action = "<C-W><C-K>";
+    #   options.desc = "Move to window above";
+    # }
+    # {
+    #   key = "<C-L>";
+    #   action = "<C-W><C-L>";
+    #   options.desc = "Move to window right";
+    # }
+    # {
+    #   key = "<C-H>";
+    #   action = "<C-W><C-H>";
+    #   options.desc = "Move to window left";
+    # }
     {
       key = "<C-U>";
       action = "<C-U>zz";

@@ -29,5 +29,6 @@
     # ./lightbulb.nix
     # ./profiler.nix
     ./neotest.nix
+    # ./navigator.nix
   ];
 }

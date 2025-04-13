@@ -10,6 +10,7 @@
     ./cmp.nix
     ./debugger.nix
     ./diagnostics.nix
+    # ./zellij.nix
     # ./lazyload.nix
   ];
 }
