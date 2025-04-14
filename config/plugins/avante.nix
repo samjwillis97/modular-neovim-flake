@@ -1,6 +1,8 @@
+{ pkgs, ... }:
 {
   plugins.copilot-lua = {
     enable = true;
+    nodePackage = pkgs.nodejs_20;
   };
 
   plugins.render-markdown = {
