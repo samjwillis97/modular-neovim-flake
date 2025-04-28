@@ -152,31 +152,33 @@ in
     };
   };
 
-  plugins.dap = {
-    enable = true;
+  plugins = {
+    dap = {
+      enable = true;
 
-    signs = {
-      "dapBreakpoint" = { text=""; texthl="DapBreakpoint"; linehl="DapBreakpoint"; numhl="DapBreakpoint"; };
-      "dapBreakpointCondition" = { text=""; texthl="DapBreakpoint"; linehl="DapBreakpoint"; numhl="DapBreakpoint"; };
-      "dapLogPoint" = { text=""; texthl="DapLogPoint"; linehl="DapLogPoint"; numhl="DapLogPoint"; };
-      "dapStopped" = { text=""; texthl="DapStopped"; linehl="DapStopped"; numhl="DapStopped"; };
-      "dapBreakpointRejected" = { text=""; texthl="DapBreakpoint"; linehl="DapBreakpoint"; numhl="DapBreakpoint"; };
+      signs = {
+        "dapBreakpoint" = { text=""; texthl="DapBreakpoint"; linehl="DapBreakpoint"; numhl="DapBreakpoint"; };
+        "dapBreakpointCondition" = { text=""; texthl="DapBreakpoint"; linehl="DapBreakpoint"; numhl="DapBreakpoint"; };
+        "dapLogPoint" = { text=""; texthl="DapLogPoint"; linehl="DapLogPoint"; numhl="DapLogPoint"; };
+        "dapStopped" = { text=""; texthl="DapStopped"; linehl="DapStopped"; numhl="DapStopped"; };
+        "dapBreakpointRejected" = { text=""; texthl="DapBreakpoint"; linehl="DapBreakpoint"; numhl="DapBreakpoint"; };
+      };
+
+      adapters = {
+        # servers = {
+        # };
+      };
+
+      configurations = {
+        # javascript = jsConfiguration;
+        # typescript = jsConfiguration;
+      };
     };
 
-    adapters = {
-      # servers = {
-      # };
-    };
+    dap-ui = {
+      enable = true;
 
-    configurations = {
-      # javascript = jsConfiguration;
-      # typescript = jsConfiguration;
-    };
-
-    extensions = {
-      dap-ui = {
-        enable = true;
-
+      settings = {
         layouts = [
           {
             elements = [
@@ -201,11 +203,15 @@ in
           }
         ];
       };
-      dap-virtual-text = {
-        enable = true;
-      };
-      dap-go = {
-        enable = true;
+    };
+
+    dap-virtual-text = {
+      enable = true;
+    };
+
+    dap-go = {
+      enable = true;
+      settings = {
         delve.path = "${pkgs.delve}/bin/dlv";
       };
     };
