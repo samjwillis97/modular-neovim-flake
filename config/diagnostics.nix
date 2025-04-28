@@ -1,5 +1,5 @@
 {
-  diagnostics = {
+  diagnostic.config = {
     underline = true;
     virtual_text = false;
     float = {
