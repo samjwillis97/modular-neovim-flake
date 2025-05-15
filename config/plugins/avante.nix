@@ -1,10 +1,14 @@
 { pkgs, ... }:
+let 
+  # copilotModel = "gpt-4o-2024-11-20";
+  copilotModel = "claude-3.7-sonnet";
+in
 {
   plugins.copilot-lua = {
     enable = true;
     nodePackage = pkgs.nodejs_20;
     settings = {
-      copilot_model = "claude-3.7-sonnet";
+      copilot_model = copilotModel;
 
       suggestion = {
         enabled = true;
@@ -29,6 +33,8 @@
     };
   };
 
+  opts.laststatus = 3;
+
   plugins.avante = {
     enable = true;
 
@@ -41,8 +47,7 @@
 
       copilot = {
         endpoint = "https://api.githubcopilot.com";
-        # model = "gpt-4o-2024-11-20";
-        model = "claude-3.7-sonnet";
+        model = copilotModel;
         proxy = null;
         allow_insecure = false;
         timeout = 30000;
