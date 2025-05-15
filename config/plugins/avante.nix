@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let 
-  # copilotModel = "gpt-4o-2024-11-20";
-  copilotModel = "claude-3.7-sonnet";
+  copilotModel = "gpt-4o-2024-11-20";
+  # copilotModel = "claude-3.7-sonnet";
 in
 {
   plugins.copilot-lua = {
@@ -12,7 +12,7 @@ in
 
       suggestion = {
         enabled = true;
-        auto_trigger = true;
+        auto_trigger = false;
         hide_during_completion = true;
         trigger_on_accept = true;
       };
@@ -60,9 +60,15 @@ in
       };
 
       behaviour = {
-        auto_focus_sidebar = false;
-        auto_suggestions = false; # Experimental
         enable_token_counting = true;
+        auto_focus_sidebar = false;
+
+        # Smart Tab
+        # disabled because - https://github.com/yetone/avante.nvim/issues/1048
+        auto_suggestions = false; # Experimental
+        # auto_set_keymaps = true;
+        # auto_apply_diff_after_generation = false;
+        # support_paste_from_clipboard = false;
       };
     };
   };

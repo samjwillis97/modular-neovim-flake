@@ -1,9 +1,10 @@
+{ lib, ... }:
 {
   plugins = {
     luasnip.enable = true;
 
     copilot-cmp = {
-      enable = true;
+      enable = lib.mkForce false;
     };
 
     cmp-buffer = {
