@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   plugins = {
     blink-copilot = {
@@ -16,12 +16,12 @@
           nerd_font_variant = "mono";
         };
 
-        signature = {
-          window = {
-            border = "single";
-          };
-        };
-
+        # signature = {
+        #   window = {
+        #     border = "single";
+        #   };
+        # };
+        #
         completion = {
           ghost_text = {
             enabled = true;
@@ -29,15 +29,15 @@
           };
 
           menu = {
-            border = "single";
+            # border = "single";
             auto_show = false; # only show menu on <C-Space>
           };
 
-          documentation = {
-            window = {
-              border = "single";
-            };
-          };
+          # documentation = {
+          #   window = {
+          #     border = "single";
+          #   };
+          # };
 
           accept = {
             auto_brackets = {
@@ -106,13 +106,27 @@
         keymap = {
           preset = "default";
 
-          # if the completion menu is up, enter should select and accpt
+          # if the completion menu is up, enter should select and accept
           # otherwise enter should be a newline like default
+          "<Enter>" = let
+            function = lib.nixvim.utils.mkRaw ''
+              function(cmp)
+                if cmp.is_menu_visible() then 
+                  return cmp.accept()
+                end
+              end
+            '';
+          in
+          [
+            function
+            "fallback"
+          ];
 
-          # the completion menu should be opened using <C-space>
-          # "<enter>" = [
-          #   "select_and_accept"
-          # ];
+          "<C-d>" = [ "scroll_documentation_up" "fallback" ];
+          "<C-f>" = [ "scroll_documentation_down" "fallback" ];
+
+          # This handles "Tab" accepting the ghost text
+          "<Tab>" = [ "select_and_accept" "fallback" ];
         };
       };
     };
