@@ -7,7 +7,8 @@
     ./treesitter.nix
     ./lsp
     ./plugins
-    ./cmp.nix
+    # ./cmp.nix
+    ./blink.nix
     ./debugger.nix
     ./diagnostics.nix
     # ./zellij.nix

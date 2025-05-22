@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let 
-  copilotModel = "gpt-4o-2024-11-20";
-  # copilotModel = "claude-3.7-sonnet";
+  # copilotModel = "gpt-4o-2024-11-20";
+  copilotModel = "claude-3.7-sonnet";
 in
 {
   plugins.copilot-lua = {
@@ -11,10 +11,11 @@ in
       copilot_model = copilotModel;
 
       suggestion = {
+        enabled = false;
+      };
+
+      panel = {
         enabled = true;
-        auto_trigger = false;
-        hide_during_completion = true;
-        trigger_on_accept = true;
       };
     };
   };
