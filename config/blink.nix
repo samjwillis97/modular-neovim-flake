@@ -1,10 +1,16 @@
 { lib, ... }:
+let 
+  border = false;
+in
 {
   plugins = {
     blink-copilot = {
       enable = true;
     };
 
+    colorful-menu = {
+      enable = true;
+    };
 
     # TODO: make it so first completion is accepted using tab
     blink-cmp = {
@@ -16,12 +22,12 @@
           nerd_font_variant = "mono";
         };
 
-        # signature = {
-        #   window = {
-        #     border = "single";
-        #   };
-        # };
-        #
+        signature = {
+          window = {
+            border = if border then "single" else null;
+          };
+        };
+
         completion = {
           ghost_text = {
             enabled = true;
@@ -29,15 +35,34 @@
           };
 
           menu = {
-            # border = "single";
+            enabled = true;
+            border = if border then "single" else null;
             auto_show = false; # only show menu on <C-Space>
+
+            # Supporting colorful menu
+            draw = {
+              # This is a really annoying datastructure to define in Nix
+              columns = lib.nixvim.utils.mkRaw ''
+                { { "kind_icon" }, { "label", gap = 1 } }
+              '';
+              components = {
+                label = {
+                  text = lib.nixvim.utils.mkRaw ''
+                      require("colorful-menu").blink_components_text
+                  '';
+                  highlight = lib.nixvim.utils.mkRaw ''
+                      require("colorful-menu").blink_components_highlight
+                  '';
+                };
+              };
+            };
           };
 
-          # documentation = {
-          #   window = {
-          #     border = "single";
-          #   };
-          # };
+          documentation = {
+            window = {
+              border = if border then "single" else null;
+            };
+          };
 
           accept = {
             auto_brackets = {
@@ -109,18 +134,23 @@
           # if the completion menu is up, enter should select and accept
           # otherwise enter should be a newline like default
           "<Enter>" = let
-            function = lib.nixvim.utils.mkRaw ''
-              function(cmp)
-                if cmp.is_menu_visible() then 
-                  return cmp.accept()
+              function = lib.nixvim.utils.mkRaw ''
+                function(cmp)
+                  if cmp.is_menu_visible() then 
+                    return cmp.accept()
+                  end
                 end
-              end
-            '';
-          in
-          [
-            function
-            "fallback"
-          ];
+              '';
+            in
+            [
+              function
+              "fallback"
+            ];
+
+          # "<C-space>" = [
+          #   "show"
+          #   "fallback"
+          # ];
 
           "<C-d>" = [ "scroll_documentation_up" "fallback" ];
           "<C-f>" = [ "scroll_documentation_down" "fallback" ];
