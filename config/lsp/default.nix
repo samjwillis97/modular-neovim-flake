@@ -38,7 +38,12 @@
 
         lua_ls.enable = true;
 
+        # Not supported lol
+        # csharp_ls.enable = true;
+        # omnisharp.enable = true;
+
         ts_ls.enable = true;
+        html.enable = true;
         eslint.enable = true;
         svelte.enable = true;
 

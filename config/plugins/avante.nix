@@ -6,7 +6,6 @@ in
 {
   plugins.copilot-lua = {
     enable = true;
-    nodePackage = pkgs.nodejs_20;
     settings = {
       copilot_model = copilotModel;
 
@@ -46,14 +45,18 @@ in
       # cursor_applying_provider = "copilot";
       # memory_summary_provider = "copilot";
 
-      copilot = {
-        endpoint = "https://api.githubcopilot.com";
-        model = copilotModel;
-        proxy = null;
-        allow_insecure = false;
-        timeout = 30000;
-        temperature = 0;
-        max_tokens = 175000;
+      providers = {
+        copilot = {
+          endpoint = "https://api.githubcopilot.com";
+          model = copilotModel;
+          proxy = null;
+          allow_insecure = false;
+          timeout = 30000;
+          extra_request_body = {
+            temperature = 0;
+            max_tokens = 175000;
+          };
+        };
       };
 
       hints = {

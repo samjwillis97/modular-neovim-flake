@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   keymaps = [
     {
@@ -12,5 +13,9 @@
     }
   ];
 
-  plugins.fugitive.enable = true;
+  plugins = {
+    fugitive.enable = true;
+  };
+
+  extraPlugins = with pkgs.vimPlugins; [ vim-rhubarb ];
 }
