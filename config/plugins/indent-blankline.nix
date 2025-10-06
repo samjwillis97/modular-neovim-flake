@@ -57,7 +57,9 @@ in
   plugins.rainbow-delimiters = {
     enable = true;
 
-    highlight = highlightNames;
+    settings = {
+      highlight = highlightNames;
+    };
   };
 
   plugins.indent-blankline = {
