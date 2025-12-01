@@ -42,6 +42,7 @@
         # csharp_ls.enable = true;
         # omnisharp.enable = true;
 
+        denols.enable = true;
         ts_ls.enable = true;
         html.enable = true;
         eslint.enable = true;
