@@ -42,8 +42,29 @@
         # csharp_ls.enable = true;
         # omnisharp.enable = true;
 
-        denols.enable = true;
-        ts_ls.enable = true;
+        denologs = false;
+        ts_ls = true;
+
+        # # denols only activates in Deno projects (with deno.json or deno.jsonc)
+        # denols = {
+        #   enable = true;
+        #   rootMarkers = [
+        #     "deno.json"
+        #     "deno.jsonc"
+        #   ];
+        #   extraOptions = {
+        #     single_file_support = false;
+        #   };
+        # };
+
+        # ts_ls - DISABLED here, manually configured in luaConfig to prevent conflicts
+        # ts_ls = {
+        #   enable = true;
+        #   extraOptions = {
+        #     single_file_support = false;
+        #   };
+        # };
+
         html.enable = true;
         eslint.enable = true;
         svelte.enable = true;
