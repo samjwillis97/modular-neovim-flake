@@ -3,7 +3,8 @@
     "allow": [
       "Bash(tree:*)",
       "Bash(nix flake:*)",
-      "Bash(nix develop:*)"
+      "Bash(nix develop:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

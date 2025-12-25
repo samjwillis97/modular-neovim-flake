@@ -1,7 +1,8 @@
 { system, nixpkgs, nixvim }:
 let
   pkgs = nixpkgs.legacyPackages.${system};
-  baseModule = import ./config;
+  baseModule = import ./base-config;
+  fullModule = import ./full-config;
 
   # Helper to build nixvim with merged modules
   buildWithModules = modules:
@@ -20,5 +21,5 @@ let
   extendModules = modules: buildWithModules modules;
 in
 {
-  inherit extend extendModules baseModule;
+  inherit extend extendModules baseModule fullModule;
 }

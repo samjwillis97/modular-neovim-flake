@@ -23,15 +23,14 @@
       nixvim,
       ...
     }@inputs:
-    let
-      config = import ./config;
-    in
     flake-utils.lib.eachDefaultSystem (
       system:
       let
         nixvimLib = nixvim.lib.${system};
         pkgs = import nixpkgs { inherit system; };
         nixvim' = nixvim.legacyPackages.${system};
+
+        # Use full-config as the default build
         nvim = nixvim'.makeNixvimWithModule {
           inherit pkgs;
 
@@ -39,7 +38,7 @@
             inherit inputs;
           };
 
-          module = config;
+          module = import ./full-config;
         };
       in
       {
