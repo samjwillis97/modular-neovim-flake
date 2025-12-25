@@ -1,5 +1,0 @@
-{
-  plugins.yazi = {
-    enable = true;
-  };
-}
