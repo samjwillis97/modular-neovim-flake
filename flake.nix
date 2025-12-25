@@ -59,6 +59,10 @@
 
         devShells.default = import ./shell.nix { inherit pkgs; };
 
+        # Extension library for composing with project-specific configs
+        lib = import ./lib.nix {
+          inherit system nixpkgs nixvim;
+        };
       }
     );
 }

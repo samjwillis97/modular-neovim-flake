@@ -42,8 +42,8 @@
         # csharp_ls.enable = true;
         # omnisharp.enable = true;
 
-        denologs = false;
-        ts_ls = true;
+        # denologs = false;
+        ts_ls.enable = true;
 
         # # denols only activates in Deno projects (with deno.json or deno.jsonc)
         # denols = {
