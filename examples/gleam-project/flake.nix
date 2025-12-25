@@ -31,6 +31,9 @@
             (my-neovim.lib.${system}.extendModules [
               ./neovim/gleam.nix
               ./neovim/keymaps.nix
+              {
+                custom.copilot.autocomplete.enable = true;
+              }
             ])
 
             # Gleam tooling

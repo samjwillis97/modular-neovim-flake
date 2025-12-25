@@ -79,6 +79,9 @@ Extend the **base** configuration with inline configuration:
 
 ```nix
 my-neovim.lib.${system}.extend {
+  # Enable Copilot autocomplete (optional)
+  custom.copilot.autocomplete.enable = true;
+
   # Add your language server
   plugins.lsp.servers.rust_analyzer.enable = true;
 
@@ -147,6 +150,7 @@ nixvim.legacyPackages.${system}.makeNixvimWithModule {
 
 See the [`examples/`](./examples/) directory for complete examples:
 
+- **with-copilot.nix** - Enabling Copilot autocomplete with a single option
 - **simple-inline.nix** - Quick inline extension for Python projects
 - **gleam-project/** - Full Gleam project setup with LSP, keymaps, and formatting
 

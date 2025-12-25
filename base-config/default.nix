@@ -10,5 +10,6 @@
     ./plugins
     ./blink.nix
     ./debugger.nix
+    ./copilot-autocomplete.nix
   ];
 }

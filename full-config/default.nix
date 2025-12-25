@@ -8,4 +8,7 @@
     ./debugger.nix
     ./plugins
   ];
+
+  # Enable Copilot autocomplete
+  custom.copilot.autocomplete.enable = true;
 }
