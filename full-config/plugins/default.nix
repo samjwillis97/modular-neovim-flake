@@ -11,7 +11,6 @@
     ./avante.nix
 
     ./diffview.nix
-    ./actions-preview.nix
     ./yazi.nix
   ];
 }

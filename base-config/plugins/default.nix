@@ -20,6 +20,7 @@
     ./surround.nix
     ./which-key.nix
     ./lastplace.nix
+    ./actions-preview.nix
     ./neotest.nix
   ];
 }
