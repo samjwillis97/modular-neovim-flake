@@ -5,6 +5,8 @@
 
     # Lazy load on key mappings
     lazyLoad.settings = {
+      cmd = "Telescope";
+
       keys = [
         "<leader>ff"
         "<leader>sf"
