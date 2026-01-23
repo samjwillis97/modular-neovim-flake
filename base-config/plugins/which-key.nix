@@ -4,7 +4,7 @@
 
     # Load after startup for keymap help
     lazyLoad.settings = {
-      event = "VeryLazy";
+      event = "DeferredUIEnter";
     };
 
     settings = {

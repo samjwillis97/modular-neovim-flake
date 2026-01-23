@@ -10,6 +10,9 @@ in
   config = lib.mkIf cfg.enable {
     plugins.blink-copilot = {
       enable = true;
+      lazyLoad.settings = {
+        event = "DeferredUIEnter";
+      };
     };
 
     plugins.blink-cmp.settings = {

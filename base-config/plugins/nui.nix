@@ -4,7 +4,7 @@
 
     # Load on VeryLazy as a dependency library for other plugins
     lazyLoad.settings = {
-      event = "VeryLazy";
+      event = "DeferredUIEnter";
     };
   };
 }

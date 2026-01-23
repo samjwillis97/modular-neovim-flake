@@ -4,7 +4,7 @@
 
     # Load on VeryLazy for surround operations
     lazyLoad.settings = {
-      event = "VeryLazy";
+      event = "DeferredUIEnter";
     };
   };
 }

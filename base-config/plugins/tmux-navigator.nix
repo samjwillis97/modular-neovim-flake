@@ -4,7 +4,7 @@
 
     # Load on VeryLazy for navigation
     lazyLoad.settings = {
-      event = "VeryLazy";
+      event = "DeferredUIEnter";
     };
   };
 }

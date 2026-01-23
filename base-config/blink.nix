@@ -1,5 +1,5 @@
 { lib, ... }:
-let 
+let
   border = false;
 in
 {
@@ -12,7 +12,7 @@ in
 
       # Load when blink-cmp loads
       lazyLoad.settings = {
-        event = "InsertEnter";
+        event = "DeferredUIEnter";
       };
     };
 
@@ -23,7 +23,7 @@ in
 
       # Load when entering insert mode for completion
       lazyLoad.settings = {
-        event = "InsertEnter";
+        event = "DeferredUIEnter";
       };
 
       settings = {
@@ -57,10 +57,10 @@ in
               components = {
                 label = {
                   text = lib.nixvim.utils.mkRaw ''
-                      require("colorful-menu").blink_components_text
+                    require("colorful-menu").blink_components_text
                   '';
                   highlight = lib.nixvim.utils.mkRaw ''
-                      require("colorful-menu").blink_components_highlight
+                    require("colorful-menu").blink_components_highlight
                   '';
                 };
               };
@@ -134,7 +134,8 @@ in
 
           # if the completion menu is up, enter should select and accept
           # otherwise enter should be a newline like default
-          "<Enter>" = let
+          "<Enter>" =
+            let
               function = lib.nixvim.utils.mkRaw ''
                 function(cmp)
                   if cmp.is_menu_visible() then 
@@ -153,11 +154,20 @@ in
           #   "fallback"
           # ];
 
-          "<C-d>" = [ "scroll_documentation_up" "fallback" ];
-          "<C-f>" = [ "scroll_documentation_down" "fallback" ];
+          "<C-d>" = [
+            "scroll_documentation_up"
+            "fallback"
+          ];
+          "<C-f>" = [
+            "scroll_documentation_down"
+            "fallback"
+          ];
 
           # This handles "Tab" accepting the ghost text
-          "<Tab>" = [ "select_and_accept" "fallback" ];
+          "<Tab>" = [
+            "select_and_accept"
+            "fallback"
+          ];
         };
       };
     };

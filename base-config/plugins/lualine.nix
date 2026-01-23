@@ -4,7 +4,7 @@
 
     # Load after startup for statusline
     lazyLoad.settings = {
-      event = "VeryLazy";
+      event = "DeferredUIEnter";
     };
 
     settings = {

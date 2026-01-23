@@ -9,7 +9,7 @@ in
 
     # Load on VeryLazy for copilot support
     lazyLoad.settings = {
-      event = "VeryLazy";
+      event = "DeferredUIEnter";
     };
 
     settings = {
@@ -51,7 +51,7 @@ in
 
     # Load on VeryLazy for AI assistant
     lazyLoad.settings = {
-      event = "VeryLazy";
+      event = "DeferredUIEnter";
     };
 
     settings = {
