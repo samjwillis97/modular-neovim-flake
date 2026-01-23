@@ -2,9 +2,9 @@
   plugins.treesitter-context = {
     enable = true;
 
-    # Load when reading a buffer
+    # Load after buffer is read (after treesitter)
     lazyLoad.settings = {
-      event = "BufRead";
+      event = "BufReadPost";
     };
 
     settings = {

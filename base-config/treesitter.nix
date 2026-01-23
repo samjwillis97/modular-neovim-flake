@@ -4,7 +4,7 @@
 
     # Load when reading a buffer for syntax highlighting
     lazyLoad.settings = {
-      event = "DeferredUIEnter";
+      event = "BufReadPost";
     };
 
     nixvimInjections = true;

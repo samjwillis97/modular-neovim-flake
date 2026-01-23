@@ -13,9 +13,19 @@
   plugins.nvim-ufo = {
     enable = true;
 
-    # Load when reading a buffer for code folding
+    # Load when reading a buffer or using fold operations
     lazyLoad.settings = {
-      event = "BufRead";
+      event = "BufReadPost";
+      keys = [
+        "zR"
+        "zM"
+        "zo"
+        "zc"
+        "za"
+        "zO"
+        "zC"
+        "zA"
+      ];
     };
   };
 }

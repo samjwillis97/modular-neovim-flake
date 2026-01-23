@@ -2,9 +2,15 @@
   plugins.vim-surround = {
     enable = true;
 
-    # Load on VeryLazy for surround operations
+    # Load only when using surround operations
     lazyLoad.settings = {
-      event = "DeferredUIEnter";
+      keys = [
+        "ys"
+        "ds"
+        "cs"
+        "yS"
+        "cS"
+      ];
     };
   };
 }

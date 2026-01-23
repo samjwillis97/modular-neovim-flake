@@ -20,9 +20,9 @@
   plugins.gitsigns = {
     enable = true;
 
-    # Load when entering a buffer to show git signs
+    # Load after buffer is read to show git signs
     lazyLoad.settings = {
-      event = "BufRead";
+      event = "BufReadPost";
     };
   };
 }

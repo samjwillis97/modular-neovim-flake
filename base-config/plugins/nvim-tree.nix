@@ -34,6 +34,17 @@ in
       settings = {
         hijack_cursor = true;
 
+        renderer = {
+          icons = {
+            show = {
+              file = true;
+              folder = true;
+              folder_arrow = true;
+              git = true;
+            };
+          };
+        };
+
         actions = {
           open_file.window_picker = {
             enable = true;

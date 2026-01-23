@@ -2,9 +2,7 @@
   plugins.web-devicons = {
     enable = true;
 
-    # Load on VeryLazy as a dependency for other plugins
-    lazyLoad.settings = {
-      event = "DeferredUIEnter";
-    };
+    # Don't lazy load - it's a small dependency plugin needed by multiple plugins
+    # Loading it at startup ensures icons work everywhere
   };
 }

@@ -16,13 +16,19 @@ in
   ];
 
   extraConfigLua = ''
-    require("actions-preview").setup()
-  '';
+    -- Lazy load actions-preview
+    local loaded = false
+    local function load_actions_preview()
+      if not loaded then
+        require("actions-preview").setup()
+        loaded = true
+      end
+    end
 
-  keymaps = [
-    {
-      key = "<leader>ca";
-      action = "<CMD>lua require('actions-preview').code_actions()<CR>";
-    }
-  ];
+    -- Set up lazy-loaded keymap
+    vim.keymap.set("n", "<leader>ca", function()
+      load_actions_preview()
+      require('actions-preview').code_actions()
+    end, { desc = "Code actions preview" })
+  '';
 }

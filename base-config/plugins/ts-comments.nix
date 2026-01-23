@@ -2,9 +2,14 @@
   plugins.ts-comments = {
     enable = true;
 
-    # Load when reading a buffer for comment support
+    # Load only when using comment operations
     lazyLoad.settings = {
-      event = "BufRead";
+      keys = [
+        "gcc"
+        "gbc"
+        "gc"
+        "gb"
+      ];
     };
   };
 }

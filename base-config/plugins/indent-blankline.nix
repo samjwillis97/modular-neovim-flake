@@ -57,9 +57,9 @@ in
   plugins.rainbow-delimiters = {
     enable = true;
 
-    # Load when entering a buffer
+    # Load when buffer is read for delimiter highlighting
     lazyLoad.settings = {
-      event = "BufEnter";
+      event = "BufReadPost";
     };
 
     settings = {
@@ -70,9 +70,9 @@ in
   plugins.indent-blankline = {
     enable = true;
 
-    # Load when entering a buffer
+    # Load when buffer is read for indent guides
     lazyLoad.settings = {
-      event = "BufEnter";
+      event = "BufReadPost";
     };
 
     settings = {
