@@ -7,24 +7,16 @@ in
     # Copilot integration moved to full-config
     # Users can enable blink-copilot in their extensions if needed
 
+    # Can't lazy load
     colorful-menu = {
       enable = true;
-
-      # Load when blink-cmp loads
-      lazyLoad.settings = {
-        event = "DeferredUIEnter";
-      };
     };
 
+    # Can't lazy load
     # TODO: make it so first completion is accepted using tab
     blink-cmp = {
       enable = true;
       setupLspCapabilities = true;
-
-      # Load when entering insert mode for completion
-      lazyLoad.settings = {
-        event = "DeferredUIEnter";
-      };
 
       settings = {
         appearance = {

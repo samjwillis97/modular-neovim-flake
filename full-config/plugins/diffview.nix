@@ -59,7 +59,6 @@
     local actions = require('telescope.actions')
     local action_state = require('telescope.actions.state')
     local builtin = require('telescope.builtin')
-    local diffview = require('diffview')
 
     -- Define a custom action to print the branch name
     local function open_diff_on_branch_name(prompt_bufnr)

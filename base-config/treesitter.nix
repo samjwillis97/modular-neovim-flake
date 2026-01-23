@@ -4,10 +4,8 @@
 
     # Load when reading a buffer for syntax highlighting
     lazyLoad.settings = {
-      event = "BufRead";
+      event = "DeferredUIEnter";
     };
-
-    folding.enable = true;
 
     nixvimInjections = true;
     nixGrammars = true;
