@@ -2,6 +2,11 @@
   plugins.which-key = {
     enable = true;
 
+    # Load after startup for keymap help
+    lazyLoad.settings = {
+      event = "VeryLazy";
+    };
+
     settings = {
       delay = 200;
       expand = 1;

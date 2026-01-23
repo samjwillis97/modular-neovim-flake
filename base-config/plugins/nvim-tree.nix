@@ -19,6 +19,18 @@ in
     nvim-tree = {
       enable = true;
 
+      # Lazy load on key mappings and commands
+      lazyLoad.settings = {
+        keys = [
+          "<C-n>"
+          ",n"
+        ];
+        cmd = [
+          "NvimTreeToggle"
+          "NvimTreeFindFile"
+        ];
+      };
+
       settings = {
         hijack_cursor = true;
 

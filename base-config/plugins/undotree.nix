@@ -6,5 +6,10 @@
 
   plugins.undotree = {
     enable = true;
+
+    # Lazy load on UndotreeToggle command
+    lazyLoad.settings = {
+      cmd = "UndotreeToggle";
+    };
   };
 }

@@ -57,6 +57,11 @@ in
   plugins.rainbow-delimiters = {
     enable = true;
 
+    # Load when entering a buffer
+    lazyLoad.settings = {
+      event = "BufEnter";
+    };
+
     settings = {
       highlight = highlightNames;
     };
@@ -64,6 +69,11 @@ in
 
   plugins.indent-blankline = {
     enable = true;
+
+    # Load when entering a buffer
+    lazyLoad.settings = {
+      event = "BufEnter";
+    };
 
     settings = {
       indent = {

@@ -39,6 +39,15 @@
     dap = {
       enable = true;
 
+      # Lazy load on DAP commands and keymaps
+      lazyLoad.settings = {
+        keys = [
+          "<leader>bb"
+          "<leader>dd"
+          "<up>"
+        ];
+      };
+
       signs = {
         "dapBreakpoint" = {
           text = "";
@@ -88,6 +97,15 @@
     dap-ui = {
       enable = true;
 
+      # Lazy load when dap loads
+      lazyLoad.settings = {
+        keys = [
+          "<leader>bb"
+          "<leader>dd"
+          "<up>"
+        ];
+      };
+
       settings = {
         layouts = [
           {
@@ -117,6 +135,15 @@
 
     dap-virtual-text = {
       enable = true;
+
+      # Lazy load when dap loads
+      lazyLoad.settings = {
+        keys = [
+          "<leader>bb"
+          "<leader>dd"
+          "<up>"
+        ];
+      };
     };
 
     # Language-specific DAP plugins should be added in extensions

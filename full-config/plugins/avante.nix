@@ -6,6 +6,12 @@ in
 {
   plugins.copilot-lua = {
     enable = true;
+
+    # Load on VeryLazy for copilot support
+    lazyLoad.settings = {
+      event = "VeryLazy";
+    };
+
     settings = {
       copilot_model = copilotModel;
 
@@ -22,6 +28,11 @@ in
   plugins.render-markdown = {
     enable = true;
 
+    # Load on markdown and Avante filetypes
+    lazyLoad.settings = {
+      ft = [ "markdown" "Avante" ];
+    };
+
     settings = {
       file_types = [ "markdown" "Avante" ];
 
@@ -37,6 +48,11 @@ in
 
   plugins.avante = {
     enable = true;
+
+    # Load on VeryLazy for AI assistant
+    lazyLoad.settings = {
+      event = "VeryLazy";
+    };
 
     settings = {
       # The following are the default values

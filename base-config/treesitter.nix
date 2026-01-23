@@ -2,6 +2,11 @@
   plugins.treesitter = {
     enable = true;
 
+    # Load when reading a buffer for syntax highlighting
+    lazyLoad.settings = {
+      event = "BufRead";
+    };
+
     folding.enable = true;
 
     nixvimInjections = true;

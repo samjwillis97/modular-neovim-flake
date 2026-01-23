@@ -14,7 +14,18 @@
   ];
 
   plugins = {
-    fugitive.enable = true;
+    fugitive = {
+      enable = true;
+
+      # Lazy load on git commands and keymaps
+      lazyLoad.settings = {
+        cmd = "Git";
+        keys = [
+          "<leader>gg"
+          "<leader>gB"
+        ];
+      };
+    };
   };
 
   extraPlugins = with pkgs.vimPlugins; [ vim-rhubarb ];

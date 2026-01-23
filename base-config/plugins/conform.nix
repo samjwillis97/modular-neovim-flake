@@ -3,6 +3,11 @@
   plugins.conform-nvim = {
     enable = true;
 
+    # Load before saving to handle format on save
+    lazyLoad.settings = {
+      event = "BufWritePre";
+    };
+
     settings = {
       log_level = "trace";
       notify_no_formatters = false;

@@ -3,6 +3,20 @@
   plugins.telescope = {
     enable = true;
 
+    # Lazy load on key mappings
+    lazyLoad.settings = {
+      keys = [
+        "<leader>ff"
+        "<leader>sf"
+        "<leader>sw"
+        "<leader>sb"
+        "<leader>fs"
+        "gd"
+        "gr"
+        "gi"
+      ];
+    };
+
     extensions = {
       live-grep-args.enable = true;
     };

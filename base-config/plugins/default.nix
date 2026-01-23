@@ -1,4 +1,7 @@
 {
+  # Enable lz.n lazy loading backend
+  plugins.lz-n.enable = true;
+
   imports = [
     ./transparent.nix
     ./nui.nix

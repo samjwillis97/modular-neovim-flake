@@ -2,6 +2,11 @@
   plugins.neotest = {
     enable = true;
 
+    # Lazy load on Neotest commands
+    lazyLoad.settings = {
+      cmd = "Neotest";
+    };
+
     # No adapters configured by default - users add their own
     adapters = {
       # Example: Add test adapters in your extension

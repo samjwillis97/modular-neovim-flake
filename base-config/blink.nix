@@ -9,12 +9,22 @@ in
 
     colorful-menu = {
       enable = true;
+
+      # Load when blink-cmp loads
+      lazyLoad.settings = {
+        event = "InsertEnter";
+      };
     };
 
     # TODO: make it so first completion is accepted using tab
     blink-cmp = {
       enable = true;
       setupLspCapabilities = true;
+
+      # Load when entering insert mode for completion
+      lazyLoad.settings = {
+        event = "InsertEnter";
+      };
 
       settings = {
         appearance = {

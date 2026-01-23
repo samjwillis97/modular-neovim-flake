@@ -25,6 +25,22 @@
   plugins.diffview = {
     enable = true;
 
+    # Lazy load on diffview commands and keymaps
+    lazyLoad.settings = {
+      cmd = [
+        "DiffviewOpen"
+        "DiffviewClose"
+        "DiffviewToggle"
+        "DiffviewBranchSelect"
+      ];
+      keys = [
+        "<leader>dvt"
+        "<leader>dvo"
+        "<leader>dvc"
+        "<leader>dvb"
+      ];
+    };
+
     settings = {
       view = {
         default = {

@@ -17,5 +17,12 @@
     }
   ];
 
-  plugins.gitsigns.enable = true;
+  plugins.gitsigns = {
+    enable = true;
+
+    # Load when entering a buffer to show git signs
+    lazyLoad.settings = {
+      event = "BufRead";
+    };
+  };
 }

@@ -13,6 +13,9 @@
       autoLoad = true;
       enable = true;
 
+      # Lazy load colorscheme
+      lazyLoad.enable = true;
+
       settings = {
         flavour = "mocha";
         integrations = {
