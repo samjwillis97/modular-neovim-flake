@@ -37,6 +37,24 @@
       };
 
       luaConfig = {
+        pre = ''
+          -- Function to get LSP capabilities with blink-cmp support
+          local __lspCapabilities = function()
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+            -- Try to load blink-cmp capabilities if available
+            local has_blink, blink = pcall(require, 'blink-cmp')
+            if has_blink then
+              capabilities = vim.tbl_deep_extend('force', capabilities, blink.get_lsp_capabilities())
+            end
+
+            return capabilities
+          end
+
+          -- Store for later use by LSP servers
+          vim.g.__lspCapabilities = __lspCapabilities
+        '';
+
         post = ''
           vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
             vim.lsp.diagnostic.on_publish_diagnostics, {

@@ -19,7 +19,6 @@ in
     # TODO: make it so first completion is accepted using tab
     blink-cmp = {
       enable = true;
-      setupLspCapabilities = true;
 
       # Load when entering insert mode for completion
       lazyLoad.settings = {
