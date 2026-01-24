@@ -25,25 +25,6 @@ in
     };
   };
 
-  plugins.render-markdown = {
-    enable = true;
-
-    # Load on markdown and Avante filetypes
-    lazyLoad.settings = {
-      ft = [ "markdown" "Avante" ];
-    };
-
-    settings = {
-      file_types = [ "markdown" "Avante" ];
-
-      code = {
-        above = "▄";
-        below = "▀";
-        style = "normal";
-      };
-    };
-  };
-
   opts.laststatus = 3;
 
   plugins.avante = {

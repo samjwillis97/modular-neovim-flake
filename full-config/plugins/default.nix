@@ -4,6 +4,7 @@
 
     ./conform.nix
     ./neotest.nix
+    ./render-markdown.nix
 
     # AI Assistant - Commented out because it requires Copilot authentication
     # which fails during nix flake check. Enable in your own config:
