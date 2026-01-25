@@ -3,11 +3,11 @@ let
 in
 {
   keymaps = [
-    {
-      key = "<C-n>";
-      action = "<CMD>NvimTreeToggle<CR>";
-      options.desc = "Toggle NvimTree";
-    }
+    # {
+    #   key = "<C-n>";
+    #   action = "<CMD>NvimTreeToggle<CR>";
+    #   options.desc = "Toggle NvimTree";
+    # }
     {
       key = ",n";
       action = "<CMD>NvimTreeFindFile<CR>";
