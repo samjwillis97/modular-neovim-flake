@@ -1,28 +1,5 @@
 { pkgs, ... }:
 {
-  keymaps = [
-    {
-      key = "<leader>bb";
-      action = "<CMD>lua require('dap').toggle_breakpoint()<CR>";
-      options.desc = "Toggle breakpoint";
-    }
-    {
-      key = "<leader>dd";
-      action = "<CMD>lua require('dap').run()<CR>";
-      options.desc = "Start debugging";
-    }
-    {
-      key = "<leader><leader>";
-      action = "<CMD>lua require('dap').terminate()<CR>";
-      options.desc = "Stop debugging";
-    }
-    {
-      key = "<up>";
-      action = "<CMD>lua require('dap').continue()<CR>";
-      options.desc = "Debugging: continue";
-    }
-  ];
-
   highlightOverride = {
     "DapBreakpoint" = {
       fg = "#E06C75";
@@ -42,9 +19,26 @@
       # Lazy load on DAP commands and keymaps
       lazyLoad.settings = {
         keys = [
-          "<leader>bb"
-          "<leader>dd"
-          "<up>"
+          {
+            __unkeyed-1 = "<leader>bb";
+            action.__raw = "function() require('dap').toggle_breakpoint() end";
+            desc = "Toggle breakpoint";
+          }
+          {
+            __unkeyed-1 = "<leader>dd";
+            action.__raw = "function() require('dap').run() end";
+            desc = "Start debugging";
+          }
+          {
+            __unkeyed-1 = "<leader><leader>";
+            action.__raw = "function() require('dap').terminate() end";
+            desc = "Stop debugging";
+          }
+          {
+            __unkeyed-1 = "<up>";
+            action.__raw = "function() require('dap').continue() end";
+            desc = "Debugging: continue";
+          }
         ];
       };
 
@@ -97,15 +91,6 @@
     dap-ui = {
       enable = true;
 
-      # Lazy load when dap loads
-      lazyLoad.settings = {
-        keys = [
-          "<leader>bb"
-          "<leader>dd"
-          "<up>"
-        ];
-      };
-
       settings = {
         layouts = [
           {
@@ -135,15 +120,6 @@
 
     dap-virtual-text = {
       enable = true;
-
-      # Lazy load when dap loads
-      lazyLoad.settings = {
-        keys = [
-          "<leader>bb"
-          "<leader>dd"
-          "<up>"
-        ];
-      };
     };
 
     # Language-specific DAP plugins should be added in extensions

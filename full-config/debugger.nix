@@ -7,9 +7,15 @@
     dap-go = {
       enable = true;
 
-      # Lazy load on go filetype and dap keys
+      # Lazy load on go filetype or when dap is triggered
       lazyLoad.settings = {
         ft = "go";
+        keys = [
+          "<leader>bb"
+          "<leader>dd"
+          "<leader><leader>"
+          "<up>"
+        ];
       };
 
       settings = {

@@ -5,7 +5,7 @@
 
     # Add language-specific extensions
     ./lsp
-    ./debugger.nix
+    # ./debugger.nix
     ./plugins
   ];
 

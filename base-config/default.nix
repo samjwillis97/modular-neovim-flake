@@ -10,12 +10,7 @@
     ./lsp
     ./plugins
     ./blink.nix
-    ./debugger.nix
+    # ./debugger.nix
     ./copilot-autocomplete.nix
-  ];
-
-  extraPackages = with pkgs; [
-    fd
-    ripgrep
   ];
 }
