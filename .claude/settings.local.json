@@ -17,7 +17,9 @@
       "Bash(nix-store:*)",
       "Bash(curl -s https://raw.githubusercontent.com/nix-community/nixvim/main/plugins/by-name/blink-copilot/default.nix)",
       "Bash(curl:*)",
-      "Bash(nvim:*)"
+      "Bash(nvim:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []

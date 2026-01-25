@@ -41,6 +41,7 @@ in
   extraPackages = with pkgs; [
     fd
     ripgrep
+    lazygit
   ];
 
   keymaps = [
@@ -54,6 +55,36 @@ in
       action = "<CMD>lua Snacks.explorer.open()<CR>";
       options.desc = "Toggle file explorer";
     }
+    {
+      key = "<leader>ff";
+      action = "<CMD>lua Snacks.picker.files()<CR>";
+      options.desc = "Open file search";
+    }
+    {
+      key = "<leader>sf";
+      action = "<CMD>lua Snacks.picker.git_grep()<CR>";
+      options.desc = "Open grep over git files";
+    }
+    {
+      key = "<leader>sw";
+      action = "<CMD>lua Snacks.picker.grep_word()<CR>";
+      options.desc = "Open grep for word under cursor";
+    }
+    {
+      key = "gd";
+      action = "<CMD>lua Snacks.picker.lsp_definitions()<CR>";
+      options.desc = "Go to definition";
+    }
+    {
+      key = "gr";
+      action = "<CMD>lua Snacks.picker.lsp_references()<CR>";
+      options.desc = "Find references";
+    }
+    {
+      key = "gi";
+      action = "<CMD>lua Snacks.picker.lsp_implementations()<CR>";
+      options.desc = "Find implementations";
+    }
   ];
 
   plugins.snacks = {
@@ -64,6 +95,18 @@ in
 
       picker = {
         sources = {
+          files = { };
+
+          git_grep = { };
+
+          grep_word = { };
+
+          lsp_definitions = { };
+
+          lsp_references = { };
+
+          lsp_implementations = { };
+
           explorer = {
             auto_close = true;
             layout = configurableSelectLayout ({

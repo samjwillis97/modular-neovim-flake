@@ -14,7 +14,7 @@
     ./colorizer.nix
     ./ts-comments.nix
     ./conform.nix
-    ./telescope.nix
+    # ./telescope.nix
     ./tmux-navigator.nix
     ./lualine.nix
     ./indent-blankline.nix
@@ -26,5 +26,6 @@
     ./actions-preview.nix
     ./neotest.nix
     ./snacks.nix
+    ./namu.nix
   ];
 }
