@@ -29,12 +29,6 @@
           indent_blankline = {
             enabled = false;
           };
-          neotree = true;
-          dap = true;
-          dap_ui = true;
-          telescope = {
-            enabled = true;
-          };
           which_key = true;
 
           native_lsp = {

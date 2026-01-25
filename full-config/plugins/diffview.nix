@@ -55,26 +55,13 @@
   };
 
   extraConfigLuaPost = ''
-    local telescope = require('telescope')
-    local actions = require('telescope.actions')
-    local action_state = require('telescope.actions.state')
-    local builtin = require('telescope.builtin')
-
-    -- Define a custom action to print the branch name
-    local function open_diff_on_branch_name(prompt_bufnr)
-      local selection = action_state.get_selected_entry()
-      actions.close(prompt_bufnr)
-      vim.cmd('DiffviewOpen ' .. selection.value)
-    end
-
     -- Create a custom picker using the git_branches picker
     local function custom_git_branches_picker()
-      builtin.git_branches({
-        attach_mappings = function(_, map)
-          map('i', '<CR>', open_diff_on_branch_name)
-          map('n', '<CR>', open_diff_on_branch_name)
-          return true
-        end
+      Snacks.picker.git_branches({
+        confirm = function(picker, item)
+          picker:close()
+          vim.cmd('DiffviewOpen ' .. item.branch)
+        end,
       })
     end
 
