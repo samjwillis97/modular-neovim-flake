@@ -6,6 +6,7 @@
     # Load before saving to handle format on save
     lazyLoad.settings = {
       event = "BufWritePre";
+      cmd = [ "ConformInfo" ];
     };
 
     settings = {

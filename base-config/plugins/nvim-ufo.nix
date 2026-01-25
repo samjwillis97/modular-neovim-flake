@@ -16,16 +16,6 @@
     # Load when reading a buffer or using fold operations
     lazyLoad.settings = {
       event = "BufReadPost";
-      keys = [
-        "zR"
-        "zM"
-        "zo"
-        "zc"
-        "za"
-        "zO"
-        "zC"
-        "zA"
-      ];
     };
   };
 }

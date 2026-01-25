@@ -15,20 +15,24 @@ in
     actions-preview
   ];
 
+  # Use lz.n for lazy loading
   extraConfigLua = ''
-    -- Lazy load actions-preview
-    local loaded = false
-    local function load_actions_preview()
-      if not loaded then
-        require("actions-preview").setup()
-        loaded = true
-      end
-    end
-
-    -- Set up lazy-loaded keymap
-    vim.keymap.set("n", "<leader>ca", function()
-      load_actions_preview()
-      require('actions-preview').code_actions()
-    end, { desc = "Code actions preview" })
+    require("lz.n").load({
+      {
+        "actions-preview",
+        keys = { "<leader>ca" },
+        after = function()
+          require("actions-preview").setup()
+        end,
+      },
+    })
   '';
+
+  keymaps = [
+    {
+      key = "<leader>ca";
+      action = "<CMD>lua require('actions-preview').code_actions()<CR>";
+      options.desc = "Code actions preview";
+    }
+  ];
 }

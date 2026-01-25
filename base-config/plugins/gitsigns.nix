@@ -23,6 +23,11 @@
     # Load after buffer is read to show git signs
     lazyLoad.settings = {
       event = "BufReadPost";
+      keys = [
+        "[g"
+        "]g"
+        "<leader>gb"
+      ];
     };
   };
 }

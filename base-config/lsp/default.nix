@@ -18,6 +18,10 @@
     lsp = {
       enable = true;
 
+      lazyLoad.settings = {
+        event = "BufReadPre";
+      };
+
       keymaps = {
         lspBuf = {
           "gD" = "declaration";

@@ -8,10 +8,23 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # Explicitly configure copilot.lua to prevent nixvim from loading it eagerly
+    plugins.copilot-lua = {
+      enable = true;
+      lazyLoad.settings = {
+        event = "InsertEnter";
+      };
+
+      settings = {
+        suggestion.enabled = false;
+        panel.enabled = false;
+      };
+    };
+
     plugins.blink-copilot = {
       enable = true;
       lazyLoad.settings = {
-        event = "DeferredUIEnter";
+        event = "InsertEnter";
       };
     };
 

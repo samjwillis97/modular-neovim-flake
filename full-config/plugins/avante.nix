@@ -1,7 +1,7 @@
 { pkgs, ... }:
-let 
+let
   # copilotModel = "gpt-4o-2024-11-20";
-  copilotModel = "claude-3.7-sonnet";
+  copilotModel = "claude-4.5-sonnet";
 in
 {
   plugins.copilot-lua = {
