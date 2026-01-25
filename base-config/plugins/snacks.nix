@@ -12,7 +12,7 @@ let
       layout = {
         inherit height width;
         backdrop = false;
-        min_width = 80;
+        min_width = 40;
         max_width = 100;
         min_height = 2;
         box = "vertical";
