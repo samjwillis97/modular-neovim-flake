@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./keymaps.nix
@@ -11,5 +12,10 @@
     ./blink.nix
     ./debugger.nix
     ./copilot-autocomplete.nix
+  ];
+
+  extraPackages = with pkgs; [
+    fd
+    ripgrep
   ];
 }
