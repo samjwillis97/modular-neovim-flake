@@ -25,5 +25,6 @@
     ./lastplace.nix
     ./actions-preview.nix
     ./neotest.nix
+    ./snacks.nix
   ];
 }
