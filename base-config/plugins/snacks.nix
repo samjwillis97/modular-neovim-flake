@@ -21,6 +21,10 @@ in
       picker = {
         sources = {
           explorer = {
+            layout = {
+              preset = "select";
+              preview = true;
+            };
             win = {
               list = {
                 keys = {
