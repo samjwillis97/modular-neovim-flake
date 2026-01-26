@@ -13,5 +13,7 @@
 
     ./diffview.nix
     # ./yazi.nix
+    
+    # ./cursortab.nix
   ];
 }
