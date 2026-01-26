@@ -27,5 +27,6 @@
     ./neotest.nix
     ./snacks.nix
     ./namu.nix
+    # ./neogit.nix
   ];
 }
