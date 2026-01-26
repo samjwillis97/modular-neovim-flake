@@ -40,6 +40,16 @@
 
           module = import ./full-config;
         };
+
+        nvim-light = nixvim'.makeNixvimWithModule {
+          inherit pkgs;
+
+          extraSpecialArgs = {
+            inherit inputs;
+          };
+
+          module = import ./base-config;
+        };
       in
       {
         formatter = pkgs.nixfmt-rfc-style;
@@ -54,6 +64,7 @@
         packages = {
           # Lets you run `nix run .` to start nixvim
           default = nvim;
+          light = nvim-light;
         };
 
         devShells.default = import ./shell.nix { inherit pkgs; };

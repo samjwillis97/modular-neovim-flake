@@ -12,6 +12,6 @@
     # ./avante.nix
 
     ./diffview.nix
-    ./yazi.nix
+    # ./yazi.nix
   ];
 }
