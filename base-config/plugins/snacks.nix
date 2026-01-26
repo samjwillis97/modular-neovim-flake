@@ -41,7 +41,6 @@ in
   extraPackages = with pkgs; [
     fd
     ripgrep
-    lazygit
   ];
 
   keymaps = [
