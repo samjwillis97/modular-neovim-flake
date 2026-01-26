@@ -1,4 +1,13 @@
 {
+  highlightOverride = {
+    "TreesitterContextBottom" = {
+      underline = false;
+    };
+    "TreesitterContextLineNumberBottom" = {
+      underline = false;
+    };
+  };
+
   plugins.treesitter-context = {
     enable = true;
 
