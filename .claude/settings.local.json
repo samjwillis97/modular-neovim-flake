@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(nix flake:*)",
+      "Bash(nix develop:*)",
+      "Bash(git add:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(nix run:*)",
+      "Bash(nix log:*)",
+      "Bash(grep:*)",
+      "Read(///**)",
+      "Bash(awk:*)",
+      "Read(//nix/store/**)",
+      "Bash(cat:*)",
+      "Bash(nix derivation show:*)",
+      "Bash(nix-store:*)",
+      "Bash(curl -s https://raw.githubusercontent.com/nix-community/nixvim/main/plugins/by-name/blink-copilot/default.nix)",
+      "Bash(curl:*)",
+      "Bash(nvim:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebSearch"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
