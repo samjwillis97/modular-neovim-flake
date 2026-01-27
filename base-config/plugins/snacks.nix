@@ -113,6 +113,7 @@ in
 
           explorer = {
             auto_close = true;
+            hidden = true;
             layout = configurableSelectLayout ({
               height = 0.8;
               width = 0.35;
