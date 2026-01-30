@@ -6,6 +6,11 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
 
+    # Stable nixpkgs for cached packages (e.g., Swift)
+    nixpkgs-stable = {
+      url = "github:NixOS/nixpkgs/nixos-24.05";
+    };
+
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
@@ -27,7 +32,10 @@
       system:
       let
         nixvimLib = nixvim.lib.${system};
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = import ./overlays.nix { inherit inputs; };
+        };
         nixvim' = nixvim.legacyPackages.${system};
 
         # Use full-config as the default build

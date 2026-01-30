@@ -14,6 +14,10 @@
     # Lua
     lua_ls.enable = true;
 
+    # Dotnet
+    roslyn_ls.enable = false;
+    omnisharp.enable = true;
+
     # TypeScript/JavaScript
     ts_ls.enable = true;
 
