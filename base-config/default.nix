@@ -10,7 +10,7 @@
     ./lsp
     ./plugins
     ./blink.nix
-    # ./debugger.nix
+    ./debugger.nix
     ./copilot-autocomplete.nix
   ];
 }

@@ -1,5 +1,13 @@
 { pkgs, ... }:
 {
+  keymaps = [
+    {
+      key = "<leader>du";
+      action = "<cmd>DapViewToggle<CR>";
+      options.desc = "Toggle DAP view";
+    }
+  ];
+
   highlightOverride = {
     "DapBreakpoint" = {
       fg = "#E06C75";
@@ -21,22 +29,22 @@
         keys = [
           {
             __unkeyed-1 = "<leader>bb";
-            action.__raw = "function() require('dap').toggle_breakpoint() end";
+            __unkeyed-2.__raw = "function() require('dap').toggle_breakpoint() end";
             desc = "Toggle breakpoint";
           }
           {
             __unkeyed-1 = "<leader>dd";
-            action.__raw = "function() require('dap').run() end";
-            desc = "Start debugging";
+            __unkeyed-2.__raw = "function() require('dap').continue() end";
+            desc = "Start/continue debugging";
           }
           {
             __unkeyed-1 = "<leader><leader>";
-            action.__raw = "function() require('dap').terminate() end";
+            __unkeyed-2.__raw = "function() require('dap').terminate() end";
             desc = "Stop debugging";
           }
           {
             __unkeyed-1 = "<up>";
-            action.__raw = "function() require('dap').continue() end";
+            __unkeyed-2.__raw = "function() require('dap').continue() end";
             desc = "Debugging: continue";
           }
         ];
@@ -88,33 +96,29 @@
       };
     };
 
-    dap-ui = {
+    dap-view = {
       enable = true;
 
-      settings = {
-        layouts = [
-          {
-            elements = [
-              {
-                id = "scopes";
-                size = 0.5;
-              }
-              "breakpoints"
-              "watches"
-              "stacks"
-            ];
-            size = 50; # 50 columns
-            position = "left";
-          }
-          {
-            elements = [
-              "repl"
-              "watches"
-            ];
-            size = 25; # 25%
-            position = "bottom";
-          }
+      lazyLoad.settings = {
+        cmd = [
+          "DapViewOpen"
+          "DapViewClose"
+          "DapViewToggle"
+          "DapViewWatch"
         ];
+      };
+
+      settings = {
+        winbar = {
+          controls = {
+            enabled = true;
+            position = "right";
+          };
+        };
+        windows = {
+          position = "below";
+        };
+        auto_toggle = true;
       };
     };
 
