@@ -3,7 +3,7 @@
   # These extend the base LSP configuration with concrete language servers
   plugins.lsp.servers = {
     # Nix
-    nil_ls.enable = true;
+    nixd.enable = true;
 
     # Shell
     bashls.enable = true;
