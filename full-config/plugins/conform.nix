@@ -17,7 +17,7 @@
       # Add more formatters as needed
       # python = [ "black" ];
       # rust = [ "rustfmt" ];
-      nix = [ "nixfmt" ];
+      # nix = [ "nixfmt" ];
     };
 
     formatters = {

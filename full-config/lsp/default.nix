@@ -1,9 +1,13 @@
+{ pkgs, lib, ... }:
 {
   # Language-specific LSP servers
   # These extend the base LSP configuration with concrete language servers
   plugins.lsp.servers = {
     # Nix
-    nixd.enable = true;
+    nixd = {
+      enable = true;
+      settings.formatting.command = [ (lib.getExe pkgs.nixfmt-rfc-style) ];
+    };
 
     # Shell
     bashls.enable = true;
