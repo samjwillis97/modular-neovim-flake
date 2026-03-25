@@ -11,7 +11,8 @@
     #   imports = [ my-neovim.lib.${system}.fullModule ./my-avante-config.nix ];
     # ./avante.nix
 
-    ./diffview.nix
+    # ./diffview.nix
+    ./codediff.nix
     # ./yazi.nix
 
     # ./cursortab.nix
