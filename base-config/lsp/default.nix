@@ -42,25 +42,17 @@
 
       luaConfig = {
         post = ''
-          vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
-              underline = true,
-              signs = true,
-              update_in_insert = false,
-            }
-          )
+          -- Diagnostics are configured via vim.diagnostic.config() now; the
+          -- "textDocument/publishDiagnostics" handler is installed automatically.
+          vim.diagnostic.config({
+            underline = true,
+            signs = true,
+            update_in_insert = false,
+          })
 
-          vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-            vim.lsp.handlers.hover, {
-              border = "single",
-            }
-          )
-
-          vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-            vim.lsp.handlers.hover, {
-              border = "single",
-            }
-          )
+          -- Border for floating windows (hover, signature help, etc.).
+          -- Replaces the deprecated vim.lsp.with() handler overrides.
+          vim.o.winborder = "single"
         '';
       };
     };
